@@ -32,22 +32,22 @@ var shapes = (function() {
 
 
 
-	shapes.cube = function(side, palette) {
+	shapes.box = function(dx, dy, dz, palette) {
 
 		//
 		// (L|R T|B F|B) => (Left|Right Top|Bottom Front|Back)
 		// TODO: Which direction does the Z axis go in (into screen our away from screen)?
-		var half    = side/2;
+		var hx = dx/2, hy = dy/2, hz = z/2;
 		var palette = palette || somecolours; //
 
-		var unique = [[-half,  half, -half],  // LTF (0)
-					  [-half,  half,  half],  // LTB (1)
-					  [ half,  half,  half],  // RTB (2)
-					  [ half,  half, -half],  // RTF (3)
-					  [-half, -half, -half],  // LBF (4)
-					  [-half, -half,  half],  // LBB (5)
-					  [ half, -half,  half],  // RBB (6)
-					  [ half, -half, -half]]; // RBF (7)
+		var unique = [[-hx,  hy, -hz],  // LTF (0)
+					  [-hx,  hy,  hz],  // LTB (1)
+					  [ hx,  hy,  hz],  // RTB (2)
+					  [ hx,  hy, -hz],  // RTF (3)
+					  [-hx, -hy, -hz],  // LBF (4)
+					  [-hx, -hy,  hz],  // LBB (5)
+					  [ hx, -hy,  hz],  // RBB (6)
+					  [ hx, -hy, -hz]]; // RBF (7)
 
 		// TODO: This is really a constant (worth caching?)
 		var indeces = [0, 1, 3, 3, 1, 2,  // Top    (✓)
@@ -57,13 +57,16 @@ var shapes = (function() {
 					   0, 1, 4, 4, 1, 5,  // Left   (✓)
 					   3, 2, 7, 7, 2, 6]; // Right  (✓)
 
-
 		var vertices = indeces.map(function(index)    { return unique[index]; });
 		var colours  = indeces.map(function(index, i) { return palette[sides[Math.floor(i/6)]]; });
 
 		return { vertices: vertices.flatten(), colours: colours.flatten() }; // TODO: Decide whether to concat buffers or keep them as they are
 
 	};
+
+
+
+	shapes.cube = function(side, palette) { return shapes.box(side, side, side, palette); };
 
 
 
@@ -80,9 +83,7 @@ var shapes = (function() {
 						[ hdx,  hdy, 0.00],
 						[ hdx, -hdy, 0.00]].flatten();
 
-		var colours = vertices.map(function(_) { return colour; }).flatten();
-
-		return { vertices: vertices, colours: colours };
+		return shapes.monochrome(vertices, colour);
 
 	};
 
@@ -136,9 +137,7 @@ var shapes = (function() {
 				vertices.push(rightX, radiusRight * Math.sin(segment*angle), radiusRight * Math.cos(segment*angle));
 			}
 
-		}
-
-		return this.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return vertices, colourshapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
 
@@ -159,10 +158,8 @@ var shapes = (function() {
 			var x = radius*cosine(θ*segment), z = radius*sine(θ*segment);
 			// glColor4f(color.r, color.g, color.b, color.a);
 			vertices.push(x, -height/2, z);
-			vertices.push(x,  height/2, z);
-		}
 
-		return this.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return vertices, colourshapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
 
@@ -180,10 +177,8 @@ var shapes = (function() {
 		for (var segment = 0; segment <= segments; ++segment) {
 			// glColor3f(0.2f, 0.35f, 0.65f);
 			vertices.push(radius*cosine(theta*segment), -height/2, radius*sine(theta*segment));
-			vertices.push(0.0,                          height/2, 0.0);
-		}
 
-		return this.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return vertices, colourshapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
 
