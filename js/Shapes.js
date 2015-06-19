@@ -137,6 +137,8 @@ var shapes = (function() {
 				vertices.push(rightX, radiusRight * Math.sin(segment*angle), radiusRight * Math.cos(segment*angle));
 			}
 
+		}
+		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	};
@@ -159,7 +161,7 @@ var shapes = (function() {
 			// glColor4f(color.r, color.g, color.b, color.a);
 			vertices.push(x, -height/2, z);
 		}
-		
+
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	};
