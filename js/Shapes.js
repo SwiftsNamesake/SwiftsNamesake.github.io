@@ -177,7 +177,8 @@ var shapes = (function() {
 		for (var segment = 0; segment <= segments; ++segment) {
 			// glColor3f(0.2f, 0.35f, 0.65f);
 			vertices.push(radius*cosine(theta*segment), -height/2, radius*sine(theta*segment));
-
+		}
+		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
