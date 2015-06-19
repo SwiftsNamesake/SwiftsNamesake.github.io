@@ -87,6 +87,12 @@ var shapes = (function() {
 	};
 
 
+	// this.plane = function() {};
+	// this.planeXY = function() {};
+	// this.planeXZ = function() {};
+	// this.planeYZ = function() {};
+
+
 
 	this.sphere = function(radius, palette) {
 
@@ -108,7 +114,7 @@ var shapes = (function() {
 
 		// TODO: Use the same number of longitudinal and latitudinal segments (?)
 		const segments = 18;             // For now. Juicy, delicious segments.
-		const angle = 360.0f/segments; // Internal angle of a segment (degrees)
+		const angle = 360.0/segments; // Internal angle of a segment (degrees)
 
 		var radiusLeft  = Math.sqrt(radius*radius);         // Radius of the left-hand circle
 		var radiusRight = Math.sqrt(radius*radius - dx*dx); // Radius of the right-hand circle
@@ -174,7 +180,7 @@ var shapes = (function() {
 		for (int segment = 0; segment <= segments; ++segment) {
 			// glColor3f(0.2f, 0.35f, 0.65f);
 			vertices.push(radius*cosine(theta*segment), -height/2, radius*sine(theta*segment));
-			vertices.push(0.0f,                          height/2, 0.0f);
+			vertices.push(0.0,                          height/2, 0.0);
 		}
 
 		return this.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
