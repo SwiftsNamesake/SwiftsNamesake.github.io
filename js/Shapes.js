@@ -88,14 +88,14 @@ var shapes = (function() {
 	};
 
 
-	// this.plane = function() {};
-	// this.planeXY = function() {};
-	// this.planeXZ = function() {};
-	// this.planeYZ = function() {};
+	// shapes.plane = function() {};
+	// shapes.planeXY = function() {};
+	// shapes.planeXZ = function() {};
+	// shapes.planeYZ = function() {};
 
 
 
-	this.sphere = function(radius, palette) {
+	shapes.sphere = function(radius, palette) {
 
 		//
 		// TODO: Use indeces
@@ -145,7 +145,7 @@ var shapes = (function() {
 
 
 
-	this.cylinder = function(radius, height, palette) {
+	shapes.cylinder = function(radius, height, palette) {
 		
 		//
 		// TODO: Use the palette
@@ -168,7 +168,7 @@ var shapes = (function() {
 
 
 
-	this.cone = function(radius, height) {
+	shapes.cone = function(radius, height) {
 
 		//
 		var vertices = [];
@@ -188,7 +188,7 @@ var shapes = (function() {
 
 
 
-	this.pyramid = function(dx, dz, height, palette) {
+	shapes.pyramid = function(dx, dz, height, palette) {
 
 		//
 		// TODO: Use palette
@@ -209,13 +209,13 @@ var shapes = (function() {
  		               4, 3, 2,  // Base (first half)
  		               2, 1, 4]; // Base (second half)
 
-		return this.monochrome(indeces.map(function(index) { return unique[index]; }).flatten(), [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(indeces.map(function(index) { return unique[index]; }).flatten(), [1.0, 0.0, 0.0, 1.0]);
 
 	};
 
 
 
-	this.spiral = function(radius, dy, inclination, revolutions, palette) {
+	shapes.spiral = function(radius, dy, inclination, revolutions, palette) {
 
 		// Renders a one-dimensional spiral
 		// TODO: Come up with a better name for dy/revolution (height) (cf. inclination) (✓)
