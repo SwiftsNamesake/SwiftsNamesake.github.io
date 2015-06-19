@@ -125,9 +125,9 @@ var shapes = (function() {
 		for (var xSegment = 0; xSegment <= segments; xSegment++) {
 
 			//
-			var theta  = xSegment * dTheta;
-			var rightX = radius * Math.cos(theta);
-			var leftX  = radius * Math.cos(theta+dTheta);
+			var θ  = xSegment * dTheta;
+			var rightX = radius * Math.cos(θ);
+			var leftX  = radius * Math.cos(θ+dTheta);
 
 			radiusLeft  = Math.sqrt(radius*radius - leftX*leftX);
 			radiusRight = Math.sqrt(radius*radius - rightX*rightX);
@@ -179,7 +179,7 @@ var shapes = (function() {
 
 		for (var segment = 0; segment <= segments; ++segment) {
 			// glColor3f(0.2f, 0.35f, 0.65f);
-			vertices.push(radius*Math.cos(theta*segment), -height/2, radius*Math.sin(theta*segment));
+			vertices.push(radius*Math.cos(θ*segment), -height/2, radius*Math.sin(θ*segment));
 		}
 		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
