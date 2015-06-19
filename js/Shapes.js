@@ -158,7 +158,8 @@ var shapes = (function() {
 			var x = radius*cosine(θ*segment), z = radius*sine(θ*segment);
 			// glColor4f(color.r, color.g, color.b, color.a);
 			vertices.push(x, -height/2, z);
-
+		}
+		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	};
