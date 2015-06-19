@@ -177,7 +177,7 @@ var shapes = (function() {
 		const segments = 18;
 		const θ = 360.0 / segments;
 
-		for (int segment = 0; segment <= segments; ++segment) {
+		for (var segment = 0; segment <= segments; ++segment) {
 			// glColor3f(0.2f, 0.35f, 0.65f);
 			vertices.push(radius*cosine(theta*segment), -height/2, radius*sine(theta*segment));
 			vertices.push(0.0,                          height/2, 0.0);
@@ -227,7 +227,7 @@ var shapes = (function() {
 		const segments = 18;             // Segments per revolution
 		const delta    = 360.0/segments; // Internal angle of a single segment
 
-		for (int segment = 0; segment <= segments * revolutions; ++segment) {
+		for (var segment = 0; segment <= segments * revolutions; ++segment) {
 			var y = inclination * segment/segments;
 			vertices.push(radius*cosine(segment*delta), y,    radius*sine(segment*delta));
 			vertices.push(radius*cosine(segment*delta), y+dy, radius*sine(segment*delta));
