@@ -137,7 +137,7 @@ var shapes = (function() {
 				vertices.push(rightX, radiusRight * Math.sin(segment*angle), radiusRight * Math.cos(segment*angle));
 			}
 
-		return vertices, colourshapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
 
@@ -159,7 +159,7 @@ var shapes = (function() {
 			// glColor4f(color.r, color.g, color.b, color.a);
 			vertices.push(x, -height/2, z);
 
-		return vertices, colourshapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
 
@@ -178,7 +178,7 @@ var shapes = (function() {
 			// glColor3f(0.2f, 0.35f, 0.65f);
 			vertices.push(radius*cosine(theta*segment), -height/2, radius*sine(theta*segment));
 
-		return vertices, colourshapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	}
 
