@@ -126,8 +126,8 @@ var shapes = (function() {
 
 			//
 			var theta  = xSegment * dTheta;
-			var rightX = radius * cosine(theta);
-			var leftX  = radius * cosine(theta+dTheta);
+			var rightX = radius * Math.cos(theta);
+			var leftX  = radius * Math.cos(theta+dTheta);
 
 			radiusLeft  = Math.sqrt(radius*radius - leftX*leftX);
 			radiusRight = Math.sqrt(radius*radius - rightX*rightX);
@@ -157,7 +157,7 @@ var shapes = (function() {
 		
 		for (var segment = 0; segment <= segments; ++segment) {
 			//
-			var x = radius*cosine(θ*segment), z = radius*sine(θ*segment);
+			var x = radius*Math.cos(θ*segment), z = radius*Math.sin(θ*segment);
 			// glColor4f(color.r, color.g, color.b, color.a);
 			vertices.push(x, -height/2, z);
 		}
@@ -179,7 +179,7 @@ var shapes = (function() {
 
 		for (var segment = 0; segment <= segments; ++segment) {
 			// glColor3f(0.2f, 0.35f, 0.65f);
-			vertices.push(radius*cosine(theta*segment), -height/2, radius*sine(theta*segment));
+			vertices.push(radius*Math.cos(theta*segment), -height/2, radius*Math.sin(theta*segment));
 		}
 		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
@@ -228,8 +228,8 @@ var shapes = (function() {
 
 		for (var segment = 0; segment <= segments * revolutions; ++segment) {
 			var y = inclination * segment/segments;
-			vertices.push(radius*cosine(segment*delta), y,    radius*sine(segment*delta));
-			vertices.push(radius*cosine(segment*delta), y+dy, radius*sine(segment*delta));
+			vertices.push(radius*Math.cos(segment*delta), y,    radius*Math.sin(segment*delta));
+			vertices.push(radius*Math.cos(segment*delta), y+dy, radius*Math.sin(segment*delta));
 		}
 
 		return { vertices: indeces.map(function(index) { return unique[index]; }).flatten(), colours: colours };
