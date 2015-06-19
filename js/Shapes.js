@@ -139,7 +139,7 @@ var shapes = (function() {
 
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
-	}
+	};
 
 
 
@@ -161,7 +161,7 @@ var shapes = (function() {
 
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
-	}
+	};
 
 
 
@@ -181,7 +181,7 @@ var shapes = (function() {
 		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
-	}
+	};
 
 
 
@@ -208,7 +208,7 @@ var shapes = (function() {
 
 		return this.monochrome(indeces.map(function(index) { return unique[index]; }).flatten(), [1.0, 0.0, 0.0, 1.0]);
 
-	}
+	};
 
 
 
@@ -231,7 +231,7 @@ var shapes = (function() {
 
 		return { vertices: indeces.map(function(index) { return unique[index]; }).flatten(), colours: colours };
 
-	}
+	};
 
 
 
