@@ -37,7 +37,7 @@ var shapes = (function() {
 		//
 		// (L|R T|B F|B) => (Left|Right Top|Bottom Front|Back)
 		// TODO: Which direction does the Z axis go in (into screen our away from screen)?
-		var hx = dx/2, hy = dy/2, hz = z/2;
+		var hx = dx/2, hy = dy/2, hz = dz/2;
 		var palette = palette || somecolours; //
 
 		var unique = [[-hx,  hy, -hz],  // LTF (0)
@@ -138,7 +138,7 @@ var shapes = (function() {
 			}
 
 		}
-		
+
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
 
 	};
