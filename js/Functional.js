@@ -16,6 +16,10 @@
 
 
 
+"use strict"
+
+
+
 var haskell = (function() {
 
 
@@ -26,7 +30,7 @@ var haskell = (function() {
 
 		//
 		var side = 0;         //
-		const θ  = 2*π/sides; // Internal angle for each segment'
+		const θ  = 2*π/sides; // Internal angle for each segment
 
 		return {
 			next: function() {
