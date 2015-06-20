@@ -40,6 +40,7 @@ var haskell = (function() {
 				return value;
 			}
 		};
+
 	};
 
 
@@ -50,6 +51,7 @@ var haskell = (function() {
 		}
 	};
 
+	haskell.polygon(1,2);
 	haskell.runtests();
 
 	return haskell;
