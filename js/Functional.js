@@ -29,6 +29,7 @@ var haskell = (function() {
 	self.polygon = function(sides, radius) {
 
 		//
+		console.log('Polygon');
 		var side = 0;         //
 		const θ  = 2*π/sides; // Internal angle for each segment
 
@@ -46,7 +47,7 @@ var haskell = (function() {
 
 
 	self.runtests = function() {
-		console.log(self)
+		console.log('Running tests');
 		for (let x of self.polygon(5, 1.2)) {
 			console.log(x);
 		}
