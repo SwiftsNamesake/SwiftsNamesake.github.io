@@ -24,6 +24,7 @@ var haskell = (function() {
 
 
 	var haskell = {};
+	var self = haskell;
 
 
 	haskell.polygon = function(sides, radius) {
@@ -46,7 +47,7 @@ var haskell = (function() {
 
 
 	haskell.runtests = function() {
-		for (let x of haskell.polygon(5, 1.2)) {
+		for (let x of self.polygon(5, 1.2)) {
 			console.log(x);
 		}
 	};
