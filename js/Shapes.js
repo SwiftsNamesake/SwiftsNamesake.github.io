@@ -61,7 +61,7 @@ var shapes = (function() {
 					   3, 2, 7, 7, 2, 6]; // Right  (✓)
 
 		var vertices = indeces.map(function(index)    { return unique[index]; });
-		var colours  = indeces.map(function(index, i) { return palette[sides[Math.floor(i/6)]]; });
+		var colours  = indeces.map(function(index, i) { return palette[cubesides[Math.floor(i/6)]]; });
 
 		return { vertices: vertices.flatten(), colours: colours.flatten() }; // TODO: Decide whether to concat buffers or keep them as they are
 
