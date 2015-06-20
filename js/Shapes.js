@@ -168,9 +168,10 @@ var shapes = (function() {
 
 
 
-	shapes.cone = function(radius, height) {
+	shapes.cone = function(radius, height, palette) {
 
 		//
+		// TODO: Use palette
 		var vertices = [];
 		var colours  = [];
 
