@@ -23,11 +23,11 @@ var haskell = (function() {
 	"use strict";
 
 	// var haskell = {};
-	var self = {};
+	var haskell = {};
 	var π    = Math.PI;
 
 
-	self.polygon = function(sides, radius) {
+	haskell.polygon = function(sides, radius) {
 
 		//
 		console.log('Polygon');
@@ -53,24 +53,72 @@ var haskell = (function() {
 
 
 
-	self.runtests = function() {
+	haskell.iterator = function(next) {
+
+		// Creates an object supporting the iterable protocol
+		// TODO: Return a function that returns an iterator, or return iterator directly (?)
+		// var state = state || {}; // TODO: Remove state argument (?)
+		var iterable = {};
+		iterable[Symbol.iterator] = function() {
+			return {
+				next: function() {
+					return next();
+				}
+			}
+		};
+
+		return iterable;
+
+	};
+
+
+	haskell.range = function(start, stop, step) {
+
+		//
+		// TODO: Allow negative step
+		var start = stop !== undefined ? start : 0;     // 
+		var stop  = stop !== undefined ? stop  : start; // 
+		var step  = step !== undefined ? step  : 1;     //
+
+		var n = start;
+
+		function increment() {
+			var next = n < stop ? { value: n, done: false } : { done: true };
+			n += step;
+			return next;
+		}
+
+		return haskell.iterator(increment);
+
+	}
+
+
+	haskell.runtests = function() {
 
 		//
 		console.log('Running tests');
 
 		try {
+
+			//
 			for (let x of this.polygon(5, 1.2)) {
 				console.log(x);
 			}
+
+			for (let x of this.range(0, 10, 2)) {
+				console.log(x);
+			}
+
 		} catch (e) {
+			console.log('Atleast one test failed');
 			console.log(e);
 		}
 
 	};
 
-	console.log(self.polygon(1,2));
-	self.runtests();
+	console.log(haskell.polygon(1,2));
+	haskell.runtests();
 
-	return self;
+	return haskell;
 
 }());
