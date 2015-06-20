@@ -24,6 +24,7 @@ var haskell = (function() {
 
 	// var haskell = {};
 	var self = {};
+	var π    = Math.PI;
 
 
 	self.polygon = function(sides, radius) {
@@ -33,24 +34,38 @@ var haskell = (function() {
 		var side = 0;         //
 		const θ  = 2*π/sides; // Internal angle for each segment
 
-		return {
-			next: function() {
-				var value = side < sides ? { value: [radius*Math.cos(side*θ), radius*Math.cos(side*θ)], done: false }
-				                         : { done: true, };
-				side++;
-				return value;
+		var iterable = {};
+
+		iterable[Symbol.iterator] = function() {
+			return {
+				next: function() {
+					var value = side < sides ? { value: [radius*Math.cos(side*θ), radius*Math.sin(side*θ)], done: false }
+				                             : { done: true };
+					side++;
+					return value;
+				}	
 			}
 		};
+
+		return iterable;
 
 	};
 
 
 
 	self.runtests = function() {
+
+		//
 		console.log('Running tests');
-		for (let x of self.polygon(5, 1.2)) {
-			console.log(x);
+
+		try {
+			for (let x of this.polygon(5, 1.2)) {
+				console.log(x);
+			}
+		} catch (e) {
+			console.log(e);
 		}
+
 	};
 
 	console.log(self.polygon(1,2));

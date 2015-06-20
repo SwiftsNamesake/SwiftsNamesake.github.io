@@ -15,6 +15,7 @@
  */
 
 
+"use strict";
 
 var shapes = (function() {
 
