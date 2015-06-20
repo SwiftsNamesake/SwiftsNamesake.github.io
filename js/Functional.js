@@ -47,6 +47,7 @@ var haskell = (function() {
 
 
 	haskell.runtests = function() {
+		console.log(self)
 		for (let x of self.polygon(5, 1.2)) {
 			console.log(x);
 		}
