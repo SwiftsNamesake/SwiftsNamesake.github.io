@@ -16,12 +16,11 @@
 
 
 
-"use strict";
-
-
 
 var haskell = (function() {
 
+	//
+	"use strict";
 
 	// var haskell = {};
 	var self = {};
@@ -56,6 +55,6 @@ var haskell = (function() {
 	console.log(self.polygon(1,2));
 	self.runtests();
 
-	return haskell;
+	return self;
 
 }());
