@@ -23,11 +23,11 @@
 var haskell = (function() {
 
 
-	var haskell = {};
-	var self = haskell;
+	// var haskell = {};
+	var self = {};
 
 
-	haskell.polygon = function(sides, radius) {
+	self.polygon = function(sides, radius) {
 
 		//
 		var side = 0;         //
@@ -46,15 +46,15 @@ var haskell = (function() {
 
 
 
-	haskell.runtests = function() {
+	self.runtests = function() {
 		console.log(self)
 		for (let x of self.polygon(5, 1.2)) {
 			console.log(x);
 		}
 	};
 
-	console.log(haskell.polygon(1,2));
-	haskell.runtests();
+	console.log(self.polygon(1,2));
+	self.runtests();
 
 	return haskell;
 
