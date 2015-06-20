@@ -216,7 +216,12 @@ var shapes = (function() {
  		               2, 1, 4]; // Base (second half)
 
  		var vertices = indeces.map(function(index) { return unique[index]; }).flatten(); //
- 		var colours  = ['front', 'back', 'left', 'right', 'bottom', 'bottom'].map(function(side) { return (palette || somecolours)[side]; }).flatten();
+ 		var colours  = ['front',  'front',  'front',
+ 		                'back',   'back',   'back',
+ 		                'left',   'left',   'left',
+ 		                'right',  'right',  'right',
+ 		                'bottom', 'bottom', 'bottom',
+ 		                'bottom', 'bottom', 'bottom'].map(function(side) { return (palette || somecolours)[side]; }).flatten();
 
 		return { vertices: vertices, colours: colours };
 
