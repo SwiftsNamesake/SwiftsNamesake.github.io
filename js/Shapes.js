@@ -217,7 +217,7 @@ var shapes = (function() {
 
  		var vertices = indeces.map(function(index) { return unique[index]; }).flatten(); //
  		var colours  = ['front', 'back', 'left', 'right', 'bottom', 'bottom'].map(function(side) { return (palette || somecolours)[side]; }).flatten();
-
+ 		console.log(vertices,colours);
 		return { vertices: vertices, colour: colours };
 
 	};
