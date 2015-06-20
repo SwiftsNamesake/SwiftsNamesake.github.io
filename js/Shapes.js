@@ -15,11 +15,13 @@
  */
 
 
-"use strict";
 
 var shapes = (function() {
 
 	//
+
+	"use strict";
+
 	var shapes = {};
 
 	var somecolours = {'top':    [1.00, 0.00, 0.00, 1.00],
@@ -29,7 +31,7 @@ var shapes = (function() {
 					   'left':   [0.00, 0.50, 0.00, 1.00],
 					   'right':  [0.00, 0.00, 0.50, 1.00]};
 
-	var sides = ['top', 'bottom', 'front', 'back', 'left', 'right']; // This is a constant
+	const cubesides = ['top', 'bottom', 'front', 'back', 'left', 'right']; // This is a constant
 
 
 
@@ -197,7 +199,6 @@ var shapes = (function() {
 
 		//
 		// TODO: Use palette
-		var colours  = [];
 
 		var hx = dx/2, hz = dz/2, hHeight = height/2; //
 
@@ -214,7 +215,10 @@ var shapes = (function() {
  		               4, 3, 2,  // Base (first half)
  		               2, 1, 4]; // Base (second half)
 
-		return shapes.monochrome(indeces.map(function(index) { return unique[index]; }).flatten(), [1.0, 0.0, 0.0, 1.0]);
+ 		var vertices = indeces.map(function(index) { return unique[index]; }).flatten(); //
+ 		var colours  = ['front', 'back', 'left', 'right', 'bottom', 'bottom'].map(function(side) { return (palette || shapes.somecolours)[side]; }).flatten();
+
+		return { vertices: vertices, colour: colours };
 
 	};
 

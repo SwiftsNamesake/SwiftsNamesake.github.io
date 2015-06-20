@@ -6,8 +6,8 @@
  * June 20 2015
  *
 
- * TODO | - 
- *        - 
+ * TODO | - Caching
+ *        - More functions (takeWhile, until, iterate, take, convert to array, filter, map, reduce)
 
  * SPEC | -
  *        -
@@ -36,18 +36,12 @@ var haskell = (function() {
 
 		var iterable = {};
 
-		iterable[Symbol.iterator] = function() {
-			return {
-				next: function() {
-					var value = side < sides ? { value: [radius*Math.cos(side*θ), radius*Math.sin(side*θ)], done: false }
-				                             : { done: true };
-					side++;
-					return value;
-				}	
-			}
-		};
-
-		return iterable;
+		return haskell.iterator(function() {
+			var value = side < sides ? { value: [radius*Math.cos(side*θ), radius*Math.sin(side*θ)], done: false }
+			                         : { done: true };
+			side++;
+			return value;
+		});
 
 	};
 
