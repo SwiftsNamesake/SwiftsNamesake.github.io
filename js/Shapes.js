@@ -114,13 +114,13 @@ var shapes = (function() {
 		const dx = radius / resolution; // The distance between adjacent circles
 
 		// TODO: Use the same number of longitudinal and latitudinal segments (?)
-		const segments = 18;             // For now. Juicy, delicious segments.
-		const angle = 360.0/segments; // Internal angle of a segment (degrees)
+		const segments = 18;        // For now. Juicy, delicious segments.
+		const angle = 2*π/segments; // Internal angle of a segment (degrees)
 
 		var radiusLeft  = Math.sqrt(radius*radius);         // Radius of the left-hand circle
 		var radiusRight = Math.sqrt(radius*radius - dx*dx); // Radius of the right-hand circle
 
-		const dTheta = 180.0/segments;
+		const dTheta = π/segments;
 
 		for (var xSegment = 0; xSegment <= segments; xSegment++) {
 
@@ -153,13 +153,14 @@ var shapes = (function() {
 		var colours  = [];
 
 		const segments = 18;
-		const θ = 360.0 / segments;
+		const θ = 2*π / segments;
 		
 		for (var segment = 0; segment <= segments; ++segment) {
-			//
-			var x = radius*Math.cos(θ*segment), z = radius*Math.sin(θ*segment);
-			// glColor4f(color.r, color.g, color.b, color.a);
+			var x = radius*Math.cos(θ*segment);
+			var z = radius*Math.sin(θ*segment);
+
 			vertices.push(x, -height/2, z);
+			vertices.push(x,  height/2, z);
 		}
 
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
@@ -176,11 +177,13 @@ var shapes = (function() {
 		var colours  = [];
 
 		const segments = 18;
-		const θ = 360.0 / segments;
+		const θ = 2*π / segments;
 
 		for (var segment = 0; segment <= segments; ++segment) {
-			// glColor3f(0.2f, 0.35f, 0.65f);
-			vertices.push(radius*Math.cos(θ*segment), -height/2, radius*Math.sin(θ*segment));
+			var x = radius*Math.cos(θ*segment);
+			var z = radius*Math.sin(θ*segment);
+			vertices.push(x, -height/2, z);
+			vertices.push(0,  height/2, 0);
 		}
 		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
@@ -225,7 +228,7 @@ var shapes = (function() {
 		var vertices = [];
 
 		const segments = 18;             // Segments per revolution
-		const delta    = 360.0/segments; // Internal angle of a single segment
+		const delta    = 2*π/segments; // Internal angle of a single segment
 
 		for (var segment = 0; segment <= segments * revolutions; ++segment) {
 			var y = inclination * segment/segments;
