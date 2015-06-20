@@ -1,0 +1,3 @@
+[submodule "First-Person"]
+	path = First-Person
+	url = https://github.com/SwiftsNamesake/First-Person.git
