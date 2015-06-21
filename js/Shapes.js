@@ -8,6 +8,11 @@
 
  * TODO | - Palette defaults (?)
  *        - Caching, saving constants
+ *          -- As private variables (?)
+ *          -- Make sure all functions are referentially transparent
+ *
+ *        - Pure vertex functions (or use parameter to decide whether to include colours) (?)
+ *          -- More flexible colour handling
 
  * SPEC | -
  *        -
@@ -38,11 +43,12 @@ var shapes = (function() {
 	shapes.box = function(dx, dy, dz, palette) {
 
 		//
-		// (L|R T|B F|B) => (Left|Right Top|Bottom Front|Back)
 		// TODO: Which direction does the Z axis go in (into screen our away from screen)?
-		var hx = dx/2, hy = dy/2, hz = dz/2;
+		var hx = dx/2, hy = dy/2, hz = dz/2;  //
 		var palette = palette || somecolours; //
 
+		// All unique vertices (each vertex is used three times in a cube)
+		// (L|R T|B F|B) => (Left|Right Top|Bottom Front|Back)
 		var unique = [[-hx,  hy, -hz],  // LTF (0)
 					  [-hx,  hy,  hz],  // LTB (1)
 					  [ hx,  hy,  hz],  // RTB (2)
@@ -52,13 +58,13 @@ var shapes = (function() {
 					  [ hx, -hy,  hz],  // RBB (6)
 					  [ hx, -hy, -hz]]; // RBF (7)
 
-		// TODO: This is really a constant (worth caching?)
-		var indeces = [0, 1, 3, 3, 1, 2,  // Top    (✓)
-					   4, 5, 7, 7, 5, 6,  // Bottom (✓)
-					   0, 3, 4, 4, 3, 7,  // Front  (✓)
-					   1, 2, 5, 5, 2, 6,  // Back   (✓)
-					   0, 1, 4, 4, 1, 5,  // Left   (✓)
-					   3, 2, 7, 7, 2, 6]; // Right  (✓)
+		// TODO: Cache this constant array (?)
+		const indeces = [0, 1, 3, 3, 1, 2,  // Top    (✓)
+						 4, 5, 7, 7, 5, 6,  // Bottom (✓)
+						 0, 3, 4, 4, 3, 7,  // Front  (✓)
+						 1, 2, 5, 5, 2, 6,  // Back   (✓)
+						 0, 1, 4, 4, 1, 5,  // Left   (✓)
+						 3, 2, 7, 7, 2, 6]; // Right  (✓)
 
 		var vertices = indeces.map(function(index)    { return unique[index]; });
 		var colours  = indeces.map(function(index, i) { return palette[cubesides[Math.floor(i/6)]]; });
