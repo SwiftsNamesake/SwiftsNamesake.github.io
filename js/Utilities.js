@@ -7,7 +7,8 @@
  *
 
  * TODO | - Wrap in 'namespace object' (?)
- *        - 
+ *        - Use strict
+ *        - Opt-in features (?)
 
  * SPEC | -
  *        -
@@ -17,12 +18,12 @@
 
 
 /* Mathematical constants */
-var π = Math.PI;
-var e = Math.E;
+const π = Math.PI;
+const e = Math.E;
 
 
 /* Mathematical functions */
-function rad(degrees) {
+function radians(degrees) {
 	/* Converts degrees to radians */
 	return degrees*π/180.0
 }
@@ -48,22 +49,7 @@ function comprehension(list, functor, predicate) {
 
 
 /* Array operations */
-Array.prototype.comprehension = function(functor, predicate) {
-	
-	var r = []; // Result
-	console.log(predicate, predicate !== undefined);
-	var p = predicate !== undefined ? predicate : function(x) { return true; };
-
-	for (var i = 0; i < list.length; i++) {
-		if (p(this[i]))
-			r.push(functor(list[i]));
-		else
-			continue;
-	};
-
-	return r;
-
-}
+Array.prototype.comprehension = function(functor, predicate) { return comprehension(this, functor, predicate); }
 
 
 Array.prototype.replicate = function(n) {

@@ -30,6 +30,11 @@ var Entity = function(properties) {
 
 	this.mesh = properties.mesh;
 
+
+	this.render  = function(modelview, projection) { this.mesh.render(modelview, project, this.body.position, this.body.rotation); }
+	this.animate = function(dt) { this.body.animate(dt); };
+	
+
 	// 'Cache' these property definitions by applying them to the Entity prototype (?)
 	Object.defineProperty(this, 'position', { set: function(p) { this.body.p = this.mesh.position = p; return p; },
 	                                    	  get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.p; } });

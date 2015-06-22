@@ -12,6 +12,8 @@
  *        - Textures and materials
  *        - Index buffers
  *        - Separate physics attributes/logic (eg. create a Body type)
+ *          -- If we let wrapper objects worry about position/rotation, we can re-use the same mesh without risking interference
+ *
  *        - Queries, metadata (volume, collisions, boolean operations, contours, etc.)
  *
  *        - Inheritance
@@ -43,7 +45,7 @@ var Mesh = function(context, data, position, rotation) {
 	this.rotation = rotation || [0.0, 0.0, 0.0];
 
 
-	this.render = function(modelview, projection) { context.renderVertices(this.vertices, this.colours, this.rotation, this.position, modelview, projection); }
+	this.render = function(modelview, projection, rotation, position) { context.renderVertices(this.vertices, this.colours, rotation, position, modelview, projection); }
 
 	// this.addColour = function (rgb) {}
 	// this.addTexture = function (path) {}
