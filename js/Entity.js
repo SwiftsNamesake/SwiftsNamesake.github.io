@@ -31,7 +31,7 @@ var Entity = function(properties) {
 	this.mesh = properties.mesh;
 
 
-	this.render  = function(modelview, projection) { return this.mesh.render(modelview, projection, this.body.position, this.body.rotation); }
+	this.render  = function(modelview, projection) { return this.mesh.render(modelview, projection, this.body.p, this.body.r); }
 	this.animate = function(dt)                    { return this.body.animate(dt); };
 
 
