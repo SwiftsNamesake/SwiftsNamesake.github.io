@@ -32,7 +32,7 @@ var haskell = (function() {
 	haskell.polygon = function(sides, radius) {
 
 		//
-		log('Polygon');
+		console.log('Polygon');
 		var side = 0;         //
 		const θ  = 2*π/sides; // Internal angle for each segment
 
@@ -92,27 +92,27 @@ var haskell = (function() {
 	haskell.runtests = function() {
 
 		//
-		log('Running tests');
+		console.log('Running tests');
 
 		try {
 
 			//
 			for (let x of this.polygon(5, 1.2)) {
-				log(x);
+				console.log(x);
 			}
 
 			for (let x of this.range(0, 10, 2)) {
-				log(x);
+				console.log(x);
 			}
 
 		} catch (e) {
-			log('Atleast one test failed');
-			log(e);
+			console.log('Atleast one test failed');
+			console.log(e);
 		}
 
 	};
 
-	log(haskell.polygon(1,2));
+	console.log(haskell.polygon(1,2));
 	haskell.runtests();
 
 	return haskell;
