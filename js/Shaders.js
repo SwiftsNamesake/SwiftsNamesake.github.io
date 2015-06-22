@@ -7,8 +7,8 @@
  * 
 
  * TODO | - Promises
- *        - Logging (allow toggle), timing, profiling
- *        - Separate request IO from WebGL logic
+ *        - console.logging (allow toggle), timing, profiling
+ *        - Separate request IO from WebGL console.logic
  *        - Toggle async
 
  * SPEC | -
@@ -29,9 +29,9 @@ var shaders = (function() {
 	shaders.DEBUG = true;
 
 	// TODO: Allow changing at runtime (?)
-	// TODO: Use logging library instead (?)
+	// TODO: Use console.logging library instead (?)
 	if (shaders.DEBUG) {
-		shaders.log = log;//log.bind(console);
+		shaders.log = console.log;//console.log.bind(console);
 	} else {
 		shaders.log = function() {};
 	}
@@ -67,7 +67,7 @@ var shaders = (function() {
 
 
 	shaders.onerror = function(xhr, status, exception) {
-		// TODO: Proper logging and error handling
+		// TODO: Proper console.logging and error handling
 		console.error('Someone messed up badly.');
 		console.error(xhr, status, exception);
 	}
@@ -76,7 +76,7 @@ var shaders = (function() {
 
 	shaders.create = function(context, source, type) {
 		// Creates and compiles a WebGL shader object from the source.
-		// TODO: Better logging and error handling
+		// TODO: Better console.logging and error handling
 		try {
 			// TODO: Allow other shader type options (eg. synonyms and abbreviations) (?)
 			shaders.log('Creating shader.');
@@ -89,7 +89,7 @@ var shaders = (function() {
 
 			if (!context.getShaderParameter(shader, context.COMPILE_STATUS)) {
 				console.error('Faulty compile status'); // TODO: Better message
-				console.error(context.getShaderInfoLog(shader));
+				console.error(context.getShaderInfoconsole.log(shader));
 				return undefined;
 			}
 
