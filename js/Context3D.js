@@ -160,6 +160,37 @@ var Context3D = function(canvas) {
 	};
 
 
+
+	this.createTexture = function(image) {
+
+		//
+		var GL      = this.context;                 //
+		var texture = this.context.createTexture(); //
+
+		GL.bindTexture(GL.TEXTURE_2D, texture);                                           //
+		GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, image);       //
+		GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.LINEAR);                //
+		GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.LINEAR_MIPMAP_NEAREST); //
+		GL.generateMipmap(GL.TEXTURE_2D);                                                 //
+
+		GL.bindTexture(GL.TEXTURE_2D, null); //
+
+		return texture;
+
+	}
+
+
+	this.loadTexture = function(path) {
+
+		//
+		var self    = this;            // 
+		var image   = new Image();     // 
+		image.onload = function() { self.createTexture(image); }; // TODO: Use promises (?)
+
+	};
+
+
+
 	//
 	this.context = this.create(canvas); //
 	// this.program = _;                // The shader program is initialised asynchronously via this.loadShaders
