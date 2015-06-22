@@ -11,6 +11,7 @@
  *          -- As private variables (?)
  *          -- Make sure all functions are referentially transparent
  *
+ *        - Support primitives other than GL.TRIANGLES
  *        - Pure vertex functions (or use parameter to decide whether to include colours) (?)
  *          -- More flexible colour handling
 
