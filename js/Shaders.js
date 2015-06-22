@@ -31,7 +31,7 @@ var shaders = (function() {
 	// TODO: Allow changing at runtime (?)
 	// TODO: Use console.logging library instead (?)
 	if (shaders.DEBUG) {
-		shaders.log = console.log;//console.log.bind(console);
+		shaders.log = console.log.bind(console);
 	} else {
 		shaders.log = function() {};
 	}
