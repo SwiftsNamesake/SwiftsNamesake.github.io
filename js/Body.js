@@ -10,7 +10,7 @@
  *          -- If not, its rotation and position has to be kept in sync somehow (maybe with another wrapper object?)
  *          -- User-friendliness, queries (like names, should probably be delegated to high-level wrapper object)
  *
- *        - Physics, collisions, bounding boxes, 
+ *        - Physics, collisions, bounding boxes, etc.
  *        - Vector object
 
  * SPEC | -
@@ -27,6 +27,7 @@ var Body = function(properties) {
 	// TODO: Read position and rotation from connected Mesh (✓)
 
 	// Physics and animation
+	// TODO: Let callers worry about defaults (eg. require all arguments) (?)
 	this.p = properties.position || [0.0, 0.0, 0.0];     // Position (units) 
 	this.r = properties.rotation || [0.0, 0.0, 0.0];     // Rotation (radians) 
 	this.v = properties.velocity || [0.0, 0.0, 0.0];     // Velocity (units per second)
