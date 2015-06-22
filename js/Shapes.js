@@ -41,7 +41,6 @@ var shapes = (function() {
 	const cubesides = ['top', 'bottom', 'front', 'back', 'left', 'right']; // This is a constant
 
 
-
 	shapes.box = function(dx, dy, dz, palette) {
 
 		//

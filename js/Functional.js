@@ -8,6 +8,8 @@
 
  * TODO | - Caching
  *        - More functions (takeWhile, until, iterate, take, convert to array, filter, map, reduce)
+ *        - Monads (duh)
+ *        - Currying
 
  * SPEC | -
  *        -
