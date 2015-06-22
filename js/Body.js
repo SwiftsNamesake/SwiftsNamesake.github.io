@@ -36,7 +36,7 @@ var Body = function(properties) {
 	
 	this.m = properties.mass || 1.0;
 
-	this.connected = properties.connected || console.log('Body was not given a connected Mesh'); //
+	// this.connected = properties.connected || console.log('Body was not given a connected Mesh'); //
 
 
 	this.animate = function(dt) {
@@ -58,8 +58,8 @@ var Body = function(properties) {
 
 		// Update connected mesh
 		// TODO: Better way of syncing
-		this.connected.position = this.p;
-		this.connected.rotation = this.r;
+		// this.connected.position = this.p;
+		// this.connected.rotation = this.r;
 
 	};
 

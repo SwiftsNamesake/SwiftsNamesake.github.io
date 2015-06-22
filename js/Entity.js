@@ -6,7 +6,7 @@
  * June 18 2015
  *
 
- * TODO | - 
+ * TODO | - Generalise transformations (keep a 4x4 matrix, not just a position/rotation vector)
  *        - 
 
  * SPEC | -
@@ -20,8 +20,8 @@ var Entity = function(properties) {
 
 	// 
 	// TODO: Use $.extend (?)
-	this.body = new Body({ position: properties.mesh.position,
-						   rotation: properties.mesh.rotation,
+	this.body = new Body({ position: properties.position,
+						   rotation: properties.rotation,
 						   mass:     properties.mass,
 						   velocity: properties.velocity,
 						   angular:  properties.angular,
@@ -35,11 +35,12 @@ var Entity = function(properties) {
 	this.animate = function(dt)                    { return this.body.animate(dt); };
 
 
+	// TODO: Since Meshes no longer care about position/rotation, we don't need these 'syncing properties' anymore.
 	// 'Cache' these property definitions by applying them to the Entity prototype (?)
-	Object.defineProperty(this, 'position', { set: function(p) { this.body.p = this.mesh.position = p; return p; },
-	                                    	  get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.p; } });
+	// Object.defineProperty(this, 'position', { set: function(p) { this.body.p = this.mesh.position = p; return p; },
+	                                    	  // get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.p; } });
 
-	Object.defineProperty(this, 'rotation', { set: function(r) { this.body.r = this.mesh.rotation = r; return r; },
-	                                    	  get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.r; } });
+	// Object.defineProperty(this, 'rotation', { set: function(r) { this.body.r = this.mesh.rotation = r; return r; },
+	                                    	  // get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.r; } });
 
 };

@@ -30,7 +30,7 @@
 
 
 
-var Mesh = function(context, data, position, rotation) {
+var Mesh = function(context, data) {
 
 	//
 	// TODO: Accept single object as argument (?)
@@ -41,11 +41,11 @@ var Mesh = function(context, data, position, rotation) {
 
 	this.primitive = context.context.TRIANGLES; // Triangles by default
 
-	this.position = position || [0.0, 0.0, 0.0];
-	this.rotation = rotation || [0.0, 0.0, 0.0];
+	// this.position = position || [0.0, 0.0, 0.0];
+	// this.rotation = rotation || [0.0, 0.0, 0.0];
 
 
-	this.render = function(modelview, projection, rotation, position) { context.renderVertices(this.vertices, this.colours, rotation, position, modelview, projection); }
+	this.render = function(modelview, projection, position, rotation) { context.renderVertices(this.vertices, this.colours, position, rotation, modelview, projection); }
 
 	// this.addColour = function (rgb) {}
 	// this.addTexture = function (path) {}

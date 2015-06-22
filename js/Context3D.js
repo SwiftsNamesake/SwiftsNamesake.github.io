@@ -134,7 +134,7 @@ var Context3D = function(canvas) {
 
 
 
-	this.renderVertices = function(vertexbuffer, colourbuffer, rotation, translation, modelview, projection) {
+	this.renderVertices = function(vertexbuffer, colourbuffer, translation, rotation, modelview, projection) {
 		
 		//
 		// TODO: Allow other primitives, textures, etc. (accept primitive 'mesh' object as argument?)
