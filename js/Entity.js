@@ -20,27 +20,22 @@ var Entity = function(properties) {
 
 	// 
 	// TODO: Use $.extend (?)
-	this.body = new Body({ position: properties.position,
-						   rotation: properties.rotation,
-						   mass:     properties.mass,
-						   velocity: properties.velocity,
-						   angular:  properties.angular,
-						   acceleration: properties.acceleration,
-						   connected: properties.mesh });
+	// TODO: Better way of implementing 'synonym' keys
+	var pr = properties;
+	// var defaults = {};
 
-	this.mesh = properties.mesh;
+	this.body = new Body({ position:     pr.position     || pr.p,
+						   rotation:     pr.rotation     || pr.r,
+						   mass:         pr.mass         || pr.m,
+						   velocity:     pr.velocity     || pr.v,
+						   angular:      pr.angular      || pr.ω,
+						   acceleration: pr.acceleration || pr.a,
+						   connected:    pr.mesh });
+
+	this.mesh = pr.mesh;
 
 
 	this.render  = function(modelview, projection) { return this.mesh.render(modelview, projection, this.body.p, this.body.r); }
 	this.animate = function(dt)                    { return this.body.animate(dt); };
-
-
-	// TODO: Since Meshes no longer care about position/rotation, we don't need these 'syncing properties' anymore.
-	// 'Cache' these property definitions by applying them to the Entity prototype (?)
-	// Object.defineProperty(this, 'position', { set: function(p) { this.body.p = this.mesh.position = p; return p; },
-	                                    	  // get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.p; } });
-
-	// Object.defineProperty(this, 'rotation', { set: function(r) { this.body.r = this.mesh.rotation = r; return r; },
-	                                    	  // get: function()  { console.assert(this.body.p === this.mesh.position); return this.body.r; } });
 
 };
