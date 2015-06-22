@@ -31,8 +31,8 @@ var Entity = function(properties) {
 	this.mesh = properties.mesh;
 
 
-	this.render  = function(modelview, projection) { this.mesh.render(modelview, project, this.body.position, this.body.rotation); }
-	this.animate = function(dt) { this.body.animate(dt); };
+	this.render  = function(modelview, projection) { return this.mesh.render(modelview, project, this.body.position, this.body.rotation); }
+	this.animate = function(dt)                    { return this.body.animate(dt); };
 
 
 	// 'Cache' these property definitions by applying them to the Entity prototype (?)

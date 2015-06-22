@@ -28,11 +28,11 @@ var Body = function(properties) {
 
 	// Physics and animation
 	// TODO: Let callers worry about defaults (eg. require all arguments) (?)
-	this.p = properties.position || [0.0, 0.0, 0.0];     // Position (units) 
-	this.r = properties.rotation || [0.0, 0.0, 0.0];     // Rotation (radians) 
+	this.p = properties.position || [0.0, 0.0, 0.0];     // Position (units)
+	this.r = properties.rotation || [0.0, 0.0, 0.0];     // Rotation (radians)
 	this.v = properties.velocity || [0.0, 0.0, 0.0];     // Velocity (units per second)
-	this.ω = properties.angular  || [0.0, 0.0, 0.0];     // Angular velocity (radians per second) 
-	this.a = properties.acceleration || [0.0, 0.0, 0.0]; // Acceleration (units per second per second) 
+	this.ω = properties.angular  || [0.0, 0.0, 0.0];     // Angular velocity (radians per second)
+	this.a = properties.acceleration || [0.0, 0.0, 0.0]; // Acceleration (units per second per second)
 	
 	this.m = properties.mass || 1.0;
 

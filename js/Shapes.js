@@ -29,6 +29,7 @@ var shapes = (function() {
 
 	var shapes = {};
 
+	// Default colours for cube and box shapes
 	var somecolours = {'top':    [1.00, 0.00, 0.00, 1.00],
 					   'bottom': [0.00, 1.00, 0.00, 1.00],
 					   'front':  [0.00, 0.00, 1.00, 1.00],
