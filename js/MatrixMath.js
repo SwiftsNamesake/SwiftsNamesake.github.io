@@ -807,3 +807,9 @@ quat4.slerp = function(a,b,c,d) {
 quat4.str = function(a) {
 	return "[" + a[0] + ", " + a[1] + ", " + a[2] + ", " + a[3] + "]"
 };
+
+
+
+var matrix = (function() {
+	
+}());
