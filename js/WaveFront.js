@@ -28,6 +28,9 @@ var WaveFront = (function() {
 	WaveFront.contains   = function(element, list) { return list.indexOf(element) !== (-1); }
 
 
+	WaveFront.parseMTLLine = function(line) {};
+	WaveFront.parseOBJLine = function(line) {};
+
 	WaveFront.parseMTL = function(mtl) {
 
 		// Parses an MTL file
@@ -60,7 +63,7 @@ var WaveFront = (function() {
 		var current   = undefined; 		  // Name of the current material
 		var path 	  = parent(filename); // Path to containing folder
 
-		for (var line of mtl.split(/\n+/).filter(notComment)) {
+		for (var line of mtl.split(/\n+/).filter(WaveFront.notComment)) {
 			
 			// TODO: Decide between abbreviated and full-length keys
 			console.log(line);
@@ -120,9 +123,9 @@ var WaveFront = (function() {
 		var data = { vertices: [], normals: [], textures: [], faces: [], groups: [], mtl: undefined, material: undefined }; //
 		// var path 	= parent(filename);  // Path to containing folder
 
-		for (var line of filter(lambda ln: not (ln.isspace() or ln.startswith('#')), open(filename, 'r'))):
+		for (var line of mtl.split(/\n+/).filter(WaveFront.notComment)):
 
-			values = line.split();
+			values = line.split(/\s+/);
 
 			if (values[0] == 'v') {
 				// Vertex coordinates
@@ -135,22 +138,22 @@ var WaveFront = (function() {
 				data['textures'].append(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
 			} else if (values[0] == 'f') {
 				// Face
-				// TODO: Save indices instead (would probably save memory) (?)
+				// TODO: Save indeces instead (would probably save memory) (?)
 				// TODO: Refactor (?)
-				// TODO: Handle absent values for normals and texture coords
+				// TODO: Handle absent values for normals and texture coords (✓)
 				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60)
-				var face = [vertex.split('/') for vertex in values[1:]] // Extract indices for each vertex of the face
-				console.assert(all(len(vertex) == len(face[0]) for vertex in face))
-				// data['faces'].append(data[key][int(vertex[index]-1)] for index, attr in enumerate(('vertices', 'textures', 'normals') if len(face[0])>index) else None)
-				// data['faces'].append(data['material'])
-				data['faces'].append(([data['vertices'][int(vertex[0])-1] for vertex in face], 								 // Vertices
-									  [data['textures'][int(vertex[1])-1] for vertex in face] if len(face[0])>1 else None,   // Texture coordinates
-									  [data['normals'][int(vertex[2])-1]  for vertex in face] if len(face[0])>2 else None,   // Normals
-									   data['material'])) 																	 // Material
+				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
+				console.assert(face.every(function(vertex) { return vertex.length == face[0].length; }));
+
+				data['faces'].append({ vertices:  face.map(function(vertex) { return data['vertices'][parseInt(vertex[0])-1]; }), 							  // Vertices
+									   texcoords: face.map(function(vertex) { return face[0].length > 1 ? data['textures'][parseInt(vertex[1])-1] : null; }), // Texture coordinates
+									   normals:   face.map(function(vertex) { return face[0].length > 2 ? data['normals'][parseInt(vertex[2])-1]  : null; }), // Normals
+									   material:  data['material'] }); 																	                      // Material
 			} else if (values[0] == 'g') {
 				// Group
-				// print('Adding group:', values[2])
-				data['groups'].append((values[2], len(data['faces']))) // Group name with its lower bound (index into faces array)
+				// console.log('Adding group:', values[2])
+				// TODO: Use object instead of a two-item array (?) (✓)
+				data['groups'].append({ name: values[2], lower: len(data['faces']) }) // Group name with its lower bound (index into faces array)
 			} else if (values[0] == 'o') {
 				// Object
 				// console.log('Ignoring OBJ property \'{0}\''.format(values[0]))
