@@ -10,6 +10,7 @@
  *        - More functions (takeWhile, until, iterate, take, convert to array, filter, map, reduce)
  *        - Monads (duh)
  *        - Currying
+ *        - Iterator objects (?)
 
  * SPEC | -
  *        -
@@ -68,9 +69,16 @@ var haskell = (function() {
 	};
 
 
+
+	// haskell.map = function(f, iterable) {};
+	// haskell.filter = function(p, iterable) {};
+
+
+
 	haskell.range = function(start, stop, step) {
 
 		//
+		// TODO: TEST
 		// TODO: Allow negative step
 		var start = stop !== undefined ? start : 0;     // 
 		var stop  = stop !== undefined ? stop  : start; // 
@@ -89,25 +97,95 @@ var haskell = (function() {
 	}
 
 
+
+	// haskell.reverse = function(iterable) {};
+
+
+
+	haskell.slice = function(iterable, start, stop, step) {
+
+		//
+		// TODO: TEST
+		// TODO: Infinite upper bounds (stop)
+		// TODO: Optimise random-access iterators (rather than skipping one at a time)
+		var start = stop !== undefined ? start : 0;     // 
+		var stop  = stop !== undefined ? stop  : start; // 
+		var step  = step !== undefined ? step  : 1;     //
+
+		// console.log('Start is ' + start + '.');
+		// console.log('Stop  is ' + stop  + '.');
+		// console.log('Step is '  + step  + '.');		
+		
+		var n = start;
+		var iterator = iterable[Symbol.iterator]();
+
+		for (var i = 0; i < start; i++) { iterator.next(); } // Skip items preceding start
+
+		function next() {
+			var value = n < stop ? iterator.next(): { done: true };
+			for (var i = 1; i < step; i++) { iterator.next(); }
+			n += step;
+			return value;
+
+		}
+
+		return haskell.iterator(next);	
+
+	};
+
+
+
+	haskell.zip   = function(a, b) { return haskell.zipWith(function(fst, snd) { return [fst, snd]; }, a, b) };
+
+
+
+	haskell.zipWith = function(f, a, b) {
+
+		//
+		// TODO: TEST
+		// TODO: Allow any number of iterables
+		var iterators = { a: a[Symbol.iterator](), b: b[Symbol.iterator]() };
+		// console.log(iterators);
+		function next() {
+			var first  = iterators.a.next();
+			var second = iterators.b.next();
+			// console.log(first, second)
+			return { value: f(first.value, second.value), done: first.done || second.done };
+		}
+
+		return haskell.iterator(next);
+		
+	};
+
+
+
 	haskell.runtests = function() {
 
 		//
 		console.log('Running tests');
 
-		try {
+		//
+		console.log('Testing haskell.polygon');
+		for (let x of haskell.polygon(5, 1.2)) {
+			console.log(x);
+		}
 
-			//
-			for (let x of this.polygon(5, 1.2)) {
-				console.log(x);
-			}
+		//
+		console.log('Testing haskell.range');
+		for (let x of haskell.range(0, 10, 2)) {
+			console.log(x);
+		}
 
-			for (let x of this.range(0, 10, 2)) {
-				console.log(x);
-			}
+		//
+		console.log('Testing zipWith');
+		for (let x of haskell.zipWith(function(fst, snd) { return [fst, snd, fst*snd]; }, haskell.range(0, 10, 2), haskell.range(0, 10, 1))) {
+			console.log(x[0] + ' * ' + x[1] + ' = ' + x[2] + '.');
+		}
 
-		} catch (e) {
-			console.log('Atleast one test failed');
-			console.log(e);
+		//
+		console.log('Testing zip');
+		for (let x of haskell.zip(haskell.range(0, 10, 2), haskell.range(0, 10, 1))) {
+			console.log(x);
 		}
 
 	};

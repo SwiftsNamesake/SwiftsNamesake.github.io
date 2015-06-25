@@ -11,7 +11,7 @@
  *        - Change geometry at runtime
  *        - Textures and materials
  *        - Index buffers
- *        - Separate physics attributes/logic (eg. create a Body type)
+ *        - Separate physics attributes/console.logic (eg. create a Body type)
  *          -- If we let wrapper objects worry about position/rotation, we can re-use the same mesh without risking interference
  *
  *        - Queries, metadata (volume, collisions, boolean operations, contours, etc.)
@@ -20,7 +20,7 @@
  *          -- Common solids and 2D shapes (triangle, rectangle, block, cube, sphere, cone, cylinder, dodecahedron, etc.)
  *
  *        - Robustness
- *          -- Logging and debugging
+ *          -- console.logging and debugging
  *          -- Type-checking, function signatures
  
  * SPEC | -

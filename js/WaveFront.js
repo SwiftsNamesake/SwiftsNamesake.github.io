@@ -6,8 +6,9 @@
  * June 17 2015
  *
 
- * TODO | - 
- *        - 
+ * TODO | - Use functional iterators
+ *        - Format debugging messages
+ *        - Support multiple MTL files (part of standard?) (?)
 
  * SPEC | -
  *        -
@@ -31,7 +32,7 @@ var WaveFront = (function() {
 	WaveFront.parseMTLLine = function(line) {};
 	WaveFront.parseOBJLine = function(line) {};
 
-	WaveFront.parseMTL = function(mtl) {
+	WaveFront.parseMTL = function(source) {
 
 		// Parses an MTL file
 
@@ -61,9 +62,9 @@ var WaveFront = (function() {
 		
 		var materials = {}; 			  // TODO: Dict comprehension, itertools, split on "newmtl" (?)
 		var current   = undefined; 		  // Name of the current material
-		var path 	  = parent(filename); // Path to containing folder
+		// var path 	  = parent(filename); // Path to containing folder
 
-		for (var line of mtl.split(/\n+/).filter(WaveFront.notComment)) {
+		for (var line of source.split(/\n+/).filter(WaveFront.notComment)) {
 			
 			// TODO: Decide between abbreviated and full-length keys
 			console.log(line);
@@ -77,7 +78,7 @@ var WaveFront = (function() {
 				materials[current][values[0]] = values.slice(1).map(parseFloat); // (R, G, B, A) channels
 			} else if (values[0] == 'map_Kd') {
 				// Texture
-				materials[current][values[0]] = loadTexture(join(path, values[1]));
+				materials[current][values[0]] = values[1]; //loadTexture(join(path, values[1]));
 			} else if (values[0] == 'newmtl') {
 				// New material definition
 				current = values[1];
@@ -100,9 +101,9 @@ var WaveFront = (function() {
 
 
 
-	WaveFront.parseOBJ = function(obj) {
+	WaveFront.parseOBJ = function(source) {
 
-		// Parses an OBJ file
+		// Parses the contents of an OBJ file
 
 		// TODO: Use namedtuple to pack face data (?)
 		// TODO: Difference between groups and objects (?)
@@ -123,7 +124,20 @@ var WaveFront = (function() {
 		var data = { vertices: [], normals: [], textures: [], faces: [], groups: [], mtl: undefined, material: undefined }; //
 		// var path 	= parent(filename);  // Path to containing folder
 
-		for (var line of mtl.split(/\n+/).filter(WaveFront.notComment)):
+		/*var lookup = {
+			'v': undefined,
+			'vn': undefined,
+			'vt': undefined,
+			'f': undefined,
+			'g': undefined,
+			'o': undefined,
+			's': undefined,
+			'mtllib': undefined,
+			'usemtl': undefined,
+			['l']: undefined
+		}*/
+
+		for (var line of source.split(/\n+/).filter(WaveFront.notComment)):
 
 			values = line.split(/\s+/);
 
@@ -141,7 +155,7 @@ var WaveFront = (function() {
 				// TODO: Save indeces instead (would probably save memory) (?)
 				// TODO: Refactor (?)
 				// TODO: Handle absent values for normals and texture coords (✓)
-				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60)
+				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60) ()
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				console.assert(face.every(function(vertex) { return vertex.length == face[0].length; }));
 
@@ -177,16 +191,17 @@ var WaveFront = (function() {
 
 		// TODO: Handle data with no group definitions
 		var prev = len(data['groups'])
-		// print('Groups', data['groups'])
-		console.assert(len(data['groups']) == 0 || data['groups'][0][1] == 0, 'All faces must belong to a group. (lowest index is {0})'.format(data['groups'][0][1]))
+		// console.log('Groups', data['groups'])
+		console.assert(data['groups'].length == 0 || data['groups'][0][1] == 0, 'All faces must belong to a group. (lowest index is {0})'.format(data['groups'][0][1]))
 		
 		// Map group names to their lower and upper bounds
 		// TODO: Optimise (the tail slice is very expensive, use islice instead)
 		// TODO: Refactor (or atleast explain) this line
+		// TODO: NO DICT COMPREHENSIONS IN JAVASCRIPT
 		data['groups'] = { group : (low, upp) for (group, low), (_, upp) in zip(data['groups'], chain(islice(data['groups'], 1, None), [(None, len(data['faces']))])) }
 
 		// assert len(data['groups']) == prev
-		// print('Groups', data['groups'])
+		// console.log('Groups', data['groups'])
 
 		// Meta data
 		// TODO: Additional meta data
@@ -202,8 +217,8 @@ var WaveFront = (function() {
 	}
 
 
-	WaveFront.loadOBJ = function() {};
-	WaveFront.loadMTL = function() {};
+	WaveFront.loadOBJ = function(fn) { return $.ajax(fn).then(WaveFront.parseOBJ); };
+	WaveFront.loadMTL = function(fn) { return $.ajax(fn).then(WaveFront.parseMTL); };
 
 
 	return WaveFront;

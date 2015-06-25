@@ -48,6 +48,7 @@ function comprehension(list, functor, predicate) {
 }
 
 
+
 /* Array operations */
 Array.prototype.comprehension = function(functor, predicate) { return comprehension(this, functor, predicate); }
 
