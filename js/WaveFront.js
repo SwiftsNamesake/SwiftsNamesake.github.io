@@ -200,7 +200,9 @@ var WaveFront = (function() {
 		// TODO: Handle data with no group definitions
 		var prev = data.groups.length;
 		// console.log('Groups', data.groups)
-		console.assert(data.groups.length == 0 || data.groups[0][1] == 0, 'All faces must belong to a group. (lowest index is {0})'.format(data.groups[0][1]))
+		// console.assert(data.groups.length == 0 || data.groups[0][1] == 0, 'All faces must belong to a group. (lowest index is {0})'.format(data.groups[0][1]))
+		console.assert(data.groups.length == 0 || data.groups[0][1] == 0, 'All faces must belong to a group. (lowest index is ' + data.groups.lower + ')')
+
 		
 		// Map group names to their lower and upper bounds
 		// TODO: Optimise (the tail slice is very expensive, use islice instead)
