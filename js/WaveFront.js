@@ -72,7 +72,7 @@ var WaveFront = (function() {
 			// For each line that is not blank or a comment
 			var values = line.split(/\s+/); // Split on space
 
-			if (contains(values[0], ['Ka', 'Kd', 'Ks'])) {
+			if (WaveFront.contains(values[0], ['Ka', 'Kd', 'Ks'])) {
 				// Ambient, Diffuse and Specular
 				// TODO: Convert to tuple (?)
 				materials[current][values[0]] = values.slice(1).map(parseFloat); // (R, G, B, A) channels
@@ -83,7 +83,7 @@ var WaveFront = (function() {
 				// New material definition
 				current = values[1];
 				materials[current] = {};
-			} else if (contains(values[0], ['Ns', 'Ni', 'd', 'Tr', 'illum'])) {
+			} else if (WaveFront.contains(values[0], ['Ns', 'Ni', 'd', 'Tr', 'illum'])) {
 				// ?, ?, d(issolved), Tr(ansparent), ?
 				// Dissolved and Transparent are synonyms
 				// console.log('The valid MTL property \'{0}\' is currently unsupported by this parser and will have no effect.'.format(values[0]));
@@ -177,12 +177,12 @@ var WaveFront = (function() {
 			} else if (values[0] == 'mtllib') {
 				// MTL library
 				// Load materials defined in an external file
-				data.mtl = parseMTL(join(path, values[1])); // TODO: FIX PATH HANDLING!!!!!
+				data.mtl = WaveFront.parseMTL(join(path, values[1])); // TODO: FIX PATH HANDLING!!!!!
 			} else if (values[0] == 'usemtl') {
 				// Use MTL material
 				// TODO: Handle usemtl (null)
 				data.material = data.mtl[values[1]] // Current material
-			} else if (contains(values[0], ['l'])) {
+			} else if (WaveFront.contains(values[0], ['l'])) {
 				// console.log('Unsure how to handle property \'{0}\'.'.format(values[0]));
 			} else {
 				// Unknown parameter encountered
