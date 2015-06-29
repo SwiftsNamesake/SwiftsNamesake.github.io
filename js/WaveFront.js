@@ -149,6 +149,7 @@ var WaveFront = (function() {
 
 			if (values[0] == 'v') {
 				// Vertex coordinates
+				console.log(data.vertices);
 				data.vertices.append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid vertex data
 			} else if (values[0] == 'vn') {
 				// Vertex normal
