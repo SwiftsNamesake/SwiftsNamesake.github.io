@@ -149,14 +149,13 @@ var WaveFront = (function() {
 
 			if (values[0] == 'v') {
 				// Vertex coordinates
-				console.log(data.vertices);
-				data.vertices.append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid vertex data
+				data.vertices.push(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid vertex data
 			} else if (values[0] == 'vn') {
 				// Vertex normal
-				data.normals.append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
+				data.normals.push(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
 			} else if (values[0] == 'vt') {
 				// Texture coordinates
-				data.textures.append(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
+				data.textures.push(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
 			} else if (values[0] == 'f') {
 				// Face
 				// TODO: Save indeces instead (would probably save memory) (?)
@@ -166,7 +165,7 @@ var WaveFront = (function() {
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				console.assert(face.every(function(vertex) { return vertex.length == face[0].length; }));
 
-				data.faces.append({ vertices:  face.map(function(vertex) { return data.vertices[parseInt(vertex[0])-1]; }), 							// Vertices
+				data.faces.push({ vertices:  face.map(function(vertex) { return data.vertices[parseInt(vertex[0])-1]; }), 							// Vertices
 									texcoords: face.map(function(vertex) { return face[0].length > 1 ? data.textures[parseInt(vertex[1])-1] : null; }), // Texture coordinates
 									normals:   face.map(function(vertex) { return face[0].length > 2 ? data.normals[parseInt(vertex[2])-1]  : null; }), // Normals
 									material:  data.material }); 																	                    // Material
@@ -174,7 +173,7 @@ var WaveFront = (function() {
 				// Group
 				// console.log('Adding group:', values[2])
 				// TODO: Use object instead of a two-item array (?) (✓)
-				data.groups.append({ name: values[2], lower: len(data['faces']) }) // Group name with its lower bound (index into faces array)
+				data.groups.push({ name: values[2], lower: len(data['faces']) }) // Group name with its lower bound (index into faces array)
 			} else if (values[0] == 'o') {
 				// Object
 				// console.log('Ignoring OBJ property \'{0}\''.format(values[0]));
@@ -209,7 +208,7 @@ var WaveFront = (function() {
 		// TODO: NO DICT COMPREHENSIONS IN JAVASCRIPT
 		// data.groups = { group : (low, upp) for (group, low), (_, upp) in zip(data.groups, chain(islice(data.groups, 1, None), [(None, len(data['faces']))])) }
 
-		data.groups.append({ name: null, lower: data['faces'].length }); //
+		data.groups.push({ name: null, lower: data['faces'].length }); //
 
 		var bounded = {}; //
 
