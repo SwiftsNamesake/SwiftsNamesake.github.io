@@ -86,7 +86,7 @@ var WaveFront = (function() {
 			} else if (contains(values[0], ['Ns', 'Ni', 'd', 'Tr', 'illum'])) {
 				// ?, ?, d(issolved), Tr(ansparent), ?
 				// Dissolved and Transparent are synonyms
-				console.log('The valid MTL property \'{0}\' is currently unsupported by this parser and will have no effect.'.format(values[0]));
+				// console.log('The valid MTL property \'{0}\' is currently unsupported by this parser and will have no effect.'.format(values[0]));
 			} else {
 				// Unknown parameter encountered
 				// throw ValueError('\'{0}\' is not a recognised parameter.'.format(values[0]))
