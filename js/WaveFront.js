@@ -137,19 +137,19 @@ var WaveFront = (function() {
 			['l']: undefined
 		}*/
 
-		for (var line of source.split(/\n+/).filter(WaveFront.notComment)):
+		for (var line of source.split(/\n+/).filter(WaveFront.notComment)) {
 
 			values = line.split(/\s+/);
 
 			if (values[0] == 'v') {
 				// Vertex coordinates
-				data['vertices'].append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid vertex data
+				data.vertices.append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid vertex data
 			} else if (values[0] == 'vn') {
 				// Vertex normal
-				data['normals'].append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
+				data.normals.append(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
 			} else if (values[0] == 'vt') {
 				// Texture coordinates
-				data['textures'].append(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
+				data.textures.append(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
 			} else if (values[0] == 'f') {
 				// Face
 				// TODO: Save indeces instead (would probably save memory) (?)
@@ -159,57 +159,69 @@ var WaveFront = (function() {
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				console.assert(face.every(function(vertex) { return vertex.length == face[0].length; }));
 
-				data['faces'].append({ vertices:  face.map(function(vertex) { return data['vertices'][parseInt(vertex[0])-1]; }), 							  // Vertices
-									   texcoords: face.map(function(vertex) { return face[0].length > 1 ? data['textures'][parseInt(vertex[1])-1] : null; }), // Texture coordinates
-									   normals:   face.map(function(vertex) { return face[0].length > 2 ? data['normals'][parseInt(vertex[2])-1]  : null; }), // Normals
-									   material:  data['material'] }); 																	                      // Material
+				data.faces.append({ vertices:  face.map(function(vertex) { return data.vertices[parseInt(vertex[0])-1]; }), 							// Vertices
+									texcoords: face.map(function(vertex) { return face[0].length > 1 ? data.textures[parseInt(vertex[1])-1] : null; }), // Texture coordinates
+									normals:   face.map(function(vertex) { return face[0].length > 2 ? data.normals[parseInt(vertex[2])-1]  : null; }), // Normals
+									material:  data.material }); 																	                    // Material
 			} else if (values[0] == 'g') {
 				// Group
 				// console.log('Adding group:', values[2])
 				// TODO: Use object instead of a two-item array (?) (✓)
-				data['groups'].append({ name: values[2], lower: len(data['faces']) }) // Group name with its lower bound (index into faces array)
+				data.groups.append({ name: values[2], lower: len(data['faces']) }) // Group name with its lower bound (index into faces array)
 			} else if (values[0] == 'o') {
 				// Object
-				// console.log('Ignoring OBJ property \'{0}\''.format(values[0]))
+				// console.log('Ignoring OBJ property \'{0}\''.format(values[0]));
 			} else if (values[0] == 's') {
 				// Smooth shading
-				// console.log('Ignoring OBJ property \'{0}\''.format(values[0]))
+				// console.log('Ignoring OBJ property \'{0}\''.format(values[0]));
 			} else if (values[0] == 'mtllib') {
 				// MTL library
 				// Load materials defined in an external file
-				data['mtl'] = parseMTL(join(path, values[1])); // TODO: FIX PATH HANDLING!!!!!
+				data.mtl = parseMTL(join(path, values[1])); // TODO: FIX PATH HANDLING!!!!!
 			} else if (values[0] == 'usemtl') {
 				// Use MTL material
 				// TODO: Handle usemtl (null)
-				data['material'] = data['mtl'][values[1]] // Current material
+				data.material = data.mtl[values[1]] // Current material
 			} else if (contains(values[0], ['l'])) {
-				// console.log('Unsure how to handle property \'{0}\'.'.format(values[0]))
+				// console.log('Unsure how to handle property \'{0}\'.'.format(values[0]));
 			} else {
 				// Unknown parameter encountered
-				// throw ValueError('\'{0}\' is not a recognised parameter.'.format(values[0]))
+				// throw ValueError('\'{0}\' is not a recognised parameter.'.format(values[0]));
 			}
+		
+		}
 
 		// TODO: Handle data with no group definitions
-		var prev = len(data['groups'])
-		// console.log('Groups', data['groups'])
-		console.assert(data['groups'].length == 0 || data['groups'][0][1] == 0, 'All faces must belong to a group. (lowest index is {0})'.format(data['groups'][0][1]))
+		var prev = data.groups.length;
+		// console.log('Groups', data.groups)
+		console.assert(data.groups.length == 0 || data.groups[0][1] == 0, 'All faces must belong to a group. (lowest index is {0})'.format(data.groups[0][1]))
 		
 		// Map group names to their lower and upper bounds
 		// TODO: Optimise (the tail slice is very expensive, use islice instead)
 		// TODO: Refactor (or atleast explain) this line
 		// TODO: NO DICT COMPREHENSIONS IN JAVASCRIPT
-		data['groups'] = { group : (low, upp) for (group, low), (_, upp) in zip(data['groups'], chain(islice(data['groups'], 1, None), [(None, len(data['faces']))])) }
+		// data.groups = { group : (low, upp) for (group, low), (_, upp) in zip(data.groups, chain(islice(data.groups, 1, None), [(None, len(data['faces']))])) }
 
-		// assert len(data['groups']) == prev
-		// console.log('Groups', data['groups'])
+		data.groups.append({ name: null, lower: data['faces'].length }); //
+
+		var bounded = {}; //
+
+		for(let group of haskell.zip(data.groups, haskell.islice(1, groups.length, 1))) {
+			bounded[group[0].name] = { lower: group[0].lower, upper: group[1].lower };
+		}
+
+		data.groups = bounded;
+
+		// assert len(data.groups) == prev
+		// console.log('Groups', data.groups)
 
 		// Meta data
 		// TODO: Additional meta data
 		// TODO: Return an object instead, to facilitate marshalling (?)
-		data['meta'] = {};
+		data.meta = {};
 
 		for (let attribute of ['vertices', 'normals', 'faces']) {
-			data['meta'][attribute] = data[attribute].length;
+			data.meta[attribute] = data[attribute].length;
 		}
 
 		return data

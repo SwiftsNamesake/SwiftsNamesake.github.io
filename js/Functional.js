@@ -54,6 +54,7 @@ var haskell = (function() {
 
 		// Creates an object supporting the iterable protocol
 		// TODO: Return a function that returns an iterator, or return iterator directly (?)
+		// TODO: Rename (iterable)
 		// var state = state || {}; // TODO: Remove state argument (?)
 		var iterable = {};
 		iterable[Symbol.iterator] = function() {
@@ -110,7 +111,7 @@ var haskell = (function() {
 		// TODO: Optimise random-access iterators (rather than skipping one at a time)
 		var start = stop !== undefined ? start : 0;     // 
 		var stop  = stop !== undefined ? stop  : start; // 
-		var step  = step !== undefined ? step  : 1;     //
+		var step  = step !== undefined ? step  : 1;     // 
 
 		// console.log('Start is ' + start + '.');
 		// console.log('Stop  is ' + stop  + '.');
@@ -123,7 +124,7 @@ var haskell = (function() {
 
 		function next() {
 			var value = n < stop ? iterator.next(): { done: true };
-			for (var i = 1; i < step; i++) { iterator.next(); }
+			for (var i = 1; i < step; i++) { iterator.next(); } // Skip intermediate values (step-1 items)
 			n += step;
 			return value;
 
@@ -135,7 +136,11 @@ var haskell = (function() {
 
 
 
-	haskell.zip   = function(a, b) { return haskell.zipWith(function(fst, snd) { return [fst, snd]; }, a, b) };
+	haskell.zip   = function(a, b) {
+
+		// 
+		// TODO: Use object to pair up items (eg. { first: value, second: value }) (?)
+		return haskell.zipWith(function(fst, snd) { return [fst, snd]; }, a, b) };
 
 
 
@@ -155,6 +160,18 @@ var haskell = (function() {
 
 		return haskell.iterator(next);
 		
+	};
+
+
+
+	haskell.toArray = function(iterable) {
+
+		//
+		var array = [];
+		// array.push.apply(array, iterable[Symbol.iterator]());
+		for (let item of iterable) { array.push(item); }
+		return array;
+
 	};
 
 
