@@ -214,7 +214,7 @@ var WaveFront = (function() {
 
 		var bounded = {}; //
 
-		for (var group of haskell.zip(data.groups, haskell.slice(1, data.groups.length, 1))) {
+		for (var group of haskell.zip(data.groups, haskell.slice(data.groups, 1, data.groups.length))) {
 			bounded[group[0].name] = { lower: group[0].lower, upper: group[1].lower };
 		}
 
