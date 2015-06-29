@@ -139,7 +139,7 @@ var WaveFront = (function() {
 
 		for (var line of source.split(/\n+/).filter(WaveFront.notComment)) {
 
-			values = line.split(/\s+/);
+			var values = line.split(/\s+/);
 
 			if (values[0] == 'v') {
 				// Vertex coordinates
