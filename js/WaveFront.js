@@ -9,6 +9,12 @@
  * TODO | - Use functional iterators
  *        - Format debugging messages
  *        - Support multiple MTL files (part of standard?) (?)
+ *        - Figure out resource dependencies (MTL/textures/etc.)
+ *          -- Include a list of mtl dependencies in the return object (?)
+ *          -- High-level API function for loading an OBJ file and related material files
+ *
+ *        - Support index arrays (setting?)
+ *        - Optimise, profile
 
  * SPEC | -
  *        -
@@ -177,11 +183,11 @@ var WaveFront = (function() {
 			} else if (values[0] == 'mtllib') {
 				// MTL library
 				// Load materials defined in an external file
-				data.mtl = WaveFront.parseMTL(join(path, values[1])); // TODO: FIX PATH HANDLING!!!!!
+				data.mtl = values[1]; //WaveFront.parseMTL(join(path, values[1])); // TODO: FIX PATH HANDLING!!!!!
 			} else if (values[0] == 'usemtl') {
 				// Use MTL material
 				// TODO: Handle usemtl (null)
-				data.material = data.mtl[values[1]] // Current material
+				data.material = { file: data.mtl, material: values[1] }; //data.mtl[values[1]] // Current material
 			} else if (WaveFront.contains(values[0], ['l'])) {
 				// console.log('Unsure how to handle property \'{0}\'.'.format(values[0]));
 			} else {
