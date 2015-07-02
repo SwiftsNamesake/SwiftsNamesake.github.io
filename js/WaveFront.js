@@ -296,14 +296,14 @@ var WaveFront = (function() {
 		console.log(OBJ.faces.length)
 		console.log(OBJ.faces[0].vertices.length);
 
-		var vertices  = OBJ.faces.map(function(f) { return f.vertices.slice(0, 3).map(function(v) { return OBJ.vertices[v]; }); }).flatten();
-		var normals   = OBJ.faces.map(function(f) { return f.normals.slice(0, 3).map(function(n)  { return OBJ.normals[n];  }); }).flatten();
-		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka'].concat([1.0]); }).flatten();
+		var vertices  = OBJ.faces.map(function(f) { return f.vertices.slice(0, 3).map(function(v) { return OBJ.vertices[v]; }); });
+		var normals   = OBJ.faces.map(function(f) { return f.normals.slice(0, 3).map(function(n)  { return OBJ.normals[n];  }); });
+		var colours   = OBJ.faces.map(function(f) { var colour = MTLs[f.material.file][f.material.material]['Ka']; colour[3] = colour[3] || 1.0; });
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		console.log(vertices.length);
 		console.log(colours.length);
 
-		return new Mesh(context, { vertices: vertices, colours: colours });
+		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
 
 	};
 
