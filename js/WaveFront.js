@@ -297,7 +297,7 @@ var WaveFront = (function() {
 
 		var vertices  = OBJ.faces.map(function(f) { return f.vertices.map(function(v) { return OBJ.vertices[v]; }); }).flatten();
 		var normals   = OBJ.faces.map(function(f) { return f.normals.map(function(n)  { return OBJ.normals[n];  }); }).flatten();
-		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka']; }).flatten();
+		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka'].concat([1.0]); }).flatten();
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 
 		return new Mesh(context, { vertices: vertices, colours: colours });
