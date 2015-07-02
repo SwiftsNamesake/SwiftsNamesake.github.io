@@ -246,7 +246,7 @@ var WaveFront = (function() {
 	WaveFront.loadOBJ = function(fn) { return $.ajax(fn).then(WaveFront.parseOBJ); };
 	WaveFront.loadMTL = function(fn) { return $.ajax(fn).then(WaveFront.parseMTL); };
 
-	WaveFront.loadMeshes = function(fn, path) {
+	WaveFront.loadMeshes = function(context, fn, path) {
 
 		//
 		// TODO: Assume the MTL files are in the same directory (?)
@@ -276,7 +276,7 @@ var WaveFront = (function() {
 					MTLs[MTL.name] = MTL.data;
 				}
 
-				return WaveFront.createMeshes(OBJ, MTLs);
+				return WaveFront.createMeshes(context, OBJ, MTLs);
 
 			});
 		});
