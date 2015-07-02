@@ -303,7 +303,8 @@ var WaveFront = (function() {
 		var colours   = OBJ.faces.map(function(f) {
 			var colour = MTLs[f.material.file][f.material.material]['Ka'];
 			if (colour.length < 4) { colour.push(1.0); };
-			return colour;
+			// return colour;
+			return [1.0, 0.0, 0.0, 1.0];
 		});
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		console.log(vertices.length);
