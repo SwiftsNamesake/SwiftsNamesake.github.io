@@ -166,7 +166,8 @@ var WaveFront = (function() {
 				// TODO: Save indeces instead (would probably save memory) (?)
 				// TODO: Refactor (?)
 				// TODO: Handle absent values for normals and texture coords (✓)
-				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60) ()
+				// TODO: Calculate normals automatically if they're missing (?)
+				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60)
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				console.assert(face.every(function(vertex) { return vertex.length === face[0].length; }));
 
@@ -307,6 +308,9 @@ var WaveFront = (function() {
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		console.log(vertices.length);
 		console.log(colours.length);
+
+		console.log(vertices.flatten().length);
+		console.log(colours.flatten().length);
 
 		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
 
