@@ -292,6 +292,7 @@ var WaveFront = (function() {
 		// TODO: Support textures and normals
 		// TODO: Support all MTL attributes
 		// TODO: Create one mesh per group or object (what's the difference?)
+		// TODO: Handle faces with more than three vertices
 		console.log(OBJ.faces.length)
 		console.log(OBJ.faces[0].vertices.length);
 
@@ -299,6 +300,8 @@ var WaveFront = (function() {
 		var normals   = OBJ.faces.map(function(f) { return f.normals.slice(0, 3).map(function(n)  { return OBJ.normals[n];  }); }).flatten();
 		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka'].concat([1.0]); }).flatten();
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
+		console.log(vertices.length);
+		console.log(colours.length);
 
 		return new Mesh(context, { vertices: vertices, colours: colours });
 
