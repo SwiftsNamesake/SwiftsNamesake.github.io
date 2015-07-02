@@ -289,7 +289,8 @@ var WaveFront = (function() {
 		// Creates a dictionary of mesh objects ({groupname: mesh}) from parsed OBJ and MTL data
 		// TODO: Optimise arrays
 		// TODO: Use index buffers
-		// TODO: Support textures
+		// TODO: Support textures and normals
+		// TODO: Support all MTL attributes
 		var vertices  = OBJ.faces.map(function(f) { return f.vertices.map(function(v) { return OBJ.vertices[v]; }); }).merge();
 		var normals   = OBJ.faces.map(function(f) { return f.normals.map(function(n)  { return OBJ.normals[n];  }); }).merge();
 		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka']; }).merge();
