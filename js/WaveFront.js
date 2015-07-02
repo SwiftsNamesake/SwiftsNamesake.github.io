@@ -291,6 +291,7 @@ var WaveFront = (function() {
 		// TODO: Use index buffers
 		// TODO: Support textures and normals
 		// TODO: Support all MTL attributes
+		// TODO: Create one mesh per group or object (what's the difference?)
 		console.log(OBJ.faces.length)
 		console.log(OBJ.faces[0].vertices.length);
 
