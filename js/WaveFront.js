@@ -270,7 +270,7 @@ var WaveFront = (function() {
 				}));
 			}
 
-			$.when.apply($, dependencies).then(function() {
+			return $.when.apply($, dependencies).then(function() {
 				var MTLs = {};
 				for (var MTL of arguments) {
 					MTLs[MTL.name] = MTL.data;
