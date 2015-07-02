@@ -294,10 +294,10 @@ var WaveFront = (function() {
 		console.log(OBJ.faces.length)
 		console.log(OBJ.faces[0].vertices.length);
 
-		var vertices  = OBJ.faces.map(function(f) { return f.vertices.map(function(v) { return OBJ.vertices[v]; }); }).merge();
-		var normals   = OBJ.faces.map(function(f) { return f.normals.map(function(n)  { return OBJ.normals[n];  }); }).merge();
-		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka']; }).merge();
-		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).merge();
+		var vertices  = OBJ.faces.map(function(f) { return f.vertices.map(function(v) { return OBJ.vertices[v]; }); }).flatten();
+		var normals   = OBJ.faces.map(function(f) { return f.normals.map(function(n)  { return OBJ.normals[n];  }); }).flatten();
+		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka']; }).flatten();
+		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 
 		return new Mesh(context, { vertices: vertices, colours: colours });
 
