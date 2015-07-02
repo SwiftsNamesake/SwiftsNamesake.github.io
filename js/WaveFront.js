@@ -246,7 +246,7 @@ var WaveFront = (function() {
 	WaveFront.loadOBJ = function(fn) { return $.ajax(fn).then(WaveFront.parseOBJ); };
 	WaveFront.loadMTL = function(fn) { return $.ajax(fn).then(WaveFront.parseMTL); };
 
-	WaveFront.loadMesh = function(fn, path) {
+	WaveFront.loadMeshes = function(fn, path) {
 
 		//
 		// TODO: Assume the MTL files are in the same directory (?)
@@ -293,7 +293,7 @@ var WaveFront = (function() {
 		// TODO: Support all MTL attributes
 		console.log(OBJ.faces.length)
 		console.log(OBJ.faces[0].vertices.length);
-		
+
 		var vertices  = OBJ.faces.map(function(f) { return f.vertices.map(function(v) { return OBJ.vertices[v]; }); }).merge();
 		var normals   = OBJ.faces.map(function(f) { return f.normals.map(function(n)  { return OBJ.normals[n];  }); }).merge();
 		var colours   = OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['Ka']; }).merge();
