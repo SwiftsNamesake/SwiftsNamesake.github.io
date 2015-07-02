@@ -297,7 +297,7 @@ var WaveFront = (function() {
 		console.log(OBJ.faces.length)
 		console.log(OBJ.faces[0].vertices.length);
 
-		var vertices  = OBJ.faces.map(function(f) { return f.vertices.slice(0, 3).map(function(v) { return OBJ.vertices[v]; }); });
+		var vertices  = OBJ.faces.map(function(f) { return f.vertices.slice(0, 3).map(function(v) { return OBJ.vertices[v]; }).reverse(); });
 		var normals   = OBJ.faces.map(function(f) { return f.normals.slice(0, 3).map(function(n)  { return OBJ.normals[n];  }); });
 
 		var colours   = OBJ.faces.map(function(f) {
