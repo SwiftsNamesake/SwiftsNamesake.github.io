@@ -299,8 +299,17 @@ var WaveFront = (function() {
 
 		console.log(OBJ.faces.length);
 		console.log(OBJ.faces);
-		var vertices  = OBJ.faces.map(function(f) { console.assert(f.vertices.slice(0,3).length === 3); return f.vertices.slice(0, 3).map(function(v) { return OBJ.vertices[v]; }).reverse(); });
-		var normals   = OBJ.faces.map(function(f) { return f.normals.slice(0, 3).map(function(n) { return OBJ.normals[n];  }); });
+
+		var vertices  = OBJ.faces.map(function(f) {
+			console.assert(f.vertices.slice(0,3).length === 3);
+			return f.vertices.slice(0, 3).map(function(v) {
+				return OBJ.vertices[v];
+			}).reverse();
+		});
+
+		var normals   = OBJ.faces.map(function(f) {
+			return f.normals.slice(0, 3).map(function(n) { return OBJ.normals[n];  });
+		});
 
 		var colours   = OBJ.faces.map(function(f) {
 			var colour = MTLs[f.material.file][f.material.material]['Ka'];
@@ -309,9 +318,11 @@ var WaveFront = (function() {
 			return [1.0, 0.0, 0.0, 1.0];
 		});
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
+		console.log('Length when packed:');
 		console.log(vertices.length);
 		console.log(colours.length);
 
+		console.log('Length when unpacked:');
 		console.log(vertices.flatten().length);
 		console.log(colours.flatten().length);
 
