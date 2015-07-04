@@ -342,7 +342,7 @@ var WaveFront = (function() {
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
-		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten().flatten() });
+		return new Mesh(context, { vertices: vertices.flatten().flatten(), colours: colours.flatten() });
 
 	};
 
