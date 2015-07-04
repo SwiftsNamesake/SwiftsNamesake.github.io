@@ -46,6 +46,21 @@ var WaveFront = (function() {
 	WaveFront.parseMTLLine = function(line) {};
 	WaveFront.parseOBJLine = function(line) {};
 
+
+	WaveFront.tessellate = function(vertices) {
+
+		// Divides a flat polygon [[Float]] into triangles [[[Float]]]
+		// TODO: Optimise
+		// TODO: Support convex shapes
+		// TODO: Verify 'flatness' (?)
+		// TODO: Verify correctness, tests
+		var focal = vertices[0]; // 
+		return vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; });
+
+	}
+
+
+
 	WaveFront.parseMTL = function(source) {
 
 		// Parses an MTL file
@@ -231,7 +246,7 @@ var WaveFront = (function() {
 		// console.log('Groups', data.groups)
 
 		// Meta data
-		// TODO: Additional meta data
+		// TODO: Additional meta data (eg. bounding box)
 		// TODO: Return an object instead, to facilitate marshalling (?)
 		data.meta = {};
 
@@ -295,13 +310,13 @@ var WaveFront = (function() {
 		// TODO: Create one mesh per group or object (what's the difference?)
 		// TODO: Handle faces with more than three vertices
 		var vertices  = OBJ.faces.map(function(f) {
-			return f.vertices.slice(0, 3).map(function(v) {
+			return WaveFront.tesselate(f.vertices.map(function(v) {
 				return OBJ.vertices[v];
-			}).flatten();
+			})).flatten().flatten();
 		});
 
 		var normals   = OBJ.faces.map(function(f) {
-			return f.normals.slice(0, 3).map(function(n) { return OBJ.normals[n];  }).flatten();
+			return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten();
 		});
 
 		var colours   = OBJ.faces.map(function(f) {
@@ -312,7 +327,7 @@ var WaveFront = (function() {
 				colour.push(1.0); // Add missing alpha
 			}
 
-			return f.vertices.slice(0, 3).map(function(v) { return colour }).flatten();
+			return f.vertices.map(function(v) { return colour }).flatten();
 		});
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
