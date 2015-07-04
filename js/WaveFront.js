@@ -301,20 +301,20 @@ var WaveFront = (function() {
 		console.log(OBJ.faces);
 
 		var vertices  = OBJ.faces.map(function(f) {
-			return f.slice(0, 3).vertices.map(function(v) {
+			return f.vertices.slice(0, 3).map(function(v) {
 				return OBJ.vertices[v];
-			});
+			}).flatten();
 		});
 
 		var normals   = OBJ.faces.map(function(f) {
-			return f.slice(0, 3).normals.map(function(n) { return OBJ.normals[n];  });
+			return f.normals.slice(0, 3).map(function(n) { return OBJ.normals[n];  });
 		});
 
 		var colours   = OBJ.faces.map(function(f) {
 			var colour = MTLs[f.material.file][f.material.material]['Ka'];
 			if (colour.length < 4) { colour.push(1.0); };
 			// return colour;
-			return [1.0, 0.0, 0.0, 1.0];
+			return [[1.0, 0.0, 0.0, 1.0], [1.0, 0.0, 0.0, 1.0], [1.0, 0.0, 0.0, 1.0]].flatten();
 		});
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		console.log('Length when packed:');
