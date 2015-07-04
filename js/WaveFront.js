@@ -312,9 +312,9 @@ var WaveFront = (function() {
 		// TODO: Handle faces with more than three vertices
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
-			return f.vertices.map(function(v) {
+			return WaveFront.tessellate(f.vertices.map(function(v) {
 				return OBJ.vertices[v];
-			}).flatten();
+			}).flatten());
 		});
 
 		var normals = OBJ.faces.map(function(f) {
