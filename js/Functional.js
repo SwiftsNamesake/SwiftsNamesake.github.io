@@ -211,7 +211,7 @@ var haskell = (function() {
 	};
 
 	console.log(haskell.polygon(1,2));
-	haskell.runtests();
+	// haskell.runtests();
 
 	return haskell;
 
