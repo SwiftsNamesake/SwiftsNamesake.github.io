@@ -294,12 +294,6 @@ var WaveFront = (function() {
 		// TODO: Support all MTL attributes
 		// TODO: Create one mesh per group or object (what's the difference?)
 		// TODO: Handle faces with more than three vertices
-		console.log(OBJ.faces.length)
-		console.log(OBJ.faces[0].vertices.length);
-
-		console.log(OBJ.faces.length);
-		console.log(OBJ.faces);
-
 		var vertices  = OBJ.faces.map(function(f) {
 			return f.vertices.slice(0, 3).map(function(v) {
 				return OBJ.vertices[v];
@@ -307,23 +301,16 @@ var WaveFront = (function() {
 		});
 
 		var normals   = OBJ.faces.map(function(f) {
-			return f.normals.slice(0, 3).map(function(n) { return OBJ.normals[n];  });
+			return f.normals.slice(0, 3).map(function(n) { return OBJ.normals[n];  }).flatten();
 		});
 
 		var colours   = OBJ.faces.map(function(f) {
+			// TODO: Only one colour per face (duplicated for each vertex) (?)
 			var colour = MTLs[f.material.file][f.material.material]['Ka'];
-			if (colour.length < 4) { colour.push(1.0); };
-			// return colour;
-			return [[1.0, 0.0, 0.0, 1.0], [1.0, 0.0, 0.0, 1.0], [1.0, 0.0, 0.0, 1.0]].flatten();
+			return f.vertices.slice(0, 3).map(function(v) { return colour }).flatten();
 		});
+		
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
-		console.log('Length when packed:');
-		console.log(vertices.length);
-		console.log(colours.length);
-
-		console.log('Length when unpacked:');
-		console.log(vertices.flatten().length);
-		console.log(colours.flatten().length);
 
 		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
 

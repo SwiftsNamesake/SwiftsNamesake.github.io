@@ -7,7 +7,7 @@
  *
 
  * TODO | - Caching
- *        - More functions (takeWhile, until, iterate, take, convert to array, filter, map, reduce)
+ *        - More functions (takeWhile, until, iterate, take, convert to array, filter, map, reduce, const, id)
  *        - Monads (duh)
  *        - Currying
  *        - Iterator objects (?)
@@ -23,6 +23,9 @@
 var haskell = (function() {
 
 	//
+
+	// TODO: Rename (to Prelude) (?)
+
 	"use strict";
 
 	// var haskell = {};
