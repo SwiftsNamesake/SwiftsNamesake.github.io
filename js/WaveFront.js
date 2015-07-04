@@ -306,10 +306,15 @@ var WaveFront = (function() {
 
 		var colours   = OBJ.faces.map(function(f) {
 			// TODO: Only one colour per face (duplicated for each vertex) (?)
-			var colour = MTLs[f.material.file][f.material.material]['Ka'];
+			var colour = MTLs[f.material.file][f.material.material]['Ka']
+
+			if (colour.length < 4) {
+				colour.push(1.0); // Add missing alpha
+			}
+
 			return f.vertices.slice(0, 3).map(function(v) { return colour }).flatten();
 		});
-		
+
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 
 		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
