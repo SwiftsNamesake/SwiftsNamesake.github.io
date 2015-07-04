@@ -310,6 +310,8 @@ var WaveFront = (function() {
 		// TODO: Support all MTL attributes
 		// TODO: Create one mesh per group or object (what's the difference?)
 		// TODO: Handle faces with more than three vertices
+
+		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
 			return WaveFront.tessellate(f.vertices.map(function(v) {
@@ -321,15 +323,19 @@ var WaveFront = (function() {
 			return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten();
 		});
 
-		var colours = OBJ.faces.map(function(f) {
-			// TODO: Only one colour per face (duplicated for each vertex) (?)
-			var colour = MTLs[f.material.file][f.material.material]['Ka']
+		// var colours = OBJ.faces.map(function(f) {
+		// 	// TODO: Only one colour per face (duplicated for each vertex) (?)
+		// 	var colour = MTLs[f.material.file][f.material.material]['Ka']
 
-			if (colour.length < 4) {
-				colour.push(1.0); // Add missing alpha
-			}
+		// 	if (colour.length < 4) {
+		// 		colour.push(1.0); // Add missing alpha
+		// 	}
 
-			return f.vertices.slice(0,3).map(function(v) { return colour });
+		// 	return f.vertices.slice(0,3).map(function(v) { return colour });
+		// });
+
+		var colours = OBJ.faces.map(function(f, i) {
+			return vertices[i].map(function(_) { return OBJ.MTLs[f.material.file][f.material.material]['Ka']; });
 		});
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
