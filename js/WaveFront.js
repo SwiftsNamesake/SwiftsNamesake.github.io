@@ -323,7 +323,6 @@ var WaveFront = (function() {
 		var colours = OBJ.faces.map(function(f) {
 			// TODO: Only one colour per face (duplicated for each vertex) (?)
 			var colour = MTLs[f.material.file][f.material.material]['Ka']
-			console.log(colour);
 
 			if (colour.length < 4) {
 				colour.push(1.0); // Add missing alpha
