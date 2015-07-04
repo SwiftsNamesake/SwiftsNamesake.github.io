@@ -55,7 +55,7 @@ var WaveFront = (function() {
 		// TODO: Verify 'flatness' (?)
 		// TODO: Verify correctness, tests
 		var focal = vertices[0]; // 
-		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }).flatten();
+		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }); //.flatten();
 		return triangles;
 		// return vertices;
 	}
@@ -336,14 +336,13 @@ var WaveFront = (function() {
 
 		var colours = OBJ.faces.map(function(f, i) {
 			return vertices[i].map(function(_) {
-				console.log(_);
 				return MTLs[f.material.file][f.material.material]['Ka'];
 			}).flatten();
 		});
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
-		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
+		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten().flatten() });
 
 	};
 
