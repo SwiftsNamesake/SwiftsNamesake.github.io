@@ -329,7 +329,7 @@ var WaveFront = (function() {
 				colour.push(1.0); // Add missing alpha
 			}
 
-			return vertices.map(function(v) { return colour });
+			return f.vertices.slice(0,3).map(function(v) { return colour });
 		});
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
