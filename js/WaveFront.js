@@ -55,8 +55,8 @@ var WaveFront = (function() {
 		// TODO: Verify 'flatness' (?)
 		// TODO: Verify correctness, tests
 		var focal = vertices[0]; // 
-		return vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }).flatten();
-
+		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }).flatten();
+		return triangles;
 	}
 
 
@@ -323,7 +323,7 @@ var WaveFront = (function() {
 			// TODO: Only one colour per face (duplicated for each vertex) (?)
 			var colour = MTLs[f.material.file][f.material.material]['Ka']
 			console.log(colour);
-			
+
 			if (colour.length < 4) {
 				colour.push(1.0); // Add missing alpha
 			}
