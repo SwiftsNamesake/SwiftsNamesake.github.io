@@ -327,7 +327,7 @@ var WaveFront = (function() {
 				colour.push(1.0); // Add missing alpha
 			}
 
-			return f.vertices.map(function(v) { return colour }).flatten();
+			return vertices.map(function(v) { return colour }).flatten();
 		});
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
