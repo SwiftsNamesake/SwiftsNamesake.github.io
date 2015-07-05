@@ -159,8 +159,8 @@ var WaveFront = (function() {
 		             texcoords: [], // Unique texture coordinates
 		             faces:     [], // Faces ([{vertices: [[Double]], normals: [[Double]], texcoords: [[Double]], material: String })
 		             groups:    [], // List of group objects ({name: String, lower: Int}), converted to a dictionary ({name: { lower: Int, upper: Int }}) at the end
-		             mtl:       undefined,    // Current MTL file (as defined by the most recent mtllib statement)
-		             material:  undefined,    // Current MTL material name (as defined by the most recent usemtl statement)
+		             mtl:       undefined,   // Current MTL file (as defined by the most recent mtllib statement)
+		             material:  undefined,   // Current MTL material name (as defined by the most recent usemtl statement)
 		             dependencies: new Set() // A set of the names of all MTL dependencies for this OBJ model
 		           };
 
@@ -317,7 +317,7 @@ var WaveFront = (function() {
 			return WaveFront.tessellate(f.vertices.map(function(v) {
 				return OBJ.vertices[v];
 			}).flatten());
-		});
+		}).flatten();
 
 		var normals = OBJ.faces.map(function(f) {
 			return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten();
@@ -340,9 +340,17 @@ var WaveFront = (function() {
 			}).flatten();
 		});
 
+
+		console.assert(vertices.length === colours.length); // TODO: Potential floating-point issues?
+		console.assert(vertices[0].length === 3);
+		console.assert(colours[0].length  === 4);
+		console.assert(typeof vertices[0][0] === 'number');
+		console.assert(typeof colours[0][0]  === 'number');
+
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
-		return new Mesh(context, { vertices: vertices.flatten().flatten(), colours: colours.flatten() });
+		// return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
+		return shapes.monochrome(vertices.flatten(), [0, 1, 0.5, 1.0])
 
 	};
 
