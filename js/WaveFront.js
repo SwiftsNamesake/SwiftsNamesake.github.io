@@ -337,11 +337,11 @@ var WaveFront = (function() {
 		// });
 
 		var colours = OBJ.faces.map(function(f, i) {
-			return vertices[i].map(function(_) {
-				var colour = MTLs[f.material.file][f.material.material]['Ka'];
-				if (colour.length < 4) { colour.push(1.0); }
-				return colour;
-			}).flatten();
+			var colours = [];
+			var colour = MTLs[f.material.file][f.material.material]['Ka'];
+			// TODO: Don't hard-code the count
+			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push(colour); }
+			return colours.flatten();
 		});
 
 
@@ -352,7 +352,7 @@ var WaveFront = (function() {
 		console.assert(typeof colours[0][0]  === 'number');
 
 		debugger;
-		
+
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
 		// return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
