@@ -336,7 +336,9 @@ var WaveFront = (function() {
 
 		var colours = OBJ.faces.map(function(f, i) {
 			return vertices[i].map(function(_) {
-				return MTLs[f.material.file][f.material.material]['Ka'];
+				var colour = MTLs[f.material.file][f.material.material]['Ka'];
+				if (colour.length < 4) { colour.push(1.0); }
+				return colour;
 			}).flatten();
 		});
 
