@@ -343,7 +343,7 @@ var WaveFront = (function() {
 		});
 
 
-		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length ' colours.'); // TODO: Potential floating-point issues?
+		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.'); // TODO: Potential floating-point issues?
 		console.assert(vertices[0].length === 3);
 		console.assert(colours[0].length  === 4);
 		console.assert(typeof vertices[0][0] === 'number');
