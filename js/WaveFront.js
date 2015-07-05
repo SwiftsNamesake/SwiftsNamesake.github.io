@@ -319,6 +319,8 @@ var WaveFront = (function() {
 			}).flatten());
 		}).flatten();
 
+		debugger;
+
 		var normals = OBJ.faces.map(function(f) {
 			return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten();
 		});
@@ -349,6 +351,8 @@ var WaveFront = (function() {
 		console.assert(typeof vertices[0][0] === 'number');
 		console.assert(typeof colours[0][0]  === 'number');
 
+		debugger;
+		
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
 		// return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
