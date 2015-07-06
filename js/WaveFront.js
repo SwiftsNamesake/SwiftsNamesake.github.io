@@ -384,12 +384,13 @@ var WaveFront = (function() {
 
 		// TODO: Potential floating-point issues 
 		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.');
-		console.assert(vertices[0].length === 3, vertices[0]);
-		console.assert(colours[0].length  === 4);
-		console.assert(typeof vertices[0][0] === 'number');
-		console.assert(typeof colours[0][0]  === 'number');
+		console.assert(vertices.every(function(vertex) { return vertex.length === 3; }),  'All vertices must have three coordinates');
+		console.assert(colours.every(function(colour)  { return colour.length === 4; }), 'All colours must have four channels (rgba)');
+		console.assert(typeof vertices[0][0] === 'number', 'All coordinates must be numbers');
+		console.assert(typeof colours[0][0]  === 'number', 'All colour channel values must be numbers');
 
 		// debugger;
+		console.assert(vertices.length === veri)
 		console.log((vertices.flatten().length/3) === (colours.flatten().length/4), 'There should be one colour per vertex');
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
