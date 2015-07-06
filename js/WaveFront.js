@@ -352,7 +352,8 @@ var WaveFront = (function() {
 
 			// TODO: Don't hard-code the count
 			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push([1.0, 0.5, 0.3, 1.0]);/*colours.push(colour)*/; }
-			return colours;
+			// return colours;
+			return [colour, colour, colour];
 			// return vertices[i].map(function(_) { return colour; });
 		}).flatten();
 
@@ -378,8 +379,8 @@ var WaveFront = (function() {
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
-		// return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
-		return new Mesh(context, shapes.monochrome(vertices, [0, 1, 0.5, 1.0]));
+		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
+		// return new Mesh(context, shapes.monochrome(vertices, [0, 1, 0.5, 1.0]));
 
 	};
 
