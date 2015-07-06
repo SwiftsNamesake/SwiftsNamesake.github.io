@@ -318,6 +318,8 @@ var WaveFront = (function() {
 			})).flatten();
 		}).flatten();
 
+		// console.log('')
+		
 		// debugger;
 
 		var normals = OBJ.faces.map(function(f) {
