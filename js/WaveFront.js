@@ -338,10 +338,10 @@ var WaveFront = (function() {
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
 
-			f.vertices.every(function(vi) { console.assert(vi < OBJ.vertices.length, vi - OBJ.vertices.length); });
+			f.vertices.every(function(vi) { console.assert((vi < OBJ.vertices.length) && (vi >= 0), vi - OBJ.vertices.length); });
 			var polygon = f.vertices.map(function(vi) { return OBJ.vertices[vi]; })
 
-			console.assert(polygon.indexOf(undefined) === (-1));
+			console.assert(polygon.indexOf(undefined) === (-1), 'Vertex at index ' + polygon.indexOf(-1) + ' is undefined.');
 			console.assert(polygon.every(function(v) { return v.indexOf(NaN) === (-1) }));
 
 			var triangles = WaveFront.tessellate(polygon); //
