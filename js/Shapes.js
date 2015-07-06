@@ -91,7 +91,7 @@ var shapes = (function() {
 						[ hdx,  hdy, 0.00],
 						[-hdx, -hdy, 0.00],
 						[ hdx,  hdy, 0.00],
-						[ hdx, -hdy, 0.00]].flatten();
+						[ hdx, -hdy, 0.00]];
 
 		return shapes.monochrome(vertices, colour);
 
