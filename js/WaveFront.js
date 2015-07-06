@@ -330,7 +330,7 @@ var WaveFront = (function() {
 		// TODO: Support all MTL attributes
 		// TODO: Create one mesh per group or object (what's the difference?)
 		// TODO: Handle faces with more than three vertices
-		console.log('Creating mesh for ', OBJ.path);
+		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) {
