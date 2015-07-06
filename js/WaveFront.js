@@ -316,9 +316,9 @@ var WaveFront = (function() {
 			return WaveFront.tessellate(f.vertices.map(function(v) {
 				return OBJ.vertices[v];
 			}).flatten());
-		}).flatten();
+		});
 
-		debugger;
+		// debugger;
 
 		var normals = OBJ.faces.map(function(f) {
 			return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten();
@@ -351,12 +351,12 @@ var WaveFront = (function() {
 		console.assert(typeof vertices[0][0] === 'number');
 		console.assert(typeof colours[0][0]  === 'number');
 
-		debugger;
+		// debugger;
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
 		// return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
-		return shapes.monochrome(vertices.flatten(), [0, 1, 0.5, 1.0])
+		return shapes.monochrome(vertices, [0, 1, 0.5, 1.0])
 
 	};
 
