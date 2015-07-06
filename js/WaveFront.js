@@ -319,7 +319,7 @@ var WaveFront = (function() {
 		}).flatten();
 
 		// console.log('')
-		
+
 		// debugger;
 
 		var normals = OBJ.faces.map(function(f) {
@@ -373,6 +373,7 @@ var WaveFront = (function() {
 		console.assert(typeof colours[0][0]  === 'number');
 
 		// debugger;
+		console.log(vertices.flatten().length*3 === colours.flatten().length*4, 'There should be one colour per vertex');
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
