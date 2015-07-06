@@ -316,7 +316,7 @@ var WaveFront = (function() {
 			// return WaveFront.tessellate(f.vertices.map(function(v) {
 				// return OBJ.vertices[v];
 			// })).flatten();
-			return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[v]; }); // Transform vertex indices to vertex coordinates
+			return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
 		}).flatten();
 
 		// console.log('')
