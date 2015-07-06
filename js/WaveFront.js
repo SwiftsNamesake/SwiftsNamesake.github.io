@@ -337,8 +337,15 @@ var WaveFront = (function() {
 
 		var colours = OBJ.faces.map(function(f, i) {
 			var colours = [];
-			var colour = MTLs[f.material.file][f.material.material]['Ka'];
-			if (colour.length < 4) { colour.push(1.0); }
+
+			var ambient  = MTLs[f.material.file][f.material.material]['Ka'];
+			var diffuse  = MTLs[f.material.file][f.material.material]['Kd'];
+			var specular = MTLs[f.material.file][f.material.material]['Ks'];
+
+			var colour = [((ambient[0]||0)+(diffuse[0]||0)+(specular[0]||0))/3,
+			              ((ambient[1]||0)+(diffuse[1]||0)+(specular[1]||0))/3,
+			              ((ambient[2]||0)+(diffuse[2]||0)+(specular[2]||0))/3,
+			              ((ambient[3]||0)+(diffuse[3]||0)+(specular[3]||0))/3]
 
 			// TODO: Don't hard-code the count
 			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push(colour); }
