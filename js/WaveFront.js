@@ -341,6 +341,9 @@ var WaveFront = (function() {
 			f.vertices.every(function(vi) { console.assert(vi < OBJ.vertices.length, vi - OBJ.vertices.length); });
 			var polygon = f.vertices.map(function(vi) { return OBJ.vertices[vi]; })
 
+			console.assert(polygon.indexOf(undefined) === (-1));
+			console.assert(polygon.every(function(v) { return v.indexOf(NaN) === (-1) }));
+
 			var triangles = WaveFront.tessellate(polygon); //
 			console.assert(triangles[0].length === 3);
 			return triangles;
