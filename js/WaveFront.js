@@ -56,7 +56,7 @@ var WaveFront = (function() {
 		// TODO: Verify correctness, tests
 		var focal = vertices[0]; // 
 		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }); //.flatten();
-		return triangles;
+		return triangles.flatten();
 		// return vertices;
 	}
 
@@ -274,9 +274,8 @@ var WaveFront = (function() {
 
 			//
 			var count = OBJ.dependencies.size;
-			var numerals = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 			console.log('Finished loading OBJ file: ', fn);
-			console.log('Loading ' + (numerals[count] || count)  + ' MTL dependenc' + (count === 1 ? 'y' : 'ies') + '.');
+			console.log('Loading ' + linguist.numeral(count)  + ' MTL dependenc' + (count === 1 ? 'y' : 'ies') + '.');
 
 			var dependencies = [];
 			for (var name of OBJ.dependencies) {
@@ -345,7 +344,8 @@ var WaveFront = (function() {
 		});
 
 
-		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.'); // TODO: Potential floating-point issues?
+		// TODO: Potential floating-point issues 
+		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.');
 		console.assert(vertices[0].length === 3);
 		console.assert(colours[0].length  === 4);
 		console.assert(typeof vertices[0][0] === 'number');
