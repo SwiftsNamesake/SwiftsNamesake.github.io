@@ -186,7 +186,7 @@ var WaveFront = (function() {
 
 		for (var line of source.split(/\n+/).filter(WaveFront.notComment)) {
 
-			var values = line.split(/\s+/);
+			var values = line.trim().split(/\s+/); // TODO: This seems to be the cause of the pesky 'undefined' bug
 
 			if (values[0] == 'v') {
 				// Vertex coordinates
