@@ -25,7 +25,6 @@
  *        - Fix parser bugs
  *          -- Formal spec compliance
  *          -- Support coordinates inside parentheses
- *          --
  *
  *        - User hooks, configurability
  *          -- Scaling, centering
@@ -34,6 +33,9 @@
  *        - Meta data
  *          -- Bounding boxes
  *
+ *        - Polygons
+ *          -- Fix WaveFront.tessellate
+ *          -- Assume clockwise vertices (?)
 
  * SPEC | -
  *        -
