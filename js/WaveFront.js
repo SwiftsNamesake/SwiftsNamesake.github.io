@@ -343,7 +343,7 @@ var WaveFront = (function() {
 			// TODO: Don't hard-code the count
 			// for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push(colour); }
 			return vertices[i].map(function(_) { return colour; }).flatten();
-		});
+		}).flatten();
 
 
 		// TODO: Potential floating-point issues 
