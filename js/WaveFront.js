@@ -338,7 +338,10 @@ var WaveFront = (function() {
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
 
-			var triangles = WaveFront.tessellate(f.vertices.map(function(vi) { console.assert(vi < OBJ.vertices.length, vi - OBJ.vertices.length); return OBJ.vertices[vi]; })); //
+			console.assert(f.vertices.every(function(vi) { return vi < OBJ.vertices.length, vi - OBJ.vertices.length; }));
+			var polygon = f.vertices.map(function(vi) { return OBJ.vertices[vi]; })
+
+			var triangles = WaveFront.tessellate(polygon); //
 			console.assert(triangles[0].length === 3);
 			return triangles;
 			// return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
