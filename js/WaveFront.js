@@ -379,8 +379,8 @@ var WaveFront = (function() {
 			// return vertices[i].map(function(_) { return colour; });
 		}).flatten();
 
-		console.log(vertices.slice(0,4));
-		console.log(colours.slice(0,4));
+		console.log(vertices.slice(0,3*10));
+		console.log(colours.slice(0,4*10));
 
 		// TODO: Potential floating-point issues 
 		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.');
