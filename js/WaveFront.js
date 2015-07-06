@@ -56,7 +56,7 @@ var WaveFront = (function() {
 		// TODO: Verify correctness, tests
 		var focal = vertices[0]; // 
 		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }); //.flatten();
-		return triangles.flatten();
+		return triangles;
 		// return vertices;
 	}
 
