@@ -284,7 +284,7 @@ var WaveFront = (function() {
 			bottom: 0
 		};
 
-		data.vertices.map(function(v, i) { console.assert(v.indexOf(NaN) === (-1) && v.indexOf(undefined) === (-1), 'Invalid vertex at ' + i); });
+		data.vertices.map(function(v, i) { console.assert(v.indexOf(NaN) === (-1) && v.indexOf(undefined) === (-1) && v.length === 3, 'Invalid vertex at ' + i); });
 
 		return data
 
