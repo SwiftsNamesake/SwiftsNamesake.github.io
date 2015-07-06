@@ -390,7 +390,7 @@ var WaveFront = (function() {
 		console.assert(typeof colours[0][0]  === 'number', 'All colour channel values must be numbers');
 
 		// debugger;
-		console.assert(vertices.length === veri)
+		console.assert(vertices.length === colours.length);
 		console.log((vertices.flatten().length/3) === (colours.flatten().length/4), 'There should be one colour per vertex');
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
