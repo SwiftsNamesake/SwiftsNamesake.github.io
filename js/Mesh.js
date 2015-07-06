@@ -36,6 +36,11 @@ var Mesh = function(context, data) {
 	// TODO: Accept single object as argument (?)
 	// TODO: Don't hard-code colour size (optional alpha) (?)
 	// var texture = context.createBuffer(data.texture, 2)
+	console.assert(data.vertices.length % 3 === 0);
+	console.assert(data.colours.length  % 4 === 0);
+
+	console.assert(data.vertices.length/3 === data.colours.length/4);
+
 	this.vertices = context.createBuffer(data.vertices, 3); //
 	this.colours  = context.createBuffer(data.colours,  4); //
 	// console.log(this.vertices, this.colours)
