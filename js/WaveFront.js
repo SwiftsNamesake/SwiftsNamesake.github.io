@@ -316,7 +316,7 @@ var WaveFront = (function() {
 			return WaveFront.tessellate(f.vertices.map(function(v) {
 				return OBJ.vertices[v];
 			})).flatten();
-		});
+		}).flatten();
 
 		// debugger;
 
@@ -349,7 +349,7 @@ var WaveFront = (function() {
 
 		// TODO: Potential floating-point issues 
 		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.');
-		console.assert(vertices.flatten()[0].length === 3, vertices.flatten()[0]);
+		console.assert(vertices[0].length === 3, vertices[0]);
 		console.assert(colours[0].length  === 4);
 		console.assert(typeof vertices[0][0] === 'number');
 		console.assert(typeof colours[0][0]  === 'number');
@@ -358,7 +358,7 @@ var WaveFront = (function() {
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
-		return new Mesh(context, { vertices: vertices.flatten().flatten(), colours: colours.flatten() });
+		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
 		// return new Mesh(context, shapes.monochrome(vertices.flatten(), [0, 1, 0.5, 1.0]));
 
 	};
