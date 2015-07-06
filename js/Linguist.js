@@ -27,7 +27,7 @@ var linguist = (function() {
 	//
 	linguist.numeral = function(n, cap) {
 		// TODO: Implement cap
-		return (numerals[count] || String(n));
+		return (numerals[n] || String(n));
 	};
 
 	return linguist;
