@@ -338,7 +338,7 @@ var WaveFront = (function() {
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
 
-			console.assert(f.vertices.every(function(vi) { return vi < OBJ.vertices.length, vi - OBJ.vertices.length; }));
+			f.vertices.every(function(vi) { console.assert(vi < OBJ.vertices.length, vi - OBJ.vertices.length); });
 			var polygon = f.vertices.map(function(vi) { return OBJ.vertices[vi]; })
 
 			var triangles = WaveFront.tessellate(polygon); //
