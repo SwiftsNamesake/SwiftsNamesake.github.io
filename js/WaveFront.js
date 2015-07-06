@@ -7,7 +7,10 @@
  *
 
  * TODO | - Use functional iterators
- *        - Format debugging messages
+ *
+ *        - Logging
+ *          -- Format debugging messages
+ *
  *        - Support multiple MTL files (part of standard?) (?)
  *        - Figure out resource dependencies (MTL/textures/etc.)
  *          -- Include a list of MTL dependencies in the return object (?)
@@ -23,7 +26,15 @@
  *          -- Formal spec compliance
  *          -- Support coordinates inside parentheses
  *          --
-
+ *
+ *        - User hooks, configurability
+ *          -- Scaling, centering
+ *          -- Decide what to do with groups and objects
+ *
+ *        - Meta data
+ *          -- Bounding boxes
+ *
+ 
  * SPEC | -
  *        -
  *
