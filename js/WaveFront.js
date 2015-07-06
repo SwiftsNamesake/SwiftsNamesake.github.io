@@ -34,7 +34,7 @@
  *        - Meta data
  *          -- Bounding boxes
  *
- 
+
  * SPEC | -
  *        -
  *
@@ -66,8 +66,7 @@ var WaveFront = (function() {
 		// TODO: Verify 'flatness' (?)
 		// TODO: Verify correctness, tests
 		var focal = vertices[0]; // 
-		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }); //.flatten();
-		return triangles;
+		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+1]]; }).flatten();
 		// return vertices;
 	}
 
@@ -324,10 +323,10 @@ var WaveFront = (function() {
 		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
-			// return WaveFront.tessellate(f.vertices.map(function(v) {
-				// return OBJ.vertices[v];
-			// })).flatten();
-			return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
+			return WaveFront.tessellate(f.vertices.map(function(v) {
+				return OBJ.vertices[v];
+			})).flatten();
+			// return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
 		}).flatten();
 
 		// console.log('')
@@ -363,8 +362,8 @@ var WaveFront = (function() {
 
 			// TODO: Don't hard-code the count
 			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push([1.0, 0.5, 0.3, 1.0]);/*colours.push(colour)*/; }
-			// return colours;
-			return [colour, colour, colour];
+			return colours;
+			// return [colour, colour, colour];
 			// return vertices[i].map(function(_) { return colour; });
 		}).flatten();
 
