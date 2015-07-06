@@ -191,7 +191,7 @@ var WaveFront = (function() {
 			if (values[0] == 'v') {
 				// Vertex coordinates
 				data.vertices.push(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid vertex data
-				console.assert(data.vertices[data.vertices.length-1].every(function(n) { return (typeof n === 'number') && (n !== NaN); }), values);
+				console.assert(data.vertices[data.vertices.length-1].indexOf(NaN) === (-1);
 			} else if (values[0] === 'vn') {
 				// Vertex normal
 				data.normals.push(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
