@@ -348,7 +348,7 @@ var WaveFront = (function() {
 			var colour = [((ambient[0]||0)+(diffuse[0]||0)+(specular[0]||0))/3,
 			              ((ambient[1]||0)+(diffuse[1]||0)+(specular[1]||0))/3,
 			              ((ambient[2]||0)+(diffuse[2]||0)+(specular[2]||0))/3,
-			              ((ambient[3]||0)+(diffuse[3]||0)+(specular[3]||0))/3]
+			              ((ambient[3]||1)+(diffuse[3]||1)+(specular[3]||1))/3]
 
 			// TODO: Don't hard-code the count
 			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push([1.0, 0.5, 0.3, 1.0]);/*colours.push(colour)*/; }
