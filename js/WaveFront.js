@@ -298,6 +298,8 @@ var WaveFront = (function() {
 			var count = OBJ.dependencies.size;
 			console.log('Finished loading OBJ file: ', fn);
 			console.log('Loading ' + linguist.numeral(count)  + ' MTL dependenc' + (count === 1 ? 'y' : 'ies') + '.');
+			
+			OBJ.path = fn; // TODO: Remove this in 'release builds' (?)
 
 			var dependencies = [];
 			for (var name of OBJ.dependencies) {
@@ -331,13 +333,14 @@ var WaveFront = (function() {
 		// TODO: Support all MTL attributes
 		// TODO: Create one mesh per group or object (what's the difference?)
 		// TODO: Handle faces with more than three vertices
+		console.log('Creating mesh for ', OBJ.path);
 
 		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
-			return WaveFront.tessellate(f.vertices.map(function(v) {
-				return OBJ.vertices[v];
-			}));
+			var triangles = WaveFront.tessellate(f.vertices.map(function(v) { return OBJ.vertices[v]; })); //
+			console.log(triangles.length);
+			console.assert(triangles[0].length === 3);
 			// return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
 		}).flatten();
 
