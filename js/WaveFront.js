@@ -276,6 +276,16 @@ var WaveFront = (function() {
 			data.meta[attribute] = data[attribute].length;
 		}
 
+		// TODO: Fill this in
+		data.bounds = {
+			left: 0,
+			right: 0,
+			top: 0,
+			bottom: 0
+		};
+
+		data.vertices.map(function(v, i) { console.assert(v.indexOf(NaN) === (-1) && v.indexOf(undefined) === (-1), 'Invalid vertex at ' + i); });
+
 		return data
 
 	}
