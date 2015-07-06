@@ -336,6 +336,7 @@ var WaveFront = (function() {
 		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
+			
 			var triangles = WaveFront.tessellate(f.vertices.map(function(vi) { console.assert(vi < OBJ.vertices.length); return OBJ.vertices[vi]; })); //
 			console.assert(triangles[0].length === 3);
 			return triangles;
