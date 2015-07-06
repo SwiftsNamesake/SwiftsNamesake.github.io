@@ -358,7 +358,7 @@ var WaveFront = (function() {
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		// console.log(vertices);
 		// return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
-		return shapes.monochrome(vertices.flatten(), [0, 1, 0.5, 1.0])
+		return new Mesh(context, shapes.monochrome(vertices.flatten(), [0, 1, 0.5, 1.0]));
 
 	};
 
