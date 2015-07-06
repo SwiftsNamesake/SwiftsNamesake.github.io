@@ -335,13 +335,13 @@ var WaveFront = (function() {
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		// One list of coordinates per face [[Float]]
-		var vertices = OBJ.faces.map(function(f) {
+		var vertices = OBJ.faces.map(function(f, i) {
 			// return WaveFront.tessellate(...).flatten();
 
 			f.vertices.every(function(vi) { console.assert((vi < OBJ.vertices.length) && (vi >= 0), vi - OBJ.vertices.length); });
 			var polygon = f.vertices.map(function(vi) { return OBJ.vertices[vi]; })
 
-			console.assert(polygon.indexOf(undefined) === (-1), 'Vertex at index ' + polygon.indexOf(undefined) + ' is undefined.');
+			console.assert(polygon.indexOf(undefined) === (-1), 'Vertex at index ' + polygon.indexOf(undefined) + 'in face number ' + i + ' is undefined.');
 			console.assert(polygon.every(function(v) { return v.indexOf(NaN) === (-1) }));
 
 			var triangles = WaveFront.tessellate(polygon); //
