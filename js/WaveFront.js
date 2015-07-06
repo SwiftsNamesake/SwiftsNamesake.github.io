@@ -315,7 +315,7 @@ var WaveFront = (function() {
 			// return WaveFront.tessellate(...).flatten();
 			return WaveFront.tessellate(f.vertices.map(function(v) {
 				return OBJ.vertices[v];
-			}).flatten());
+			})).flatten();
 		});
 
 		// debugger;
