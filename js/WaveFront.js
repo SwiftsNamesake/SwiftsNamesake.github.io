@@ -70,9 +70,6 @@ var WaveFront = (function() {
 		var focal = vertices[0]; // 
 		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+2]]; }).flatten();
 
-		console.log('Number of vertices: ' + vertices.length);
-		console.log('Number of triangles: ' + triangles.length/3);
-
 		console.assert(vertices[0].length === 3);
 		console.assert(triangles[0].length === 3);
 
@@ -339,7 +336,6 @@ var WaveFront = (function() {
 		var vertices = OBJ.faces.map(function(f) {
 			// return WaveFront.tessellate(...).flatten();
 			var triangles = WaveFront.tessellate(f.vertices.map(function(v) { return OBJ.vertices[v]; })); //
-			console.log(triangles.length);
 			console.assert(triangles[0].length === 3);
 			return triangles;
 			// return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
