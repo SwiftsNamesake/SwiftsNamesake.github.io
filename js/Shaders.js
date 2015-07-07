@@ -88,7 +88,7 @@ var shaders = (function() {
 			context.compileShader(shader);
 
 			if (!context.getShaderParameter(shader, context.COMPILE_STATUS)) {
-				console.log(context.getShaderInfoLog());
+				console.log(context.getShaderInfoLog(shader));
 				console.log(shader);
 				console.error('Faulty compile status'); // TODO: Better message
 				return undefined;
