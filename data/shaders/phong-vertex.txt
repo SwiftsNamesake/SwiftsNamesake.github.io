@@ -4,9 +4,9 @@
 precision mediump float;
 
 // TODO: What's the difference between attributes and varying (?)
-varying vec3 inputPosition;
-varying vec2 inputTexCoord;
-varying vec3 inputNormal;
+attribute vec3 inputPosition;
+attribute vec2 inputTexCoord;
+attribute vec3 inputNormal;
 
 uniform mat4 projection, modelview, normalMat;
 uniform int mode;
