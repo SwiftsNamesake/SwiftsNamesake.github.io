@@ -340,41 +340,9 @@ var WaveFront = (function() {
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		// One list of coordinates per face [[Float]]
-		var vertices = OBJ.faces.map(function(f, i) {
-			// return WaveFront.tessellate(...).flatten();
-
-			f.vertices.every(function(vi) { console.assert((vi < OBJ.vertices.length) && (vi >= 0), vi - OBJ.vertices.length); });
-			var polygon = f.vertices.map(function(vi) { if (OBJ.vertices[vi] === undefined) { console.log('ERROR', vi); debugger; }; return OBJ.vertices[vi]; })
-
-			console.assert(polygon.indexOf(undefined) === (-1), 'Vertex at index ' + polygon.indexOf(undefined) + ' in face number ' + (i+1) + ' is undefined.');
-			console.assert(polygon.every(function(v) { return v.indexOf(NaN) === (-1) }));
-
-			var triangles = WaveFront.tessellate(polygon); //
-			console.assert(triangles[0].length === 3);
-			return triangles;
-			// return f.vertices.slice(0,3).map(function(vi) { return OBJ.vertices[vi]; }); // Transform vertex indices to vertex coordinates
-		}).flatten();
-
-		// console.log('')
-
-		// debugger;
-
-		var normals = OBJ.faces.map(function(f) {
-			return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten();
-		});
-
-		// var colours = OBJ.faces.map(function(f) {
-		// 	// TODO: Only one colour per face (duplicated for each vertex) (?)
-		// 	var colour = MTLs[f.material.file][f.material.material]['Ka']
-
-		// 	if (colour.length < 4) {
-		// 		colour.push(1.0); // Add missing alpha
-		// 	}
-
-		// 	return f.vertices.slice(0,3).map(function(v) { return colour });
-		// });
-
-		var colours = OBJ.faces.map(function(f, i) {
+		var vertices = OBJ.faces.map(function(f, i) { return WaveFront.tessellate(f.vertices.map(function(vi) { return OBJ.vertices[vi]; })) }).flatten();
+		var normals  = OBJ.faces.map(function(f) { return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten(); });
+		var colours  = OBJ.faces.map(function(f, i) {
 			var colours = [];
 
 			var ambient  = MTLs[f.material.file][f.material.material]['Ka'];
@@ -389,28 +357,10 @@ var WaveFront = (function() {
 			// TODO: Don't hard-code the count
 			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push(colour); }
 			return colours;
-			// return [colour, colour, colour];
-			// return vertices[i].map(function(_) { return colour; });
 		}).flatten();
 
-		console.log(vertices.slice(0,3*10));
-		console.log(colours.slice(0,4*10));
-
-		// TODO: Potential floating-point issues 
-		console.assert(vertices.length === colours.length, 'There are ' + vertices.length + ' vertices but ' + colours.length + ' colours.');
-		console.assert(vertices.every(function(vertex, i) { if (vertex === undefined) console.log(i); return vertex.length === 3; }),  'All vertices must have three coordinates');
-		console.assert(colours.every(function(colour)  { return colour.length === 4; }), 'All colours must have four channels (rgba)');
-		console.assert(typeof vertices[0][0] === 'number', 'All coordinates must be numbers');
-		console.assert(typeof colours[0][0]  === 'number', 'All colour channel values must be numbers');
-
-		// debugger;
-		console.assert(vertices.length === colours.length);
-		console.log((vertices.flatten().length/3) === (colours.flatten().length/4), 'There should be one colour per vertex');
-
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
-		// console.log(vertices);
 		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
-		// return new Mesh(context, shapes.monochrome(vertices, [0, 1, 0.5, 1.0]));
 
 	};
 

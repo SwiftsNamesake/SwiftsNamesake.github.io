@@ -11,6 +11,7 @@
  *        - Monads (duh)
  *        - Currying
  *        - Iterator objects (?)
+ *        - Should iterable functions also accept iterators (?)
 
  * SPEC | -
  *        -
@@ -30,7 +31,7 @@ var haskell = (function() {
 
 	// var haskell = {};
 	var haskell = {};
-	var π    = Math.PI;
+	var π = Math.PI;
 
 
 	haskell.polygon = function(sides, radius) {
@@ -42,7 +43,7 @@ var haskell = (function() {
 
 		var iterable = {};
 
-		return haskell.iterator(function() {
+		return haskell.iterable(function() {
 			var value = side < sides ? { value: [radius*Math.cos(side*θ), radius*Math.sin(side*θ)], done: false }
 			                         : { done: true };
 			side++;
@@ -52,8 +53,7 @@ var haskell = (function() {
 	};
 
 
-
-	haskell.iterator = function(next) {
+	haskell.iterable = function(next) {
 
 		// Creates an object supporting the iterable protocol
 		// TODO: Return a function that returns an iterator, or return iterator directly (?)
@@ -73,10 +73,11 @@ var haskell = (function() {
 	};
 
 
+	haskell.iterator = function(iterable) { return iterable[Symbol.iterator](); };
+
 
 	// haskell.map = function(f, iterable) {};
 	// haskell.filter = function(p, iterable) {};
-
 
 
 	haskell.range = function(start, stop, step) {
@@ -96,14 +97,12 @@ var haskell = (function() {
 			return next;
 		}
 
-		return haskell.iterator(increment);
+		return haskell.iterable(increment);
 
 	}
 
 
-
 	// haskell.reverse = function(iterable) {};
-
 
 
 	haskell.slice = function(iterable, start, stop, step) {
@@ -133,10 +132,9 @@ var haskell = (function() {
 
 		}
 
-		return haskell.iterator(next);	
+		return haskell.iterable(next);	
 
 	};
-
 
 
 	haskell.zip   = function(a, b) {
@@ -146,13 +144,13 @@ var haskell = (function() {
 		return haskell.zipWith(function(fst, snd) { return [fst, snd]; }, a, b) };
 
 
-
 	haskell.zipWith = function(f, a, b) {
 
 		//
 		// TODO: TEST
 		// TODO: Allow any number of iterables
-		var iterators = { a: a[Symbol.iterator](), b: b[Symbol.iterator]() };
+		// TODO: Implement with haskell.map (?)
+		var iterators = { a: haskell.iterator(a), b: haskell.iterator(b) };
 		// console.log(iterators);
 		function next() {
 			var first  = iterators.a.next();
@@ -161,10 +159,27 @@ var haskell = (function() {
 			return { value: f(first.value, second.value), done: first.done || second.done };
 		}
 
-		return haskell.iterator(next);
+		return haskell.iterable(next);
 		
 	};
 
+
+	haskell.replicate = function(n, value) { return haskell.map(haskell.range(n), function(_) { return value; }); };
+
+
+	haskell.map = function(f, iterable) {
+
+		//
+		var iter = haskell.iterator(iterable);
+
+		function next() {
+			var item = iter.next()
+			return { value: f(item.value), done: item.done };
+		}
+
+		return haskell.iterable(next);
+
+	};
 
 
 	haskell.toArray = function(iterable) {
@@ -176,7 +191,6 @@ var haskell = (function() {
 		return array;
 
 	};
-
 
 
 	haskell.runtests = function() {
