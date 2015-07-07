@@ -230,6 +230,8 @@ var haskell = (function() {
 			console.log(x);
 		}
 
+		console.log(haskell.toArray((haskell.map(function (n) { return n*n; }, haskell.range(0, 10))));
+
 	};
 
 	console.log(haskell.polygon(1,2));
