@@ -96,6 +96,7 @@ var shaders = (function() {
 
 			return shader;
 		} catch (e) {
+			console.error(e);
 			console.error('Something went wrong when attempting to create a shader');
 			return undefined; // TODO
 		}
