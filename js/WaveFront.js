@@ -340,27 +340,25 @@ var WaveFront = (function() {
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		// One list of coordinates per face [[Float]]
-		var vertices = OBJ.faces.map(function(f, i) { return WaveFront.tessellate(f.vertices.map(function(vi) { return OBJ.vertices[vi]; })) }).flatten();
-		var normals  = OBJ.faces.map(function(f) { return f.normals.map(function(n) { return OBJ.normals[n];  }).flatten(); });
-		var colours  = OBJ.faces.map(function(f, i) {
-			var colours = [];
+		var vertices = OBJ.faces.map(function(f) { return WaveFront.tessellate(f.vertices.map(function(vi) { return OBJ.vertices[vi]; })) }).flatten();
+		var normals  = OBJ.faces.map(function(f) { return f.normals.map(function(ni) { return OBJ.normals[ni];  }).flatten(); });
+		var colours  = OBJ.faces.map(function(f) {
 
-			var ambient  = MTLs[f.material.file][f.material.material]['Ka'];
-			var diffuse  = MTLs[f.material.file][f.material.material]['Kd'];
-			var specular = MTLs[f.material.file][f.material.material]['Ks'];
-
-			var colour = [((ambient[0]||0)+(diffuse[0]||0)+(specular[0]||0))/3,
-			              ((ambient[1]||0)+(diffuse[1]||0)+(specular[1]||0))/3,
-			              ((ambient[2]||0)+(diffuse[2]||0)+(specular[2]||0))/3,
-			              ((ambient[3]||1)+(diffuse[3]||1)+(specular[3]||1))/3];
+			// TODO: Assume all colours are defined (but not the alpha channel) (?)
+			// TODO: Is this the way of dealing with ambient, diffuse and specular colours (?)
+			console.assert((material['Ka'] !== undefined) && (material['Kd'] !== undefined) && (material['Ks'] !== undefined));
+			var material = MTLs[f.material.file][f.material.material];
+			var colour = [((material['Ka'][0]||0)+(material['Kd'][0]||0)+(material['Ks'][0]||0))/3,
+			              ((material['Ka'][1]||0)+(material['Kd'][1]||0)+(material['Ks'][1]||0))/3,
+			              ((material['Ka'][2]||0)+(material['Kd'][2]||0)+(material['Ks'][2]||0))/3,
+			              ((material['Ka'][3]||1)+(material['Kd'][3]||1)+(material['Ks'][3]||1))/3];
 
 			// TODO: Don't hard-code the count
-			for (var n = 0; n < (f.vertices.length-2)*3; n++) { colours.push(colour); }
-			return colours;
+			return haskell.toArray(haskell.replicate((f.vertices.length-2)*3, colour));
 		}).flatten();
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
-		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten() });
+		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() });
 
 	};
 
