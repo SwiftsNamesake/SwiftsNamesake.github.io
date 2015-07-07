@@ -346,8 +346,8 @@ var WaveFront = (function() {
 
 			// TODO: Assume all colours are defined (but not the alpha channel) (?)
 			// TODO: Is this the way of dealing with ambient, diffuse and specular colours (?)
-			console.assert((material['Ka'] !== undefined) && (material['Kd'] !== undefined) && (material['Ks'] !== undefined));
 			var material = MTLs[f.material.file][f.material.material];
+			console.assert((material['Ka'] !== undefined) && (material['Kd'] !== undefined) && (material['Ks'] !== undefined));
 			var colour = [((material['Ka'][0]||0)+(material['Kd'][0]||0)+(material['Ks'][0]||0))/3,
 			              ((material['Ka'][1]||0)+(material['Kd'][1]||0)+(material['Ks'][1]||0))/3,
 			              ((material['Ka'][2]||0)+(material['Kd'][2]||0)+(material['Ks'][2]||0))/3,
