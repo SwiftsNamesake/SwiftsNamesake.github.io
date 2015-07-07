@@ -82,7 +82,7 @@ var shaders = (function() {
 			shaders.log('Creating shader.');
 			// shaders.log(source);
 			var shader = context.createShader({'vertex': context.VERTEX_SHADER, 'pixel': context.FRAGMENT_SHADER}[type]);
-
+			console.log(shader);
 			/* Compile and verify */
 			context.shaderSource(shader, source);
 			context.compileShader(shader);
@@ -91,7 +91,6 @@ var shaders = (function() {
 				console.error('Faulty compile status'); // TODO: Better message
 				console.error(context.getShaderInfo);
 				console.log(shader);
-				console.log(source);
 				return undefined;
 			}
 
