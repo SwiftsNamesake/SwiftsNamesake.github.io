@@ -91,6 +91,7 @@ var shaders = (function() {
 				console.error('Faulty compile status'); // TODO: Better message
 				console.error(context.getShaderInfo);
 				console.log(shader);
+				console.log(source);
 				return undefined;
 			}
 
