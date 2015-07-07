@@ -11,6 +11,8 @@
  *        - Monads (duh)
  *        - Currying
  *        - Iterator objects (?)
+ *          -- Allow chaining
+ *
  *        - Should iterable functions also accept iterators (?)
 
  * SPEC | -
@@ -219,6 +221,12 @@ var haskell = (function() {
 		//
 		console.log('Testing zip');
 		for (let x of haskell.zip(haskell.range(0, 10, 2), haskell.range(0, 10, 1))) {
+			console.log(x);
+		}
+
+		//
+		console.log('Testing map');
+		for (let x of haskell.map(function (n) { return n*n; }, haskell.range(0, 10))) {
 			console.log(x);
 		}
 
