@@ -277,6 +277,20 @@ var shapes = (function() {
 	};
 
 
+	// Functions for producing meta data
+	shapes.bounds = function(vertices) {
+		// Calculates the maximum and minimum X, Y and Z coordinates for the vertex array
+		// Right is positive X, upwards is positive Y and inwards is positive Z
+		// TODO: Create vertex data for bounding box (?)
+		return {
+			left:   Math.min.apply(null, vertices.map(function(v) { return v[0] })),
+			right:  Math.max.apply(null, vertices.map(function(v) { return v[0] })),
+			top:    Math.max.apply(null, vertices.map(function(v) { return v[1] })),
+			bottom: Math.min.apply(null, vertices.map(function(v) { return v[1] })),
+			front:  Math.min.apply(null, vertices.map(function(v) { return v[2] })),
+			back:   Math.max.apply(null, vertices.map(function(v) { return v[2] }))
+		};
+	};
 
 	return shapes;
 
