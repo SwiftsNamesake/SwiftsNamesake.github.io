@@ -164,7 +164,7 @@ var haskell = (function() {
 	};
 
 
-	haskell.replicate = function(n, value) { return haskell.map(haskell.range(n), function(_) { return value; }); };
+	haskell.replicate = function(n, value) { return haskell.map(function(_) { return value; }, haskell.range(n)); };
 
 
 	haskell.map = function(f, iterable) {
