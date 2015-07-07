@@ -1,6 +1,9 @@
 // Credits: http://www.mathematik.uni-marburg.de/~thormae/lectures/graphics1/code/WebGLShaderLightMat/ShaderLightMat.html
 // July 7 2015
 
+precision mediump float;
+
+// TODO: What's the difference between attributes and varying (?)
 varying vec3 inputPosition;
 varying vec2 inputTexCoord;
 varying vec3 inputNormal;
