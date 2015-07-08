@@ -59,6 +59,15 @@ var shapes = (function() {
 					  [ hx, -hy,  hz],  // RBB (6)
 					  [ hx, -hy, -hz]]; // RBF (7)
 
+		var normals = {
+			left:  [-1,  0,  0], //
+			right: [ 1,  0,  0], //
+			up:    [ 0,  1,  0], //
+			down:  [ 0, -1,  0], //
+			front: [ 0,  0, -1], // Backwards (because the normal of the front points backwards)
+			back:  [ 0,  0,  1]  // Forwards  (becase the normal of the back points forwards)
+		}
+
 		// TODO: Cache this constant array (?)
 		const indeces = [0, 1, 3, 3, 1, 2,  // Top    (✓)
 						 4, 5, 7, 7, 5, 6,  // Bottom (✓)
@@ -69,8 +78,9 @@ var shapes = (function() {
 
 		var vertices = indeces.map(function(index)    { return unique[index]; });
 		var colours  = indeces.map(function(index, i) { return palette[cubesides[Math.floor(i/6)]]; });
+		var normals  = indeces.map(function(index, i) { return normals[cubesides[Math.floor(i/6)]]; });
 
-		return { vertices: vertices.flatten(), colours: colours.flatten() }; // TODO: Decide whether to concat buffers or keep them as they are
+		return { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() }; // TODO: Decide whether to concat buffers or keep them as they are
 
 	};
 

@@ -10,6 +10,11 @@
  *        - console.logging (allow toggle), timing, profiling
  *        - Separate request IO from WebGL console.logic
  *        - Toggle async
+ *
+ *        - Attributes and uniforms
+ *          -- Figure out how to deal with shader variables in JS code generically (JSON?)
+ *
+ *        -
 
  * SPEC | -
  *        -
@@ -82,7 +87,7 @@ var shaders = (function() {
 			shaders.log('Creating shader.');
 			// shaders.log(source);
 			var shader = context.createShader({'vertex': context.VERTEX_SHADER, 'pixel': context.FRAGMENT_SHADER}[type]);
-			
+
 			/* Compile and verify */
 			context.shaderSource(shader, source);
 			context.compileShader(shader);

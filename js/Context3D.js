@@ -134,7 +134,7 @@ var Context3D = function(canvas) {
 
 
 
-	this.renderVertices = function(vertexbuffer, colourbuffer, translation, rotation, modelview, projection) {
+	this.renderVertices = function(buffers, translation, rotation, modelview, projection) {
 		
 		//
 		// TODO: Allow other primitives, textures, etc. (accept primitive 'mesh' object as argument?)
@@ -147,12 +147,17 @@ var Context3D = function(canvas) {
 		mat4.rotate(modelview, rotation[2], [0, 0, 1]);
 
 		//
-		this.context.bindBuffer(this.context.ARRAY_BUFFER, vertexbuffer);
-		this.context.vertexAttribPointer(this.program.vertexPositionAttribute, vertexbuffer.itemsize, this.context.FLOAT, false, 0, 0);
+		this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['vertex']);
+		this.context.vertexAttribPointer(this.program.vertexPositionAttribute, buffers['vertex'].itemsize, this.context.FLOAT, false, 0, 0);
 			
-		this.context.bindBuffer(this.context.ARRAY_BUFFER, colourbuffer);
-		this.context.vertexAttribPointer(this.program.vertexColourAttribute, colourbuffer.itemsize, this.context.FLOAT, false, 0, 0);
-		
+		this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['colour']);
+		this.context.vertexAttribPointer(this.program.vertexColourAttribute, buffers['colour'].itemsize, this.context.FLOAT, false, 0, 0);
+
+		if (buffers['normals'] !== undefined) {
+			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['normal']);
+			this.context.vertexAttribPointer(this.program.vertexNormalAttribute, buffers['normal'].itemsize, this.context.FLOAT, false, 0, 0);
+		}	
+
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
 		this.setMatrixUniforms(modelview, projection); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
 		this.context.drawArrays(this.context.TRIANGLES, 0, vertexbuffer.size);

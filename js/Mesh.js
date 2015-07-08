@@ -43,6 +43,8 @@ var Mesh = function(context, data) {
 
 	this.vertices = context.createBuffer(data.vertices, 3); //
 	this.colours  = context.createBuffer(data.colours,  4); //
+	this.normals  = data.normals !== undefined ? context.createBuffer(data.vertices, 3) : undefined;
+	this.buffers = { vertex: this.vertices, colour: this.colours, normal: this.normals }
 	// console.log(this.vertices, this.colours)
 
 	this.primitive = context.context.TRIANGLES; // Triangles by default
@@ -51,7 +53,7 @@ var Mesh = function(context, data) {
 	// this.rotation = rotation || [0.0, 0.0, 0.0];
 
 
-	this.render = function(modelview, projection, position, rotation) { context.renderVertices(this.vertices, this.colours, position, rotation, modelview, projection); }
+	this.render = function(modelview, projection, position, rotation) { context.renderVertices(this.buffers, position, rotation, modelview, projection); }
 
 	// this.addColour = function (rgb) {}
 	// this.addTexture = function (path) {}
