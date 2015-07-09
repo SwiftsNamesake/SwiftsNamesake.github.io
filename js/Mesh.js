@@ -30,12 +30,13 @@
 
 
 
-var Mesh = function(context, data) {
+var Mesh = function(context, data, name) {
 
 	//
 	// TODO: Accept single object as argument (?)
 	// TODO: Don't hard-code colour size (optional alpha) (?)
 	// var texture = context.createBuffer(data.texture, 2)
+	if (name) { console.log('Creating Mesh: ' + name); }
 	console.assert(data.vertices.length % 3 === 0);
 	console.assert(data.colours.length  % 4 === 0);
 
