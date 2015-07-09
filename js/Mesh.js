@@ -39,7 +39,7 @@ var Mesh = function(context, data, name) {
 	if (name) { console.log('Creating Mesh: ' + name); this.name = name; }
 	console.assert(data.vertices.length % 3 === 0);
 	console.assert(data.colours.length  % 4 === 0);
-
+	console.assert(data.normals !== undefined, 'Normals needed!');
 	console.assert((data.vertices.length/3) === (data.colours.length/4), (data.vertices.length/3 - data.colours.length/4)); // TODO: Floating-point issues (?)
 
 	this.vertices = context.createBuffer(data.vertices, 3); //
