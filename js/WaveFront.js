@@ -208,7 +208,7 @@ var WaveFront = (function() {
 				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60)
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				// console.assert(face.every(function(vertex) { return vertex.length === face[0].length; }));
-				if (face.length < 2) { console.log('Missing normals'); }
+				console.assert(face.length > 1, 'Missing normals');
 
 				data.faces.push({ vertices:  face.map(function(vertex) { return parseInt(vertex[0])-1; }),                             // Vertices
 								  texcoords: face.map(function(vertex) { return face[0].length > 1 ? parseInt(vertex[1])-1 : null; }), // Texture coordinates
