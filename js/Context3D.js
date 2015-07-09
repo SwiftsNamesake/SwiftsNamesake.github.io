@@ -117,8 +117,14 @@ var Context3D = function(canvas) {
 
 	this.setMatrixUniforms = function(modelview, projection) {
 		// Specific to our current shaders
+		var modelviewInv = new Float32Array(16);
+		var normalmatrix = new Float32Array(16);
+		mat4Invert(modelview, modelviewInv);
+		mat4Transpose(modelviewInv, normalmatrix);
+
 		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);  //
 		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection); // 
+		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix); // 
 		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);          //
 	}
 
