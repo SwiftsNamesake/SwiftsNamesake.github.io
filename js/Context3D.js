@@ -120,7 +120,7 @@ var Context3D = function(canvas) {
 		var modelviewInv = new Float32Array(16);
 		var normalmatrix = new Float32Array(16);
 		mat4.inverse(modelview, modelviewInv);
-		mat4.ranspose(modelviewInv, normalmatrix);
+		mat4.transpose(modelviewInv, normalmatrix);
 
 		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);  //
 		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection); // 
