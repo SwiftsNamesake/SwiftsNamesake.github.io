@@ -60,12 +60,12 @@ var shapes = (function() {
 					  [ hx, -hy, -hz]]; // RBF (7)
 
 		var normals = {
-			left:  [-1,  0,  0], //
-			right: [ 1,  0,  0], //
-			up:    [ 0,  1,  0], //
-			down:  [ 0, -1,  0], //
-			front: [ 0,  0, -1], // Backwards (because the normal of the front points backwards)
-			back:  [ 0,  0,  1]  // Forwards  (becase the normal of the back points forwards)
+			left:   [-1,  0,  0], //
+			right:  [ 1,  0,  0], //
+			top:    [ 0,  1,  0], //
+			bottom: [ 0, -1,  0], //
+			front:  [ 0,  0, -1], // Backwards (because the normal of the front points backwards)
+			back:   [ 0,  0,  1]  // Forwards  (becase the normal of the back points forwards)
 		}
 
 		// TODO: Cache this constant array (?)
