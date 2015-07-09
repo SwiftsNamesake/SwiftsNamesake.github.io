@@ -103,7 +103,7 @@ var shapes = (function() {
 						[ hdx,  hdy, 0.00],
 						[ hdx, -hdy, 0.00]];
 
-		return shapes.monochrome(vertices, colour);
+		return shapes.monochrome(vertices, vertices.map(function(_) { return [0, 0, -1]; }) colour);
 
 	};
 
@@ -159,7 +159,7 @@ var shapes = (function() {
 
 		}
 
-		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, vertices.map(function(_) { return [1,0,0]; }), [1.0, 0.0, 0.0, 1.0]);
 
 	};
 
@@ -169,6 +169,8 @@ var shapes = (function() {
 		
 		//
 		// TODO: Use the palette
+		// TODO: Normals
+		// TODO: Add top and bottom (?)
 		var vertices = [];
 		var colours  = [];
 
@@ -183,7 +185,7 @@ var shapes = (function() {
 			vertices.push([x,  height/2, z]);
 		}
 
-		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, vertices.map(function(v) { return [1,0,0]; }), [1.0, 0.0, 0.0, 1.0]);
 
 	};
 
@@ -207,7 +209,7 @@ var shapes = (function() {
 			vertices.push([0,  height/2, 0]);
 		}
 		
-		return shapes.monochrome(vertices, normals, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, vertices.map(function(_) { return [1,0,0]; }), [1.0, 0.0, 0.0, 1.0]);
 
 	};
 
@@ -271,9 +273,9 @@ var shapes = (function() {
 
 
 
-	shapes.monochrome = function(vertices, colour) {
+	shapes.monochrome = function(vertices, normals, colour) {
 		// Creates a monochrome shape.
-		return { vertices: vertices.flatten(), colours: vertices.map(function(_) { return colour; }).flatten() };
+		return { vertices: vertices.flatten(), colours: vertices.map(function(_) { return colour; }).flatten(), normals: normals };
 	};
 
 
