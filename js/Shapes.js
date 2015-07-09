@@ -193,6 +193,7 @@ var shapes = (function() {
 
 		//
 		// TODO: Use palette
+		// TODO: Create proper normals
 		var vertices = [];
 		var colours  = [];
 
@@ -206,7 +207,7 @@ var shapes = (function() {
 			vertices.push([0,  height/2, 0]);
 		}
 		
-		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
+		return shapes.monochrome(vertices, normals, [1.0, 0.0, 0.0, 1.0]);
 
 	};
 
@@ -216,6 +217,7 @@ var shapes = (function() {
 
 		//
 		// TODO: Use palette
+		// TODO: Create proper normals
 
 		var hx = dx/2, hz = dz/2, hHeight = height/2; //
 
@@ -240,7 +242,7 @@ var shapes = (function() {
  		                'bottom', 'bottom', 'bottom',
  		                'bottom', 'bottom', 'bottom'].map(function(side) { return (palette || somecolours)[side]; }).flatten();
 
-		return { vertices: vertices, colours: colours };
+		return { vertices: vertices, colours: colours, normals: vertices.map(function(_) { return [1,0,0]; }) };
 
 	};
 

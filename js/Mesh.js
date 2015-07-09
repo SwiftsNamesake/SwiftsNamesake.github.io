@@ -36,7 +36,7 @@ var Mesh = function(context, data, name) {
 	// TODO: Accept single object as argument (?)
 	// TODO: Don't hard-code colour size (optional alpha) (?)
 	// var texture = context.createBuffer(data.texture, 2)
-	if (name) { console.log('Creating Mesh: ' + name); }
+	if (name) { console.log('Creating Mesh: ' + name); this.name = name; }
 	console.assert(data.vertices.length % 3 === 0);
 	console.assert(data.colours.length  % 4 === 0);
 
@@ -54,7 +54,7 @@ var Mesh = function(context, data, name) {
 	// this.rotation = rotation || [0.0, 0.0, 0.0];
 
 
-	this.render = function(modelview, projection, position, rotation) { context.renderVertices(this.buffers, position, rotation, modelview, projection); }
+	this.render = function(modelview, projection, position, rotation) { console.log('Rendering ' + name); context.renderVertices(this.buffers, position, rotation, modelview, projection); }
 
 	// this.addColour = function (rgb) {}
 	// this.addTexture = function (path) {}
