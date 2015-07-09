@@ -7,6 +7,7 @@ precision mediump float;
 attribute vec3 inputPosition;
 attribute vec2 inputTexCoord;
 attribute vec3 inputNormal;
+attribute vec4 inputColour;
 
 uniform mat4 projection, modelview, normalMat;
 uniform int mode;
