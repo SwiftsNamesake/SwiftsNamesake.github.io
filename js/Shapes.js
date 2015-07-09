@@ -153,8 +153,8 @@ var shapes = (function() {
 			radiusRight = Math.sqrt(radius*radius - rightX*rightX);
 			
 			for (var segment = 0; segment <= segments; segment++) {
-				vertices.push(leftX,  radiusLeft  * Math.sin(segment*angle), radiusLeft  * Math.cos(segment*angle));
-				vertices.push(rightX, radiusRight * Math.sin(segment*angle), radiusRight * Math.cos(segment*angle));
+				vertices.push([leftX,  radiusLeft  * Math.sin(segment*angle), radiusLeft  * Math.cos(segment*angle)]);
+				vertices.push([rightX, radiusRight * Math.sin(segment*angle), radiusRight * Math.cos(segment*angle)]);
 			}
 
 		}
@@ -202,8 +202,8 @@ var shapes = (function() {
 		for (var segment = 0; segment <= segments; ++segment) {
 			var x = radius*Math.cos(θ*segment);
 			var z = radius*Math.sin(θ*segment);
-			vertices.push(x, -height/2, z);
-			vertices.push(0,  height/2, 0);
+			vertices.push([x, -height/2, z]);
+			vertices.push([0,  height/2, 0]);
 		}
 		
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
