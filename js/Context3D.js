@@ -62,14 +62,14 @@ var Context3D = function(canvas) {
 
 		this.program.uniforms   = {};
 		this.program.attributes = {};
-		
+
 		for (var uniform of uniforms) {
 			this.program.uniforms[uniform] = this.context.getUniformLocation(this.program, uniform);
 		}
 
 		for (var attribute of attributes) {
 			this.program.attributes[attribute] = this.context.getAttribLocation(this.program, attribute);
-			this.program.enableVertexAttribArray(this.program.attributes[attribute]);
+			this.context.enableVertexAttribArray(this.program.attributes[attribute]);
 		}
 
 	}
