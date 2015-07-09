@@ -48,6 +48,6 @@ void main(){
   }
   
   // forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, inputColour.a);
-  forFragColor = vec4(lambertian*diffuseColor + specular*specColor, inputColour.a);
+  forFragColor = vec4(lambertian*diffuseColor + specular*specColor, 1.0);
   // forFragColor = inputColour;
 }
