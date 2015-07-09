@@ -159,8 +159,8 @@ var Context3D = function(canvas) {
 		this.context.vertexAttribPointer(this.program.attributes['inputPosition'], buffers['vertex'].itemsize, this.context.FLOAT, false, 0, 0);
 
 		// console.log(buffers['colour'], buffers['colour'].itemsize);
-		this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['colour']);
-		this.context.vertexAttribPointer(this.program.attributes['inputColour'], buffers['colour'].itemsize, this.context.FLOAT, false, 0, 0);
+		// this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['colour']);
+		// this.context.vertexAttribPointer(this.program.attributes['inputColour'], buffers['colour'].itemsize, this.context.FLOAT, false, 0, 0);
 
 		if (buffers['normals'] !== undefined) {
 			// console.log(buffers['normal'], buffers['normal'].itemsize);
