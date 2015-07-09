@@ -57,7 +57,7 @@ var Context3D = function(canvas) {
 
 		// This needs some explaining (related to shader programs)
 		// This part is specific to the shaders we're using (should probably be extricated from Context3D class)
-		var uniforms   = ['projection',    'modelview',   'normalMat']; // 
+		var uniforms   = ['projection',    'modelview',   'normalMat', 'mode']; // 
 		var attributes = ['inputPosition', 'inputColour', 'inputNormal']; // 'inputTexCoord', 
 
 		this.program.uniforms   = {};
@@ -118,6 +118,7 @@ var Context3D = function(canvas) {
 		// Specific to our current shaders
 		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);  //
 		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection); // 
+		this.context.uniformMatrix4fv(this.program.uniforms['mode'],       false, 2);          //
 	}
 
 
