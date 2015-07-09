@@ -160,7 +160,7 @@ var Context3D = function(canvas) {
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
 		this.setMatrixUniforms(modelview, projection); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
-		this.context.drawArrays(this.context.TRIANGLES, 0, vertexbuffer.size);
+		this.context.drawArrays(this.context.TRIANGLES, 0, buffers['vertex'].size);
 
 	};
 
