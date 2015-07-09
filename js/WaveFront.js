@@ -209,7 +209,7 @@ var WaveFront = (function() {
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				// console.assert(face.every(function(vertex) { return vertex.length === face[0].length; }));
 				console.assert(face.length >= 3, 'Each face needs atleast three vertices');
-				console.assert(face.every(function(v) { return v.length > 1; }), 'Missing normals');
+				console.assert(face.every(function(v) { return v.length > 2; }), 'Missing normals');
 
 				data.faces.push({ vertices:  face.map(function(vertex) { return parseInt(vertex[0])-1; }),                             // Vertices
 								  texcoords: face.map(function(vertex) { return face[0].length > 1 ? parseInt(vertex[1])-1 : null; }), // Texture coordinates
