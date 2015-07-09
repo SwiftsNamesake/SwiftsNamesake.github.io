@@ -3,7 +3,6 @@
 
 precision mediump float;
 
-// TODO: What's the difference between attributes and varying (?)
 attribute vec3 inputPosition;
 attribute vec3 inputNormal;
 attribute vec4 inputColour;
@@ -47,7 +46,5 @@ void main(){
     if(mode == 4) specular *= 0.0;
   }
   
-  // forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, inputColour.a);
-  forFragColor = vec4(lambertian*diffuseColor + specular*specColor, inputColour.a);
-  // forFragColor = inputColour;
+  forFragColor = vec4(lambertian*diffuseColor + specular*specColor, 1.0);
 }
