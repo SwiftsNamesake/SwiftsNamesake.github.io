@@ -68,6 +68,7 @@ var Context3D = function(canvas) {
 		}
 
 		for (var attribute of attributes) {
+			console.log(attribute);
 			this.program.attributes[attribute] = this.context.getAttribLocation(this.program, attribute);
 			this.context.enableVertexAttribArray(this.program.attributes[attribute]);
 		}
