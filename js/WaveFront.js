@@ -354,7 +354,7 @@ var WaveFront = (function() {
 		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.vertices, OBJ.vertices)); }).flatten();
 		var normals  = OBJ.faces.map(function(f) { return fromIndeces(f.normals, OBJ.normals).flatten(); });
-		var colours  = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
+		var colours  = OBJ.faces.map(function(f) { return haskell.toArray(haskell.replicate((f.vertices.length-2)*3, colourOf(f))); }).flatten(); // TODO: Don't hard-code the count
 		console.log(colours);
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() });
