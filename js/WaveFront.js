@@ -195,6 +195,7 @@ var WaveFront = (function() {
 			} else if (values[0] === 'vn') {
 				// Vertex normal
 				data.normals.push(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
+				console.assert(data.vertices[data.vertices.length-1].indexOf(NaN) === (-1), values);
 			} else if (values[0] === 'vt') {
 				// Texture coordinates
 				data.texcoords.push(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
@@ -207,6 +208,7 @@ var WaveFront = (function() {
 				// TODO: Handle vertex definitions of varying length (eg. 50/2/1 55/2 60)
 				var face = values.slice(1).map(function(vertex) { return vertex.split(/\//) }); // Extract indices for each vertex of the face
 				// console.assert(face.every(function(vertex) { return vertex.length === face[0].length; }));
+				if (face.length < 2) { console.log('Missing normals'); }
 
 				data.faces.push({ vertices:  face.map(function(vertex) { return parseInt(vertex[0])-1; }),                             // Vertices
 								  texcoords: face.map(function(vertex) { return face[0].length > 1 ? parseInt(vertex[1])-1 : null; }), // Texture coordinates
