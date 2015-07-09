@@ -360,7 +360,7 @@ var WaveFront = (function() {
 		var colours  = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
-		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() });
+		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() }, OBJ.path);
 
 	};
 
