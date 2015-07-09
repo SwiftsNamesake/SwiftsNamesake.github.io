@@ -57,8 +57,8 @@ var Context3D = function(canvas) {
 
 		// This needs some explaining (related to shader programs)
 		// This part is specific to the shaders we're using (should probably be extricated from Context3D class)
-		var uniforms   = ['projection',    'modelview',     'normalMat'];
-		var attributes = ['inputPosition', 'inputTexCoord', 'inputNormal', 'inputColour'];
+		var uniforms   = ['projection',    'modelview',     'normalMat']; // 
+		var attributes = ['inputPosition', 'inputNormal', 'inputColour']; // 'inputTexCoord', 
 
 		this.program.uniforms   = {};
 		this.program.attributes = {};
@@ -69,7 +69,7 @@ var Context3D = function(canvas) {
 
 		for (var attribute of attributes) {
 			this.program.attributes[attribute] = this.context.getAttribLocation(this.program, attribute);
-			// this.context.enableVertexAttribArray(this.program.attributes[attribute]);
+			this.context.enableVertexAttribArray(this.program.attributes[attribute]);
 		}
 
 	}
