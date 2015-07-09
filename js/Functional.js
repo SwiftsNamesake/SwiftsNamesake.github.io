@@ -70,6 +70,10 @@ var haskell = (function() {
 			}
 		};
 
+		iterable.slice   = function(start, stop, step) { return haskell.slice(this, start, stop, step) };
+		iterable.map     = function(f)                 { return haskell.map(f, this);  };
+		iterable.toArray = function()                  { return haskell.toArray(this); };
+		
 		return iterable;
 
 	};

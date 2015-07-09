@@ -339,23 +339,22 @@ var WaveFront = (function() {
 		// TODO: Handle faces with more than three vertices
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
-		// One list of coordinates per face [[Float]]
-		var vertices = OBJ.faces.map(function(f) { return WaveFront.tessellate(f.vertices.map(function(vi) { return OBJ.vertices[vi]; })) }).flatten();
-		var normals  = OBJ.faces.map(function(f) { return f.normals.map(function(ni) { return OBJ.normals[ni];  }).flatten(); });
-		var colours  = OBJ.faces.map(function(f) {
-
+		function average(material, index, fallback) { return ((material['Ka'][index]||fallback)+(material['Kd'][index]||fallback)+(material['Ks'][index]||fallback))/3; }
+		function fromIndeces(indeces, values)       { return indeces.map(function(i) { return values[i]; }); }
+		function colourOf(face)                     {
+			
 			// TODO: Assume all colours are defined (but not the alpha channel) (?)
 			// TODO: Is this the way of dealing with ambient, diffuse and specular colours (?)
 			var material = MTLs[f.material.file][f.material.material];
 			console.assert((material['Ka'] !== undefined) && (material['Kd'] !== undefined) && (material['Ks'] !== undefined));
-			var colour = [((material['Ka'][0]||0)+(material['Kd'][0]||0)+(material['Ks'][0]||0))/3,
-			              ((material['Ka'][1]||0)+(material['Kd'][1]||0)+(material['Ks'][1]||0))/3,
-			              ((material['Ka'][2]||0)+(material['Kd'][2]||0)+(material['Ks'][2]||0))/3,
-			              ((material['Ka'][3]||1)+(material['Kd'][3]||1)+(material['Ks'][3]||1))/3];
+			return [average(material, 0, 0), average(material, 1, 0), average(material, 2, 0), average(material, 3, 1)];
 
-			// TODO: Don't hard-code the count
-			return haskell.toArray(haskell.replicate((f.vertices.length-2)*3, colour));
-		}).flatten();
+		}
+
+		// One list of coordinates per face [[Float]]
+		var vertices = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.vertices, OBJ.vertices)); }).flatten();
+		var normals  = OBJ.faces.map(function(f) { return fromIndeces(f.normals, OBJ.normals).flatten(); });
+		var colours  = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
 		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() });
