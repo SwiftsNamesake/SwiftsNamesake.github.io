@@ -118,7 +118,7 @@ var Context3D = function(canvas) {
 		// Specific to our current shaders
 		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);  //
 		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection); // 
-		this.context.uniformMatrix4fv(this.program.uniforms['mode'],       false, 2);          //
+		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);          //
 	}
 
 
