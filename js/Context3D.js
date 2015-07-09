@@ -164,12 +164,14 @@ var Context3D = function(canvas) {
 		this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['colour']);
 		this.context.vertexAttribPointer(this.program.attributes['inputColour'], buffers['colour'].itemsize, this.context.FLOAT, false, 0, 0);
 
-		if (buffers['normals'] !== undefined) {
+		if (buffers['normal'] !== undefined) {
 			// console.log(buffers['normal'], buffers['normal'].itemsize);
 			console.log(this.program.attributes['inputNormal']);
 			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['normal']);
 			this.context.vertexAttribPointer(this.program.attributes['inputNormal'], buffers['normal'].itemsize, this.context.FLOAT, false, 0, 0);
-		}	
+		} else {
+			console.log('Where the hell are my normals!?');
+		}
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
 		this.setMatrixUniforms(modelview, projection); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
