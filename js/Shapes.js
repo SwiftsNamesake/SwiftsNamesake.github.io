@@ -255,6 +255,7 @@ var shapes = (function() {
 		// Renders a one-dimensional spiral
 		// TODO: Come up with a better name for dy/revolution (height) (cf. inclination) (✓)
 		// TODO: Use palette
+		// TODO: Add normals
 
 		var vertices = [];
 
@@ -267,7 +268,7 @@ var shapes = (function() {
 			vertices.push(radius*Math.cos(segment*delta), y+dy, radius*Math.sin(segment*delta));
 		}
 
-		return { vertices: indeces.map(function(index) { return unique[index]; }).flatten(), colours: colours };
+		return { vertices: indeces.map(function(index) { return unique[index]; }).flatten(), colours: colours, normals: vertices.map(function(_) { return [1,0,0]; }) };
 
 	};
 
@@ -275,7 +276,7 @@ var shapes = (function() {
 
 	shapes.monochrome = function(vertices, normals, colour) {
 		// Creates a monochrome shape.
-		return { vertices: vertices.flatten(), colours: vertices.map(function(_) { return colour; }).flatten(), normals: normals };
+		return { vertices: vertices.flatten(), colours: vertices.map(function(_) { return colour; }).flatten(), normals: normals.flatten() };
 	};
 
 
