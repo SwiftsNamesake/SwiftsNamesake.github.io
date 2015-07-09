@@ -103,7 +103,7 @@ var shapes = (function() {
 						[ hdx,  hdy, 0.00],
 						[ hdx, -hdy, 0.00]];
 
-		return shapes.monochrome(vertices, vertices.map(function(_) { return [0, 0, -1]; }) colour);
+		return shapes.monochrome(vertices, vertices.map(function(_) { return [0, 0, -1]; }), colour);
 
 	};
 
