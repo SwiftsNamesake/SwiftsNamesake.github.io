@@ -60,6 +60,9 @@ var Context3D = function(canvas) {
 		var uniforms   = ['projection',    'modelview',     'normalMat'];
 		var attributes = ['inputPosition', 'inputTexCoord', 'inputNormal', 'inputColour'];
 
+		this.program.uniforms   = {};
+		this.program.attributes = {};
+		
 		for (var uniform of uniforms) {
 			this.program.uniforms[uniform] = this.context.getUniformLocation(this.program, uniform);
 		}
