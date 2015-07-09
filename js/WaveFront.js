@@ -340,7 +340,7 @@ var WaveFront = (function() {
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		function average(material, index, fallback) { return ((material['Ka'][index]||fallback)+(material['Kd'][index]||fallback)+(material['Ks'][index]||fallback))/3; }
-		function fromIndeces(indeces, values)       { return indeces.map(function(i) { return values[i]; }); }
+		function fromIndeces(indeces, values)       { return indeces.map(function(i, n) { if (i === NaN) {console.log(n)} return values[i]; }); }
 		function colourOf(face)                     {
 			
 			// TODO: Assume all colours are defined (but not the alpha channel) (?)
@@ -353,7 +353,7 @@ var WaveFront = (function() {
 
 		// One list of coordinates per face [[Float]]
 		var vertices = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.vertices, OBJ.vertices)); }).flatten();
-		var normals  = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.normals,  OBJ.normals)); }).flatten();;
+		var normals  = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.normals,  OBJ.normals));  }).flatten();;
 		var colours  = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
 
 		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
