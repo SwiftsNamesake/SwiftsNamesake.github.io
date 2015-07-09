@@ -20,6 +20,7 @@
 var Context3D = function(canvas) {
 
 	//
+	'use strict';
 
 	this.create = function(canvas) {
 
@@ -56,14 +57,17 @@ var Context3D = function(canvas) {
 
 		// This needs some explaining (related to shader programs)
 		// This part is specific to the shaders we're using (should probably be extricated from Context3D class)
-		this.program.vertexPositionAttribute = this.context.getAttribLocation(this.program, 'aVertexPosition');
-		this.context.enableVertexAttribArray(this.program.vertexPositionAttribute);
+		var uniforms   = ['projection',    'modelview',     'normalMat'];
+		var attributes = ['inputPosition', 'inputTexCoord', 'inputNormal', 'inputColour'];
 
-		this.program.vertexColourAttribute = this.context.getAttribLocation(this.program, 'aVertexColor');
-		this.context.enableVertexAttribArray(this.program.vertexColourAttribute);
+		for (var uniform of uniforms) {
+			this.program.uniforms[uniform] = this.context.getUniformLocation(this.program, uniform);
+		}
 
-		this.program.pMatrixUniform  = this.context.getUniformLocation(this.program, 'uPMatrix');
-		this.program.mvMatrixUniform = this.context.getUniformLocation(this.program, 'uMVMatrix');
+		for (var attribute of attributes) {
+			this.program.attributes[attribute] = this.context.getAttribLocation(this.program, attribute);
+			this.program.enableVertexAttribArray(this.program.attributes[attribute]);
+		}
 
 	}
 	
@@ -109,8 +113,8 @@ var Context3D = function(canvas) {
 
 	this.setMatrixUniforms = function(modelview, projection) {
 		// Specific to our current shaders
-		this.context.uniformMatrix4fv(this.program.mvMatrixUniform, false, modelview);  //
-		this.context.uniformMatrix4fv(this.program.pMatrixUniform,  false, projection); // 
+		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);  //
+		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection); // 
 	}
 
 
@@ -148,14 +152,14 @@ var Context3D = function(canvas) {
 
 		//
 		this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['vertex']);
-		this.context.vertexAttribPointer(this.program.vertexPositionAttribute, buffers['vertex'].itemsize, this.context.FLOAT, false, 0, 0);
+		this.context.vertexAttribPointer(this.program.attributes['inputPosition'], buffers['vertex'].itemsize, this.context.FLOAT, false, 0, 0);
 			
 		this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['colour']);
-		this.context.vertexAttribPointer(this.program.vertexColourAttribute, buffers['colour'].itemsize, this.context.FLOAT, false, 0, 0);
+		this.context.vertexAttribPointer(this.program.attributes['inputColour'], buffers['colour'].itemsize, this.context.FLOAT, false, 0, 0);
 
 		if (buffers['normals'] !== undefined) {
 			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['normal']);
-			this.context.vertexAttribPointer(this.program.vertexNormalAttribute, buffers['normal'].itemsize, this.context.FLOAT, false, 0, 0);
+			this.context.vertexAttribPointer(this.program.attributes['inputNormal'], buffers['normal'].itemsize, this.context.FLOAT, false, 0, 0);
 		}	
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
