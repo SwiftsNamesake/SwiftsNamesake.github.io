@@ -91,14 +91,14 @@ var haskell = (function() {
 		//
 		// TODO: TEST
 		// TODO: Allow negative step
-		var start = stop !== undefined ? start : 0;     // 
-		var stop  = stop !== undefined ? stop  : start; // 
-		var step  = step !== undefined ? step  : 1;     //
+		var fr   = (stop !== undefined) ? start : 0;     // 
+		var to   = (stop !== undefined) ? stop  : start; // 
+		var step = (step !== undefined) ? step  : 1;     //
 
-		var n = start;
+		var n = fr;
 
 		function increment() {
-			var next = n < stop ? { value: n, done: false } : { done: true };
+			var next = n < to ? { value: n, done: false } : { done: true };
 			n += step;
 			return next;
 		}
