@@ -179,8 +179,8 @@ var shapes = (function() {
 			var x = radius*Math.cos(θ*segment);
 			var z = radius*Math.sin(θ*segment);
 
-			vertices.push(x, -height/2, z);
-			vertices.push(x,  height/2, z);
+			vertices.push([x, -height/2, z]);
+			vertices.push([x,  height/2, z]);
 		}
 
 		return shapes.monochrome(vertices, [1.0, 0.0, 0.0, 1.0]);
