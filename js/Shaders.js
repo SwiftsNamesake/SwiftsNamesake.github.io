@@ -99,6 +99,7 @@ var shaders = (function() {
 				return undefined;
 			}
 
+			console.log('Successfully created shader.');
 			return shader;
 		} catch (e) {
 			console.error(e);
