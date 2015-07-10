@@ -53,7 +53,7 @@ void main(){
   }
   
   if (textured == 1) {
-    vec4 texColour = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+    vec4 texColour = texture2D(sampler, vec2(vTexCoord.s, vTexCoord.t));
     forFragColor = vec4(lambertian*texColour.rgb + specular*specColor, 1.0);
   } else {
     forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, 1.0);
