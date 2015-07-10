@@ -202,7 +202,10 @@ var Context3D = function(canvas) {
 			console.log('Where the hell are my normals!?');
 		}
 
-		if (buffers['texcoords'].length > 0) {
+		if (buffers['texcoords']/*.length > 0*/) {
+			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['texcoords']);
+			this.context.vertexAttribPointer(this.program.attributes['inputTexCoord'], buffers['texcoords'].itemsize, this.context.FLOAT, false, 0, 0);			
+		} else {
 			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['texcoords']);
 			this.context.vertexAttribPointer(this.program.attributes['inputTexCoord'], buffers['texcoords'].itemsize, this.context.FLOAT, false, 0, 0);			
 		}

@@ -64,6 +64,8 @@ var Mesh = function(context, data, name) {
 				this.textures.push(tex);
 			});
 		}
+	} else {
+		this.texcoords = context.createBuffer([], 2);
 	}
 
 	this.buffers = { vertex: this.vertices, colour: this.colours, normal: this.normals, texcoords: (this.texcoords || []) }
