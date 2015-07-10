@@ -76,7 +76,7 @@ var WaveFront = (function() {
 		// console.assert(vertices[0].length === 3);
 		// console.assert(triangles[0].length === 3);
 
-		console.assert((vertices.length-2)*3 === triangles.length);
+		// console.assert((vertices.length-2)*3 === triangles.length);
 		if (vertices.length === 3) { console.assert(vertices.every(function(v, i) { return v === triangles[i]; })); }
 		return triangles;
 		// return vertices;
