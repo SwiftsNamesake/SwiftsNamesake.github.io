@@ -17,7 +17,7 @@
 
 
 
-if (typeof KeyEvent == "undefined") {
+if (typeof KeyEvent == 'undefined') {
     var KeyEvent = {
         DOM_VK_CANCEL: 3,
         DOM_VK_HELP: 6,
