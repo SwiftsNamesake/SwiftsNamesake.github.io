@@ -363,12 +363,13 @@ var WaveFront = (function() {
 
 		// One list of coordinates per face [[Float]]
 		var vertices  = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.vertices,  OBJ.vertices));  }).flatten();
-		var normals   = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.normals,   OBJ.normals));   }).flatten();;
+		var normals   = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.normals,   OBJ.normals));   }).flatten();
 		var texcoords = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.texcoords, OBJ.texcoords)); }).flatten();
 		var colours   = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
 		
 		var textures =  new Set(OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['map_Kd']; })); // The names of all textures used by this mesh
 		console.log(textures);
+		console.log(texcoords);
 
 		return new Mesh(context, { vertices:  vertices.flatten(),
 			                       colours:   colours.flatten(),
