@@ -89,7 +89,7 @@ Array.prototype.flatten = function() {
 	var flattened = [];
 	
 	for (var item of this) {
-		flattened.concat(item);
+		flattened.push.apply(flattened, item);
 	}
 
 	return flattened;
