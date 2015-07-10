@@ -241,7 +241,7 @@ var Context3D = function(canvas) {
 
 		var promise = $.Deferred(); //
 
-		image.onload = function() { promise.resolve(image); }; // TODO: Use promises (?)
+		image.onload = function() { console.log('Loaded image.'); promise.resolve(image); }; // TODO: Use promises (?)
 		image.src = path;
 		
 		return promise.then(function(im) { return self.createTexture(image); });
