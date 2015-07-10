@@ -166,7 +166,9 @@ var Context3D = function(canvas) {
 		mat4.rotate(uniforms.modelview, rotation[1], [0, 1, 0]);
 		mat4.rotate(uniforms.modelview, rotation[2], [0, 0, 1]);
 
+		// TODO: I need to think about how to apply camera transformations (w.r.t rotation, etc.)
 		// uniforms.camera
+		uniforms.camera.applyTransformations(uniforms.modelview, uniforms.projection);
 
 		//
 		// console.log(buffers['vertex'], buffers['vertex'].itemsize);
