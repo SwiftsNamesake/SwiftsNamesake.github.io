@@ -57,8 +57,8 @@ var Context3D = function(canvas) {
 
 		// This needs some explaining (related to shader programs)
 		// This part is specific to the shaders we're using (should probably be extricated from Context3D class)
-		var uniforms   = ['projection',    'modelview',   'normalMat', 'mode']; // 
-		var attributes = ['inputPosition', 'inputColour', 'inputNormal']; // 'inputTexCoord', 
+		var uniforms   = ['projection',    'modelview',   'normalMat', 'mode', 'light']; // 
+		var attributes = ['inputPosition', 'inputColour', 'inputNormal',]; // 'inputTexCoord',
 
 		this.program.uniforms   = {};
 		this.program.attributes = {};
@@ -123,10 +123,11 @@ var Context3D = function(canvas) {
 		mat4.inverse(modelview, modelviewInv);
 		mat4.transpose(modelviewInv, normalmatrix);
 
-		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);  //
-		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection); // 
-		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix); // 
-		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);          //
+		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);       //
+		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection);      // 
+		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix);    // 
+		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);               //
+		this.context.uniform3f(this.program.uniforms['light'],              false, [1.0, 1.0, 1.0]); //
 	}
 
 
