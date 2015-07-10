@@ -195,7 +195,7 @@ var WaveFront = (function() {
 			} else if (values[0] === 'vn') {
 				// Vertex normal
 				data.normals.push(values.slice(1, 4).map(parseFloat)); // TODO: Handle invalid normal data
-				console.assert(data.vertices[data.vertices.length-1].indexOf(NaN) === (-1), values);
+				console.assert(data.normals[data.normals.length-1].indexOf(NaN) === (-1), values);
 			} else if (values[0] === 'vt') {
 				// Texture coordinates
 				data.texcoords.push(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
