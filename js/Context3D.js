@@ -117,6 +117,7 @@ var Context3D = function(canvas) {
 
 	this.setMatrixUniforms = function(modelview, projection) {
 		// Specific to our current shaders
+		// TOOD: Make generic
 		var modelviewInv = new Float32Array(16);
 		var normalmatrix = new Float32Array(16);
 		mat4.inverse(modelview, modelviewInv);
@@ -149,11 +150,12 @@ var Context3D = function(canvas) {
 
 
 
-	this.renderVertices = function(buffers, translation, rotation, modelview, projection) {
+	this.renderVertices = function(buffers, camera, translation, rotation, modelview, projection) {
 		
 		//
 		// TODO: Allow other primitives, textures, etc. (accept primitive 'mesh' object as argument?)
-		
+		// TODO: Create Scene class which deals with cameras, meshes and lights (?)
+
 		//
 		mat4.identity(modelview);
 		mat4.translate(modelview, translation);
