@@ -367,7 +367,7 @@ var WaveFront = (function() {
 		var texcoords = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.texcoords, OBJ.texcoords)); }).flatten();
 		var colours   = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
 		
-		var textures =  new Set(OBJ.faces.map(function(f) { return MTLs[f.material.file]['map_Kd']; })); // The names of all textures used by this mesh
+		var textures =  new Set(OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['map_Kd']; })); // The names of all textures used by this mesh
 		console.log(textures);
 
 		return new Mesh(context, { vertices:  vertices.flatten(),
