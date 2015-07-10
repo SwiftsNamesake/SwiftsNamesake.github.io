@@ -45,4 +45,4 @@ var Camera = function(position, rotation) {
 		mat4.rotate(modelview, -rotation[2], [0, 0, 1]);
 	}
 
-}();
+};
