@@ -61,9 +61,10 @@ var Mesh = function(context, data, name) {
 			// TODO: Path (cross-origin :/)
 			// var path = 'https://swiftsnamesake.github.io/data/models/';
 			var path = 'textures/';
+			var self = this;
 			context.loadTexture(path+texture).then(function(tex) {
 				console.log('Loaded texture');
-				this.textures.push(tex);
+				self.textures.push(tex);
 			});
 		}
 	} else {
