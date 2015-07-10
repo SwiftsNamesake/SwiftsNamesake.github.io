@@ -86,6 +86,7 @@ var Context3D = function(canvas) {
 		return shaders.programFromSourceFiles(this.context, shaderpaths.vertex, shaderpaths.pixel).then(function(program) {
 			
 			//
+			console.log('Created shader program. Setting shader program and configuring...');
 			self.program = program;                //
 			self.context.useProgram(self.program); //
 			self.configure();                      //
