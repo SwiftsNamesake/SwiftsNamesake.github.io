@@ -23,7 +23,7 @@ uniform int mode;
 // const vec3 specColor    = vec3(1.0, 1.0, 1.0);
 
 uniform sampler2D sampler;
-uniform int textured; // TODO: bool (?)
+// uniform int textured; // TODO: bool (?)
 varying highp vec2 vTexCoord; //
 
 varying float vLambertian;
