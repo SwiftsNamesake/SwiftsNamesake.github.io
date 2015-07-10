@@ -66,6 +66,7 @@ var Mesh = function(context, data, name) {
 			});
 		}
 	} else {
+		console.log(this.name + 'is not textured. Creating dummy buffer...');
 		this.texcoords = context.createBuffer(data.vertices.map(function(_) { return [0,0] }).flatten(), 2);
 	}
 
