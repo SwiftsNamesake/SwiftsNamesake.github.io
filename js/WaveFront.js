@@ -216,7 +216,7 @@ var WaveFront = (function() {
 
 				// TODO: Handle parsing errors (eg. parseInt failures)
 				var notnull  = function(v) { return v !== null; };
-				var optional = function(v) { return parseInt(v) !== NaN ? parseInt(v)-1 : null; } // TODO: Optimise (?)
+				var optional = function(v) { return !isNaN(parseInt(v)) ? parseInt(v)-1 : null; }; // TODO: Optimise (?)
 
 				data.faces.push({ vertices:  face.map(function(vertex) { return (parseInt(vertex[0])-1); }),             // Vertices
 								  texcoords: face.map(function(vertex) { return optional(vertex[1]); }).filter(notnull), // Texture coordinates
