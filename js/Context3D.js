@@ -115,11 +115,9 @@ var Context3D = function(canvas) {
 
 
 
-	this.setMatrixUniforms = function(modelview, projection) {
+	this.setMatrixUniforms = function(light, modelview, projection) {
 		// Specific to our current shaders
 		// TOOD: Make generic
-		var light = [1.0, 1.0, 1.0];
-		
 		var modelviewInv = new Float32Array(16);
 		var normalmatrix = new Float32Array(16);
 		mat4.inverse(modelview, modelviewInv);
@@ -187,7 +185,7 @@ var Context3D = function(canvas) {
 		}
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
-		this.setMatrixUniforms(modelview, projection); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
+		this.setMatrixUniforms(scene.light, modelview, projection); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
 		this.context.drawArrays(this.context.TRIANGLES, 0, buffers['vertex'].size);
 
 	};
