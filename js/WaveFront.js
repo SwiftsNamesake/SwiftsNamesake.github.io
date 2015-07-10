@@ -349,7 +349,7 @@ var WaveFront = (function() {
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		function average(material, index, fallback) { return ((material['Ka'][index]||fallback)+(material['Kd'][index]||fallback)+(material['Ks'][index]||fallback))/3;    }
-		function fromIndeces(indeces, values)       { return indeces.map(function(i, n, arr) { console.assert(i !== NaN && values[i] !== undefined, [n, arr]); return values[i]; }); }
+		function fromIndeces(indeces, values)       { return indeces.map(function(i, n, arr) { console.assert((i !== NaN) && (values[i] !== undefined), [n, arr]); return values[i]; }); }
 		function colourOf(face)                     {
 			
 			// TODO: Assume all colours are defined (but not the alpha channel) (?)
