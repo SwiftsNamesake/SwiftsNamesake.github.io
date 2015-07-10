@@ -372,6 +372,8 @@ var WaveFront = (function() {
 
 		// console.log(textures);
 		// console.log(texcoords);
+		OBJ.faces.map(function(f, i) { console.assert(f.vertices.length === f.texcoords.length, i); })
+		texcoords.map(function(t, i) { console.assert((t.length == 2) && (typeof t[0] + typeof t[1] === 'undefinedundefined') && (t.indexOf(NaN) === (-1)), i); });
 		console.assert((textures.size === 0) || (texcoords.length === vertices.length), 'Wrong number of texcoords: ' + (texcoords.length-vertices.length));
 
 		return new Mesh(context, { vertices:  vertices.flatten(),
