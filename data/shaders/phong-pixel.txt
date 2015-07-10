@@ -30,10 +30,9 @@ void main(){
 
   if (textured == 1) {
     vec4 texColour = texture2D(sampler, vec2(vTexCoord.s, vTexCoord.t));
-    forFragColor = vec4(vLambertian*texColour.rgb + vSpecular*specColor, 1.0);
-    gl_FragColor = forFragColor;
+    gl_FragColor = vec4(vLambertian*texColour.rgb + vSpecular*specColor, 1.0);
   } else {
-    gl_FragColour = vec4(vLambertian*inputColour.rgb + vSpecular*specColor, 1.0);
+    gl_FragColour = vec4(vLambertian*vColour.rgb + vSpecular*specColor, 1.0);
   }
 
 }
