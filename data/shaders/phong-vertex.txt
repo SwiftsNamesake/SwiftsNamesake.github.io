@@ -46,6 +46,6 @@ void main(){
     if(mode == 4) specular *= 0.0;
   }
   
-  forFragColor = vec4(lambertian*diffuseColor + specular*specColor, 1.0);
+  forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, 1.0);
   
 }
