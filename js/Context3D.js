@@ -31,7 +31,7 @@ var Context3D = function(canvas) {
 			context = canvas.getContext('experimental-webgl');
 			context.viewportWidth  = canvas.width;
 			context.viewportHeight = canvas.height;
-			console.log('%cCreated 3D context.', 'background-colour: green;');
+			console.log('%cCreated 3D context.', 'background-color: green;');
 			return context;
 		} catch (e) {
 			if (!context) {
