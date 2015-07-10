@@ -29,6 +29,8 @@ varying highp vec2 vTexCoord; //
 varying float vLambertian;
 varying float vSpecular;
 
+varying float vColour;
+
 
 void main(){
 
