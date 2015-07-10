@@ -199,6 +199,7 @@ var WaveFront = (function() {
 			} else if (values[0] === 'vt') {
 				// Texture coordinates
 				data.texcoords.push(values.slice(1, 3).map(parseFloat)); // TODO: Handle invalid texture data
+				console.assert(data.texcoords[data.texcoords.length-1].indexOf(NaN) === (-1), values);
 			} else if (values[0] === 'f') {
 				// Face
 				// TODO: Save indeces instead (would probably save memory) (?)
