@@ -29,10 +29,10 @@ varying highp vec2 vTexCoord; //
 varying float vLambertian;
 varying float vSpecular;
 
-varying vec3 vColour;
+varying vec4 vColour;
 
 
-void main(){
+void main() {
 
   gl_Position = projection * modelview * vec4(inputPosition, 1.0);
   vTexCoord   = inputTexCoord;
@@ -67,9 +67,4 @@ void main(){
   vSpecular   = specular;    //
   vColour     = inputColour; //
 
-}
-
-
-
-void main(){
 }
