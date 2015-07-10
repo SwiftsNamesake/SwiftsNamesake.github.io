@@ -65,7 +65,7 @@ var Mesh = function(context, data, name) {
 			});
 		}
 	} else {
-		this.texcoords = context.createBuffer(this.vertices.map(function(_) { return [0,0] }).flatten(), 2);
+		this.texcoords = context.createBuffer(data.vertices.map(function(_) { return [0,0] }).flatten(), 2);
 	}
 
 	this.buffers = { vertex: this.vertices, colour: this.colours, normal: this.normals, texcoords: (this.texcoords || []) }
