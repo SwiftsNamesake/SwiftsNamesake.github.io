@@ -377,7 +377,7 @@ var WaveFront = (function() {
 		return new Mesh(context, { vertices:  vertices.flatten(),
 			                       colours:   colours.flatten(),
 			                       normals:   normals.flatten(),
-			                       texcoords: texcoords,
+			                       texcoords: texcoords.flatten(),
 			                       textures:  textures }, OBJ.path);
 
 	};
