@@ -53,7 +53,7 @@ var Mesh = function(context, data, name) {
 	this.vertices = context.createBuffer(data.vertices, 3); //
 	this.colours  = context.createBuffer(data.colours,  4); //
 	this.normals  = data.normals !== undefined ? context.createBuffer(data.vertices, 3) : undefined;
-	if ((data.textures || []).length > 0) {
+	if ((data.textures || new Set()).size > 0) {
 		console.log('Mesh has textures. Loading...');
 		this.texcoords = context.createBuffer(data.texcoords, 2);
 		this.textures  = [];
