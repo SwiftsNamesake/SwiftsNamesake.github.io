@@ -57,8 +57,8 @@ var Context3D = function(canvas) {
 
 		// This needs some explaining (related to shader programs)
 		// This part is specific to the shaders we're using (should probably be extricated from Context3D class)
-		var uniforms   = ['projection',    'modelview',   'normalMat', 'mode', 'light']; // 
-		var attributes = ['inputPosition', 'inputColour', 'inputNormal',]; // 'inputTexCoord',
+		var uniforms   = ['projection',    'modelview',   'normalMat', 'mode', 'light', 'sampler', 'textured']; // 
+		var attributes = ['inputPosition', 'inputColour', 'inputNormal', 'inputTexCoord'];                      //
 
 		this.program.uniforms   = {};
 		this.program.attributes = {};
@@ -116,8 +116,11 @@ var Context3D = function(canvas) {
 
 
 	this.setMatrixUniforms = function(values) {
+		
 		// Specific to our current shaders
 		// TOOD: Make generic
+		// TODO: Allow for switching shader programs
+
 		var modelviewInv = new Float32Array(16);
 		var normalmatrix = new Float32Array(16);
 		mat4.inverse(values.modelview, modelviewInv);
@@ -126,8 +129,15 @@ var Context3D = function(canvas) {
 		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, values.modelview);  //
 		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, values.projection); // 
 		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix);      // 
-		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);                 //
+
+		this.context.uniform1i(this.program.uniforms['mode'], false, 2);                 //
 		this.context.uniform3f(this.program.uniforms['light'], values.light[0], values.light[1], values.light[2]); //
+
+		this.context.activeTexture(this.context.TEXTURE0);
+		this.context.bindTexture(this.context.TEXTURE_2D, values.texture||null); // TODO: Deal with absent textures properly
+		this.context.uniform1i(this.program.uniforms['sampler'], 0);             // 
+
+		this.context.uniform1i(this.program.uniforms['textured'], values.texture !== null ? 1 : 0);
 	}
 
 
@@ -158,6 +168,7 @@ var Context3D = function(canvas) {
 		// TODO: Allow other primitives, textures, etc. (accept primitive 'mesh' object as argument?)
 		// TODO: Create Scene class which deals with cameras, meshes and lights (?)
 		// TODO: Find a more flexible way of dealing with parameters
+		// TODO: Refactor (eg. context.bindAttributeBuffer)
 
 		//
 		mat4.identity(uniforms.modelview);
@@ -188,6 +199,11 @@ var Context3D = function(canvas) {
 			this.context.vertexAttribPointer(this.program.attributes['inputNormal'], buffers['normal'].itemsize, this.context.FLOAT, false, 0, 0);
 		} else {
 			console.log('Where the hell are my normals!?');
+		}
+
+		if (buffers['texcoords'].length > 0) {
+			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['texcoords']);
+			this.context.vertexAttribPointer(this.program.attributes['inputTexCoord'], buffers['texcoords'].itemsize, this.context.FLOAT, false, 0, 0);			
 		}
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
@@ -222,7 +238,13 @@ var Context3D = function(canvas) {
 		//
 		var self    = this;            // 
 		var image   = new Image();     // 
-		image.onload = function() { self.createTexture(image); }; // TODO: Use promises (?)
+
+		var promise = $.Deferred(); //
+
+		image.onload = function() { promise.resolve(image); }; // TODO: Use promises (?)
+		image.src = path;
+		
+		return promise.then(function(im) { return self.createTexture(image); });
 
 	};
 

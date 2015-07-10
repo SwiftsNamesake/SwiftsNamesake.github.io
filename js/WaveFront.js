@@ -67,12 +67,14 @@ var WaveFront = (function() {
 		// TODO: Support convex shapes
 		// TODO: Verify 'flatness' (?)
 		// TODO: Verify correctness, tests
+		// TODO: Tessellate normals, vertices[, colours] and texcords in one go (?)
+
 		var focal = vertices[0]; // 
 		var triangles = vertices.slice(1, vertices.length-1).map(function(v, i) { return [focal, v, vertices[i+2]]; }).flatten();
 
 		console.assert(triangles.every(function(t) { return (typeof t !== 'undefined') && ((typeof t[0])+(typeof t[1])+(typeof t[2])) === 'numbernumbernumber'; }), vertices);
-		console.assert(vertices[0].length === 3);
-		console.assert(triangles[0].length === 3);
+		// console.assert(vertices[0].length === 3);
+		// console.assert(triangles[0].length === 3);
 
 		console.assert((vertices.length-2)*3 === triangles.length);
 		if (vertices.length === 3) { console.assert(vertices.every(function(v, i) { return v === triangles[i]; })); }
@@ -339,11 +341,12 @@ var WaveFront = (function() {
 		// TODO: Use index buffers
 		// TODO: Support textures and normals
 		// TODO: Support all MTL attributes
+		// TODO: Deal with multiple textures per mesh somehow
 		// TODO: Create one mesh per group or object (what's the difference?)
 		// TODO: Handle faces with more than three vertices
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
-		function average(material, index, fallback) { return ((material['Ka'][index]||fallback)+(material['Kd'][index]||fallback)+(material['Ks'][index]||fallback))/3; }
+		function average(material, index, fallback) { return ((material['Ka'][index]||fallback)+(material['Kd'][index]||fallback)+(material['Ks'][index]||fallback))/3;    }
 		function fromIndeces(indeces, values)       { return indeces.map(function(i, n) { if (i === NaN || values[i] === undefined) {console.log(n)} return values[i]; }); }
 		function colourOf(face)                     {
 			
@@ -356,12 +359,19 @@ var WaveFront = (function() {
 		}
 
 		// One list of coordinates per face [[Float]]
-		var vertices = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.vertices, OBJ.vertices)); }).flatten();
-		var normals  = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.normals,  OBJ.normals));  }).flatten();;
-		var colours  = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
+		var vertices  = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.vertices,  OBJ.vertices));  }).flatten();
+		var normals   = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.normals,   OBJ.normals));   }).flatten();;
+		var texcoords = OBJ.faces.map(function(f) { return WaveFront.tessellate(fromIndeces(f.texcoords, OBJ.texcoords)); }).flatten();
+		var colours   = OBJ.faces.map(function(f) { return haskell.replicate((f.vertices.length-2)*3, colourOf(f)).toArray(); }).flatten(); // TODO: Don't hard-code the count
+		
+		var textures =  new Set(OBJ.faces.map(function(f) { return MTLs[f.material.file]['map_Kd']; })); // The names of all textures used by this mesh
+		console.log(textures);
 
-		// var texcoords = OBJ.faces.map(function(f) { return f.texcoords.map(function(t) { return OBJ.texcoords[t]; }); }).flatten();
-		return new Mesh(context, { vertices: vertices.flatten(), colours: colours.flatten(), normals: normals.flatten() }, OBJ.path);
+		return new Mesh(context, { vertices:  vertices.flatten(),
+			                       colours:   colours.flatten(),
+			                       normals:   normals.flatten(),
+			                       texcoords: texcoords,
+			                       textures:  textures }, OBJ.path);
 
 	};
 

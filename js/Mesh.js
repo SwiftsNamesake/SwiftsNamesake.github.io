@@ -36,6 +36,8 @@ var Mesh = function(context, data, name) {
 	// TODO: Accept single object as argument (?)
 	// TODO: Don't hard-code colour size (optional alpha) (?)
 	// var texture = context.createBuffer(data.texture, 2)
+	'use strict';
+
 	this.name = name; 
 	console.log('Creating Mesh: ' + this.name);
 	
@@ -51,9 +53,19 @@ var Mesh = function(context, data, name) {
 	this.vertices = context.createBuffer(data.vertices, 3); //
 	this.colours  = context.createBuffer(data.colours,  4); //
 	this.normals  = data.normals !== undefined ? context.createBuffer(data.vertices, 3) : undefined;
-	this.buffers = { vertex: this.vertices, colour: this.colours, normal: this.normals }
-	// console.log(this.vertices, this.colours)
+	if ((data.textures || []).length > 0) {
+		this.texcoords = context.createBuffer(data.texcoords, 2);
+		this.textures  = [];
+		for (var texture of data.textures) {
+			// TODO: Path
+			context.loadTexture(texture).then(function(tex) {
+				console.log('Loaded texture');
+				this.textures.push(tex);
+			});
+		}
+	}
 
+	this.buffers = { vertex: this.vertices, colour: this.colours, normal: this.normals, texcoords: (this.texcoords || []) }
 	this.primitive = context.context.TRIANGLES; // Triangles by default
 
 

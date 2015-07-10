@@ -6,7 +6,7 @@ precision mediump float;
 attribute vec3 inputPosition;
 attribute vec3 inputNormal;
 attribute vec4 inputColour;
-// attribute vec2 inputTexCoord;
+attribute vec2 inputTexCoord;
 
 // TODO: More than one light, colour, intensity
 attribute vec3 light; // Light position
@@ -19,6 +19,9 @@ varying vec4 forFragColor;
 // const vec3 lightPos  = vec3(1.0, 1.0, 1.0);
 // const vec3 diffuseColor = vec3(0.5, 0.0, 0.0);
 const vec3 specColor    = vec3(1.0, 1.0, 1.0);
+
+uniform int textured; // TODO: bool (?)
+varying highp vec2 vTexCoord; //
 
 void main(){
   gl_Position = projection * modelview * vec4(inputPosition, 1.0);
@@ -49,6 +52,12 @@ void main(){
     if(mode == 4) specular *= 0.0;
   }
   
-  forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, 1.0);
-  
+  if (textured == 1) {
+    vec4 texColour = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+    forFragColor = vec4(lambertian*texColour.rgb + specular*specColor, 1.0);
+  } else {
+    forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, 1.0);
+    // vTexCoord = inputTexCoord;
+  }
+
 }
