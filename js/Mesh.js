@@ -20,7 +20,7 @@
  *          -- Common solids and 2D shapes (triangle, rectangle, block, cube, sphere, cone, cylinder, dodecahedron, etc.)
  *
  *        - Robustness
- *          -- console.logging and debugging
+ *          -- logging and debugging
  *          -- Type-checking, function signatures
  
  * SPEC | -
@@ -36,9 +36,10 @@ var Mesh = function(context, data, name) {
 	// TODO: Accept single object as argument (?)
 	// TODO: Don't hard-code colour size (optional alpha) (?)
 	// var texture = context.createBuffer(data.texture, 2)
-	if (name) { console.log('Creating Mesh: ' + name); this.name = name; }
+	this.name = name; 
+	console.log('Creating Mesh: ' + this.name);
+	
 	console.assert(data.normals !== undefined, 'Normals needed!');
-
 	
 	console.assert(data.vertices.length % 3 === 0);
 	console.assert(data.normals.length  % 3 === 0);
@@ -55,11 +56,8 @@ var Mesh = function(context, data, name) {
 
 	this.primitive = context.context.TRIANGLES; // Triangles by default
 
-	// this.position = position || [0.0, 0.0, 0.0];
-	// this.rotation = rotation || [0.0, 0.0, 0.0];
 
-
-	this.render = function(uniforms, position, rotation) { context.renderVertices(this.buffers, uniforms, position, rotation); }
+	this.render = function(uniforms, position, rotation) { context.renderVertices(this.buffers, this.primitive, uniforms, position, rotation); }
 
 	// this.addColour = function (rgb) {}
 	// this.addTexture = function (path) {}

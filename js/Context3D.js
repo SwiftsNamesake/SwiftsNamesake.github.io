@@ -151,7 +151,7 @@ var Context3D = function(canvas) {
 
 
 
-	this.renderVertices = function(buffers, uniforms, translation, rotation) {
+	this.renderVertices = function(buffers, primitive, uniforms, translation, rotation) {
 		
 		//
 		// camera, translation, rotation, modelview, projection
@@ -190,7 +190,7 @@ var Context3D = function(canvas) {
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
 		this.setMatrixUniforms(uniforms); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
-		this.context.drawArrays(this.context.TRIANGLES, 0, buffers['vertex'].size);
+		this.context.drawArrays(primitive, 0, buffers['vertex'].size);
 
 	};
 

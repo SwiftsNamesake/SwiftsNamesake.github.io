@@ -14,6 +14,10 @@
  *        - Support primitives other than GL.TRIANGLES
  *        - Pure vertex functions (or use parameter to decide whether to include colours) (?)
  *          -- More flexible colour handling
+ *
+ *        - Separate colours and normals from vertices (?)
+ *          -- Allow chaining (eg. shapes.sphere(r).monochrome([r,g,b,a]).normals(...).object()) (?)
+ *        -
 
  * SPEC | -
  *        -
@@ -129,6 +133,7 @@ var shapes = (function() {
 		// TODO: Plenty of room for optimisation (eg. unit sphere + scaling, using indeces, etc.)
 		var vertices = [];
 		var colours  = [];
+		var normals  = [];
 
 		const resolution = 5.0;         // TODO: Better name (?)
 		const dx = radius / resolution; // The distance between adjacent circles
