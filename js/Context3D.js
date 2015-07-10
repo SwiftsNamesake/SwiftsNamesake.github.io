@@ -120,7 +120,7 @@ var Context3D = function(canvas) {
 		// TOOD: Make generic
 		var modelviewInv = new Float32Array(16);
 		var normalmatrix = new Float32Array(16);
-		mat4.inverse(uniforms.modelview, modelviewInv);
+		mat4.inverse(values.modelview, modelviewInv);
 		mat4.transpose(modelviewInv, normalmatrix);
 
 		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, values.modelview);  //
@@ -167,7 +167,7 @@ var Context3D = function(canvas) {
 		mat4.rotate(uniforms.modelview, rotation[2], [0, 0, 1]);
 
 		// uniforms.camera
-		
+
 		//
 		// console.log(buffers['vertex'], buffers['vertex'].itemsize);
 		// console.log(this.program.attributes['inputPosition']);
