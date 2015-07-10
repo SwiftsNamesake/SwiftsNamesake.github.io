@@ -120,6 +120,7 @@ var shaders = (function() {
 		context.attachShader(program, vertexshader);
 		context.attachShader(program, pixelshader);
 		context.linkProgram(program);
+		console.error(context.getProgramInfoLog(program));
 		return program;
 	}
 
