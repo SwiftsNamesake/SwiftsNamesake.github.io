@@ -17,6 +17,8 @@ const vec3 specColor    = vec3(1.0, 1.0, 1.0);
 varying float vLambertian;
 varying float vSpecular;
 
+varying float vColour;
+
 uniform sampler2D sampler;
 uniform int textured; // TODO: bool (?)
 varying highp vec2 vTexCoord; //
