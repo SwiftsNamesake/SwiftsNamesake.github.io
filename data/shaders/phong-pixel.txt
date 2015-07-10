@@ -5,16 +5,8 @@
 
 precision mediump float;
 
-attribute vec3 inputPosition;
-attribute vec3 inputNormal;
-attribute vec4 inputColour;
-attribute vec2 inputTexCoord;
-
-// TODO: More than one light, colour, intensity
-attribute vec3 light; // Light position
-
-uniform mat4 projection, modelview, normalMat;
-uniform int mode;
+// uniform mat4 projection, modelview, normalMat;
+// uniform int mode;
 
 varying vec4 forFragColor;
 
@@ -22,45 +14,24 @@ varying vec4 forFragColor;
 // const vec3 diffuseColor = vec3(0.5, 0.0, 0.0);
 const vec3 specColor    = vec3(1.0, 1.0, 1.0);
 
+varying float vLambertian;
+varying float vSpecular;
+
 uniform sampler2D sampler;
 uniform int textured; // TODO: bool (?)
 varying highp vec2 vTexCoord; //
 
 
 void main(){
-  // all following gemetric computations are performed in the
-  // camera coordinate system (aka eye coordinates)
-  vec3 normal     = vec3(normalMat * vec4(inputNormal, 0.0));
-  vec4 vertPos4   = modelview * vec4(inputPosition, 1.0);
-  vec3 vertPos    = vec3(vertPos4) / vertPos4.w;
-  vec3 lightDir   = normalize(light - vertPos);
-  vec3 reflectDir = reflect(-lightDir, normal);
-  vec3 viewDir    = normalize(-vertPos);
 
-  float lambertian = max(dot(lightDir,normal), 0.0);
-  float specular = 0.0;
-  
-  if(lambertian > 0.0) {
-    float specAngle = max(dot(reflectDir, viewDir), 0.0);
-    specular = pow(specAngle, 4.0);
+  //
 
-    // the exponent controls the shininess (try mode 2)
-    if(mode == 2)  specular = pow(specAngle, 16.0);
-       
-    // according to the rendering equation we would need to multiply
-    // with the the "lambertian", but this has little visual effect
-    if(mode == 3) specular *= lambertian;
-    // switch to mode 4 to turn off the specular component
-    if(mode == 4) specular *= 0.0;
-  }
-  
   if (textured == 1) {
     vec4 texColour = texture2D(sampler, vec2(vTexCoord.s, vTexCoord.t));
-    forFragColor = vec4(lambertian*texColour.rgb + specular*specColor, 1.0);
+    forFragColor = vec4(vLambertian*texColour.rgb + vSpecular*specColor, 1.0);
     gl_FragColor = forFragColor;
   } else {
-    forFragColor = vec4(lambertian*inputColour.rgb + specular*specColor, 1.0);
-    // vTexCoord = inputTexCoord;
+    gl_FragColour = vec4(vLambertian*inputColour.rgb + vSpecular*specColor, 1.0);
   }
 
 }
