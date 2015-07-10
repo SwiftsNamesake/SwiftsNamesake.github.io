@@ -214,9 +214,11 @@ var WaveFront = (function() {
 				console.assert(face.length >= 3, 'Each face needs atleast three vertices');
 				console.assert(face.every(function(v) { return v.length > 2; }), 'Missing normals');
 
+				var notnull = function(v) { return v !== null; };
+
 				data.faces.push({ vertices:  face.map(function(vertex) { return parseInt(vertex[0])-1; }),                             // Vertices
-								  texcoords: face.map(function(vertex) { return face[0].length > 1 ? parseInt(vertex[1])-1 : null; }), // Texture coordinates
-								  normals:   face.map(function(vertex) { return face[0].length > 2 ? parseInt(vertex[2])-1 : null; }), // Normals
+								  texcoords: face.map(function(vertex) { return face[0].length > 1 ? parseInt(vertex[1])-1 : null; }).filter(notnull), // Texture coordinates
+								  normals:   face.map(function(vertex) { return face[0].length > 2 ? parseInt(vertex[2])-1 : null; }).filter(notnull), // Normals
 								  material:  data.material });                                                                         // Material
 			} else if (values[0] === 'g') {
 				// Group
@@ -347,7 +349,7 @@ var WaveFront = (function() {
 		console.log('\n%cCreating mesh for ' + OBJ.path, "background: green; font-size: 28pt; ");
 
 		function average(material, index, fallback) { return ((material['Ka'][index]||fallback)+(material['Kd'][index]||fallback)+(material['Ks'][index]||fallback))/3;    }
-		function fromIndeces(indeces, values)       { return indeces.map(function(i, n) { if (i === NaN || values[i] === undefined) {console.log(n)} return values[i]; }); }
+		function fromIndeces(indeces, values)       { return indeces.map(function(i, n) { console.assert(i !== NaN && values[i] !== undefined, n); return values[i]; }); }
 		function colourOf(face)                     {
 			
 			// TODO: Assume all colours are defined (but not the alpha channel) (?)
