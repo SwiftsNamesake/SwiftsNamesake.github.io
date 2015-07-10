@@ -240,6 +240,8 @@ var Context3D = function(canvas) {
 	this.loadTexture = function(path) {
 
 		//
+		console.log('Loading texture...');
+		
 		var self    = this;            // 
 		var image   = new Image();     // 
 
