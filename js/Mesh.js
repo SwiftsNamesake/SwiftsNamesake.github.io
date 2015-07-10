@@ -59,7 +59,7 @@ var Mesh = function(context, data, name) {
 	// this.rotation = rotation || [0.0, 0.0, 0.0];
 
 
-	this.render = function(camera, modelview, projection, position, rotation) { context.renderVertices(this.buffers, camera, position, rotation, modelview, projection); }
+	this.render = function(uniforms, position, rotation) { context.renderVertices(this.buffers, uniforms, position, rotation); }
 
 	// this.addColour = function (rgb) {}
 	// this.addTexture = function (path) {}

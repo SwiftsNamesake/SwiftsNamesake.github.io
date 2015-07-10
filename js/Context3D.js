@@ -115,19 +115,19 @@ var Context3D = function(canvas) {
 
 
 
-	this.setMatrixUniforms = function(light, modelview, projection) {
+	this.setMatrixUniforms = function(values) {
 		// Specific to our current shaders
 		// TOOD: Make generic
 		var modelviewInv = new Float32Array(16);
 		var normalmatrix = new Float32Array(16);
-		mat4.inverse(modelview, modelviewInv);
+		mat4.inverse(uniforms.modelview, modelviewInv);
 		mat4.transpose(modelviewInv, normalmatrix);
 
-		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, modelview);    //
-		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, projection);   // 
-		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix); // 
-		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);            //
-		this.context.uniform3f(this.program.uniforms['light'], light[0], light[1], light[2]);    //
+		this.context.uniformMatrix4fv(this.program.uniforms['modelview'],  false, values.modelview);  //
+		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, values.projection); // 
+		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix);      // 
+		this.context.uniform1i(this.program.uniforms['mode'],              false, 2);                 //
+		this.context.uniform3f(this.program.uniforms['light'], values.light[0], values.light[1], values.light[2]); //
 	}
 
 
@@ -151,19 +151,23 @@ var Context3D = function(canvas) {
 
 
 
-	this.renderVertices = function(buffers, camera, translation, rotation, modelview, projection) {
+	this.renderVertices = function(buffers, uniforms, translation, rotation) {
 		
 		//
+		// camera, translation, rotation, modelview, projection
 		// TODO: Allow other primitives, textures, etc. (accept primitive 'mesh' object as argument?)
 		// TODO: Create Scene class which deals with cameras, meshes and lights (?)
+		// TODO: Find a more flexible way of dealing with parameters
 
 		//
-		mat4.identity(modelview);
-		mat4.translate(modelview, translation);
-		mat4.rotate(modelview, rotation[0], [1, 0, 0]);
-		mat4.rotate(modelview, rotation[1], [0, 1, 0]);
-		mat4.rotate(modelview, rotation[2], [0, 0, 1]);
+		mat4.identity(uniforms.modelview);
+		mat4.translate(uniforms.modelview, translation);
+		mat4.rotate(uniforms.modelview, rotation[0], [1, 0, 0]);
+		mat4.rotate(uniforms.modelview, rotation[1], [0, 1, 0]);
+		mat4.rotate(uniforms.modelview, rotation[2], [0, 0, 1]);
 
+		// uniforms.camera
+		
 		//
 		// console.log(buffers['vertex'], buffers['vertex'].itemsize);
 		// console.log(this.program.attributes['inputPosition']);
@@ -185,7 +189,7 @@ var Context3D = function(canvas) {
 		}
 
 		// console.log(this.context, vertexbuffer, colourbuffer, vertexbuffer.size);
-		this.setMatrixUniforms(scene.light, modelview, projection); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
+		this.setMatrixUniforms(uniforms); // TODO: How to deal with shaders generically (when the uniforms aren't known in advance)
 		this.context.drawArrays(this.context.TRIANGLES, 0, buffers['vertex'].size);
 
 	};
