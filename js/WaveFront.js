@@ -214,12 +214,13 @@ var WaveFront = (function() {
 				console.assert(face.length >= 3, 'Each face needs atleast three vertices');
 				console.assert(face.every(function(v) { return v.length > 2; }), 'Missing normals');
 
+				// TODO: Handle parsing errors (eg. parseInt failures)
 				var notnull = function(v) { return v !== null; };
 
-				data.faces.push({ vertices:  face.map(function(vertex) { return parseInt(vertex[0])-1; }),                             // Vertices
-								  texcoords: face.map(function(vertex) { return face[0].length > 1 ? parseInt(vertex[1])-1 : null; }).filter(notnull), // Texture coordinates
-								  normals:   face.map(function(vertex) { return face[0].length > 2 ? parseInt(vertex[2])-1 : null; }).filter(notnull), // Normals
-								  material:  data.material });                                                                         // Material
+				data.faces.push({ vertices:  face.map(function(vertex) { return (parseInt(vertex[0])-1); }),                         // Vertices
+								  texcoords: face.map(function(vertex) { return (parseInt(vertex[1])-1) || null; }).filter(notnull), // Texture coordinates
+								  normals:   face.map(function(vertex) { return (parseInt(vertex[2])-1) || null; }).filter(notnull), // Normals
+								  material:  data.material });                                                                       // Material
 			} else if (values[0] === 'g') {
 				// Group
 				// console.log('Adding group:', values[2])
