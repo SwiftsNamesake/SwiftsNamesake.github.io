@@ -1,6 +1,8 @@
 // Credits: http://www.mathematik.uni-marburg.de/~thormae/lectures/graphics1/code/WebGLShaderLightMat/ShaderLightMat.html
 // July 7 2015
 
+#version 330
+
 precision mediump float; 
 varying vec4 forFragColor;
 
