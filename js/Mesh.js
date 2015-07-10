@@ -59,7 +59,7 @@ var Mesh = function(context, data, name) {
 		this.textures  = [];
 		for (var texture of data.textures) {
 			// TODO: Path
-			var path = 'https://swiftsnamesake.github.io/data/models';
+			var path = 'https://swiftsnamesake.github.io/data/models/';
 			context.loadTexture(path+texture).then(function(tex) {
 				console.log('Loaded texture');
 				this.textures.push(tex);
