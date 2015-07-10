@@ -40,9 +40,9 @@ var Camera = function(position, rotation) {
 	this.applyTransformations = function(modelview, projection) {
 		//
 		mat4.translate(modelview, [-this.position[0], -this.position[1], -this.position[2]]);
-		mat4.rotate(modelview, -rotation[0], [1, 0, 0]);
-		mat4.rotate(modelview, -rotation[1], [0, 1, 0]);
-		mat4.rotate(modelview, -rotation[2], [0, 0, 1]);
+		mat4.rotate(modelview, -this.rotation[0], [1, 0, 0]);
+		mat4.rotate(modelview, -this.rotation[1], [0, 1, 0]);
+		mat4.rotate(modelview, -this.rotation[2], [0, 0, 1]);
 	}
 
 };
