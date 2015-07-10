@@ -84,7 +84,16 @@ Array.prototype.chooseRandom = function () {
 
 Array.prototype.flatten = function() {
 	// Flattens a 2D array (non-recursively)
-	return [].concat.apply([], this);
+	'use strict';
+	// return [].concat.apply([], this); // Apparently, this causes a call stack error for very large arrays
+	var flattened = [];
+	
+	for (var item of this) {
+		flattened.concat(item);
+	}
+
+	return flattened;
+
 };
 
 
