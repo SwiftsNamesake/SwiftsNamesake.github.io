@@ -218,9 +218,9 @@ var WaveFront = (function() {
 				var notnull  = function(v) { return v !== null; };
 				var optional = function(v) { return parseInt(v) !== NaN ? parseInt(v)-1 : null; } // TODO: Optimise (?)
 
-				data.faces.push({ vertices:  face.map(function(vertex) { return (parseInt(vertex[0])-1); }),        // Vertices
-								  texcoords: face.map(function(vertex) { return optional(v[1]); }).filter(notnull), // Texture coordinates
-								  normals:   face.map(function(vertex) { return optional(v[2]); }).filter(notnull), // Normals
+				data.faces.push({ vertices:  face.map(function(vertex) { return (parseInt(vertex[0])-1); }),             // Vertices
+								  texcoords: face.map(function(vertex) { return optional(vertex[1]); }).filter(notnull), // Texture coordinates
+								  normals:   face.map(function(vertex) { return optional(vertex[2]); }).filter(notnull), // Normals
 								  material:  data.material });                                                                       // Material
 				// console.assert(data.faces[data.faces.length-1].vertices.length === data.faces[data.faces.length-1].texcoords.length, face);
 			} else if (values[0] === 'g') {
