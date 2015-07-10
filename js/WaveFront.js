@@ -221,6 +221,7 @@ var WaveFront = (function() {
 								  texcoords: face.map(function(vertex) { return (parseInt(vertex[1])-1) || null; }).filter(notnull), // Texture coordinates
 								  normals:   face.map(function(vertex) { return (parseInt(vertex[2])-1) || null; }).filter(notnull), // Normals
 								  material:  data.material });                                                                       // Material
+				console.assert(data.faces[data.faces.length-1].vertices.length === data.faces[data.faces.length-1].texcoords.length, face);
 			} else if (values[0] === 'g') {
 				// Group
 				// console.log('Adding group:', values[2])
