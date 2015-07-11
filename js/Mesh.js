@@ -72,8 +72,8 @@ var Mesh = function(context, data, name) {
 		this.texcoords = context.createBuffer(data.vertices.map(function(_) { return [0,0] }).flatten(), 2);
 	}
 
-	this.buffers = { vertex: this.vertices, colour: this.colours, normal: this.normals, texcoords: (this.texcoords || []) }
-	this.primitive = context.context.TRIANGLES; // Triangles by default
+	this.buffers   = { vertex: this.vertices, colour: this.colours, normal: this.normals, texcoords: (this.texcoords || []) }
+	this.primitive = data.primitive || context.context.TRIANGLES; // Triangles by default
 
 
 	this.render = function(uniforms, position, rotation) { context.renderVertices(this.buffers, this.primitive, uniforms, position, rotation); }

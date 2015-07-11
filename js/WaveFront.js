@@ -359,7 +359,8 @@ var WaveFront = (function() {
 			// TODO: Is this the way of dealing with ambient, diffuse and specular colours (?)
 			var material = MTLs[face.material.file][face.material.material];
 			console.assert((material['Ka'] !== undefined) && (material['Kd'] !== undefined) && (material['Ks'] !== undefined));
-			return [average(material, 0, 0), average(material, 1, 0), average(material, 2, 0), average(material, 3, 1)];
+			// return [average(material, 0, 0), average(material, 1, 0), average(material, 2, 0), average(material, 3, 1)];
+			return [material['Kd'][0], material['Kd'][1], material['Kd'][2], material['Kd'][3]||1.0];
 
 		}
 

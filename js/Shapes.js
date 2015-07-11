@@ -12,6 +12,8 @@
  *          -- Make sure all functions are referentially transparent
  *
  *        - Support primitives other than GL.TRIANGLES
+ *          -- Include primitive type in return value (?)
+ *
  *        - Pure vertex functions (or use parameter to decide whether to include colours) (?)
  *          -- More flexible colour handling
  *
@@ -269,13 +271,21 @@ var shapes = (function() {
 
 		for (var segment = 0; segment <= segments * revolutions; ++segment) {
 			var y = inclination * segment/segments;
-			vertices.push(radius*Math.cos(segment*delta), y,    radius*Math.sin(segment*delta));
-			vertices.push(radius*Math.cos(segment*delta), y+dy, radius*Math.sin(segment*delta));
+			vertices.push([radius*Math.cos(segment*delta), y,    radius*Math.sin(segment*delta)]);
+			vertices.push([radius*Math.cos(segment*delta), y+dy, radius*Math.sin(segment*delta)]);
 		}
 
 		return { vertices: indeces.map(function(index) { return unique[index]; }).flatten(), colours: colours, normals: vertices.map(function(_) { return [1,0,0]; }) };
 
 	};
+
+
+
+	shapes.cartesian = function(origin, extents, markerstep) {
+
+		//
+
+	}
 
 
 
