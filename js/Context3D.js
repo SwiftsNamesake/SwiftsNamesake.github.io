@@ -131,6 +131,7 @@ var Context3D = function(canvas) {
 		this.context.uniformMatrix4fv(this.program.uniforms['projection'], false, values.projection); // 
 		this.context.uniformMatrix4fv(this.program.uniforms['normalMat'],  false, normalmatrix);      // 
 
+		console.log('Light at: ', values.light);
 		this.context.uniform1i(this.program.uniforms['mode'], false, 1);                 //
 		this.context.uniform3f(this.program.uniforms['light'], values.light[0], values.light[1], values.light[2]); //
 
