@@ -372,6 +372,7 @@ var WaveFront = (function() {
 		var textures =  new Set(OBJ.faces.map(function(f) { return MTLs[f.material.file][f.material.material]['map_Kd']; })); // The names of all textures used by this mesh
 		textures.delete(undefined);
 
+		console.log(MTLs[OBJ.faces[0].material.file][OBJ.faces[0].material.material], fromIndeces(OBJ.faces[0].texcoords, OBJ.texcoords))
 		// console.log(textures);
 		// console.log(texcoords);
 		if (OBJ.faces.texcoords > 0) {
