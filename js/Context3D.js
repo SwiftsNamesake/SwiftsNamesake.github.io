@@ -203,7 +203,7 @@ var Context3D = function(canvas) {
 		}
 
 		if (buffers['texcoords']/*.length > 0*/) {
-			console.log('Binding texcoord buffer');
+			// console.log('Binding texcoord buffer');
 			this.context.bindBuffer(this.context.ARRAY_BUFFER, buffers['texcoords']);
 			this.context.vertexAttribPointer(this.program.attributes['inputTexCoord'], buffers['texcoords'].itemsize, this.context.FLOAT, false, 0, 0);			
 		} else {
