@@ -28,9 +28,11 @@ void main(){
 
   if (textured == 1) {
     vec4 texColour = texture2D(sampler, vec2(vTexCoord.s, vTexCoord.t));
-    gl_FragColor = vec4(vLambertian*texColour.rgb + vSpecular*specColor, 1.0);
+    // gl_FragColor = vec4(vLambertian*texColour.rgb + vSpecular*specColor, 1.0);
+    gl_FragColor = texColour;
   } else {
-    gl_FragColor = vec4(vLambertian*vColour.rgb + vSpecular*specColor, 1.0);
+    // gl_FragColor = vec4(vLambertian*vColour.rgb + vSpecular*specColor, 1.0);
+    gl_FragColor = vColour;
   }
 
 }
