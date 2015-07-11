@@ -35,7 +35,7 @@ varying vec4 vColour;
 void main() {
 
   gl_Position = projection * modelview * vec4(inputPosition, 1.0);
-  vTexCoord   = vec2(1.0-inputTexCoord.s, inputTexCoord.t); // Minecraft exporter inverts Y coordinate for some reason
+  vTexCoord   = vec2(inputTexCoord.s, 1.0-inputTexCoord.t); // Minecraft exporter inverts Y coordinate for some reason
 
   // all following gemetric computations are performed in the
   // camera coordinate system (aka eye coordinates)
