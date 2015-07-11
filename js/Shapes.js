@@ -149,6 +149,10 @@ var shapes = (function() {
 
 		const dTheta = π/segments;
 
+		var normalise = function(vec) {
+			return [vec[0]/radius, vec[1]/radius, vec[2]/radius];
+		}
+
 		for (var xSegment = 0; xSegment <= segments; xSegment++) {
 
 			//
@@ -166,7 +170,10 @@ var shapes = (function() {
 
 		}
 
-		return shapes.monochrome(vertices, vertices.map(function(_) { return [1,0,0]; }), [1.0, 0.0, 0.0, 1.0]);
+		// TODO: 
+		var data = shapes.monochrome(vertices, vertices.map(function(_) { return [1,0,0]; }), [1.0, 0.0, 0.0, 1.0]);
+		data.normals = vertices.map(function(v) { return normals(v); });
+		return data;
 
 	};
 
