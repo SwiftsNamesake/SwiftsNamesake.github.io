@@ -172,7 +172,7 @@ var shapes = (function() {
 
 		// TODO: 
 		var data = shapes.monochrome(vertices, vertices.map(function(_) { return [1,0,0]; }), [1.0, 0.0, 0.0, 1.0]);
-		data.normals = vertices.map(function(v) { return normalise(v); });
+		data.normals = vertices.map(function(v) { return normalise(v); }).flatten();
 		return data;
 
 	};
