@@ -149,9 +149,7 @@ var shapes = (function() {
 
 		const dTheta = π/segments;
 
-		var normalise = function(vec) {
-			return [vec[0]/radius, vec[1]/radius, vec[2]/radius];
-		}
+		var normalise = function(vec) { return [vec[0]/radius, vec[1]/radius, vec[2]/radius]; }
 
 		for (var xSegment = 0; xSegment <= segments; xSegment++) {
 
