@@ -24,7 +24,7 @@ uniform int mode;
 
 // uniform int textured; // TODO: bool (?)
 uniform sampler2D sampler;
-varying highp vec2 vTexCoord; //
+varying highp vec2 vTexCoord;
 
 varying float vLambertian;
 varying float vSpecular;
