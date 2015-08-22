@@ -12,20 +12,36 @@ a:visited {
 }
 
 
-body {
-	margin: 0pt;
-	padding: 0pt;
+html, body {
+	padding: 0%;
+	margin: 0%;
+	height: 100%;
 }
 
 
 .side-nav {
-	width:  20%;
-	height: 100%;
-	background-color: #FFC103;
+	width:  18%;
+	height: 80%;
 	
 	box-shadow: 5pt 0pt 7pt #CCC3CC;
 	padding: 12pt;
-	margin-left: 10pt;
+	margin:  25pt;
+
+	float: left;
+	/*margin-left: 25pt;*/
+	/*margin-top:  25pt;*/
+	/*margin-bottom: 25pt;*/
+}
+
+
+#other.side-nav { background-color: rgb(192, 57, 43); }
+
+
+#science.side-nav { background-color: rgb(142, 68, 173); }
+
+
+#projects.side-nav {
+	background-color: #FFC103;
 }
 
 
