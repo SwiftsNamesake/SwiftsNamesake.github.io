@@ -1,1 +1,54 @@
 /* June 20 2015 */
+
+
+a {
+	text-decoration: none;
+}
+
+
+a:visited {
+	background-color: inherit;
+}
+
+
+body {
+	margin: 0pt;
+	padding: 0pt;
+}
+
+
+.side-nav {
+	width:  20%;
+	height: 100%;
+	background-color: #FFC103;
+	
+	box-shadow: 5pt 0pt 7pt #CCC3CC;
+	padding: 12pt;
+	margin-left: 10pt;
+}
+
+
+.side-nav h1 {
+	font-family: 'Raleway'; /* Raleway */
+	font-size:   52pt;
+}
+
+
+.side-nav ul {
+	padding: 0pt;
+}
+
+
+.side-nav ul li {
+	list-style-type: none;
+
+	margin:  0pt;
+	padding: 3pt;
+
+	margin-top:    5pt;
+	margin-bottom: 5pt;
+
+	font-family: 'Opens Sans' 'Raleway'; /* Raleway */
+	-webkit-font-smoothing: antialiased;
+	font-size:   22pt;
+}
