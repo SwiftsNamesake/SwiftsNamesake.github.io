@@ -51,4 +51,16 @@ body {
 	font-family: 'Opens Sans' 'Raleway'; /* Raleway */
 	-webkit-font-smoothing: antialiased;
 	font-size:   22pt;
+
+	-webkit-transition: background-color 0.7s ease;
+	-webkit-transition: padding-left     0.7s ease;
+}
+
+
+.side-nav ul li:hover {
+	-webkit-transition: background-color 0.7s ease;
+	-webkit-transition: padding-left     0.7s ease;
+
+	/*box-shadow: inset -7pt 0pt #CFCFCF;*/
+	padding-left: 22pt;
 }
