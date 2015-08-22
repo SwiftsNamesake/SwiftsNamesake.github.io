@@ -28,7 +28,7 @@ void main(){
 
   if (textured == 1) {
     vec4 texColour = texture2D(sampler, vec2(vTexCoord.s, vTexCoord.t));
-    vec4 outColour = vLambertian*texColour.rgb + vSpecular*specColor; 
+    vec3 outColour = vLambertian*texColour.rgb + vSpecular*specColor; 
 
     if (outColour.r > 1.0 || outColour.g > 1.0 || outColour.b > 1.0) {
       gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
