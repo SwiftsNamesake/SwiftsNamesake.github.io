@@ -19,6 +19,11 @@ html, body {
 }
 
 
+.page {
+
+}
+
+
 .side-nav {
 	width:  18%;
 	height: 80%;
@@ -37,7 +42,10 @@ html, body {
 #other.side-nav { background-color: rgb(192, 57, 43); }
 
 
-#science.side-nav { background-color: rgb(142, 68, 173); }
+#animals.side-nav { }
+
+
+#science.side-nav { background-color: rgb(41, 128, 185); }
 
 
 #projects.side-nav {
@@ -69,8 +77,10 @@ html, body {
 	-webkit-font-smoothing: antialiased;
 	font-size:   22pt;
 
-	-webkit-transition: background-color 0.7s ease;
-	-webkit-transition: padding-left     0.7s ease;
+	/*-webkit-transition: background-color  0.7s ease;*/
+	-webkit-transition: padding-left 0.7s ease;
+
+	cursor: pointer;
 }
 
 
@@ -80,4 +90,15 @@ html, body {
 
 	/*box-shadow: inset -7pt 0pt #CFCFCF;*/
 	padding-left: 22pt;
+}
+
+
+.side-nav ul li img {
+	-webkit-transition: -webkit-transform 0.7s ease;
+}
+
+
+.side-nav ul li:hover img {
+	-webkit-transform: rotate(46deg);
+	-webkit-transition: -webkit-transform 0.7s ease;
 }

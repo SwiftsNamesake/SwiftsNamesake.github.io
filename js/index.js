@@ -51,8 +51,7 @@ $(document).ready(function() {
 	console.log('Index.js');
 
 	$('.side-nav ul li').each(function(i, e) {
-		console.log(i, e);
-		$(e).css({ backgroundColor: UIColoursList[i] });
+		$(e).css({ backgroundColor: UIColoursList[i%UIColoursList.length] });
 	});
 
 });
