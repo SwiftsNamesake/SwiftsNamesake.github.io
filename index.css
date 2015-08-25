@@ -56,7 +56,7 @@ div#topics {
 	height:  70%;
 	padding:  0%;
 	margin:   0%;
-	margin-bottom: 2.2%;
+	margin-bottom: 5.2%;
 
 	display: table;
 
@@ -82,7 +82,7 @@ footer#titlebar {
 
 	/*box-shadow: 5pt 0pt 7pt #CCC3CC;*/
 
-	padding: 12pt;
+	/*padding: 12pt;*/
 	/*background-color: rgb( 52, 152, 219);*/
 	/*background-color: #8E44AD;*/
 
@@ -109,6 +109,19 @@ footer#titlebar h1 {
 footer#titlebar h1:hover {
 	text-shadow: 3pt 0pt 8pt #555555;
 	-webkit-transition: text-shadow 0.65s;
+}
+
+
+footer#titlebar h1 img {
+	-webkit-transform: rotate(0deg);
+	-webkit-transition: -webkit-transform 2s linear;
+}
+
+
+footer#titlebar h1 img:hover {
+    -webkit-animation:rotate 1.5s linear infinite;
+    -moz-animation:rotate 1.5s linear infinite;
+    animation:rotate 1.5s linear infinite;
 }
 
 
