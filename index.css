@@ -1,5 +1,11 @@
 /* June 20 2015 */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+
+.inline-vertical {
+	vertical-align: middle;
+	height: 100%;
+	display: inline-block;
+}
 
 
 a {
@@ -22,16 +28,66 @@ html, body {
 
 
 .page {
-	width: 100%;
-	height: 100%;
-
-	margin: 0pt;
-	padding: 0pt;
+	width: 95%;
+	height: 95%;
+	
+	margin: auto;
+	/*margin: 0pt;*/
+	/*margin: 2.2%;*/
+	padding: 0%;
 
 	/*top: 720px;*/
-	margin-top: 0%;
+	margin-top: 2%;
 	-webkit-transition: margin-top 2.2s;
 	/*overflow: hidden;*/
+}
+
+
+div#topics {
+	width:  100%;
+	height:  70%;
+	padding:  0%;
+	margin:   0%;
+	margin-bottom: 5.2%;
+
+	display: table;
+
+	table-layout: fixed;
+
+}
+
+
+div#topics div:first-child {
+	margin-left: 0%;
+}
+
+
+div#topics div:last-child {
+	margin-right: 0%;
+}
+
+
+footer#titlebar {
+	/*width: 100%;*/
+	height: 12%;
+	margin: 0%;
+
+	/*box-shadow: 5pt 0pt 7pt #CCC3CC;*/
+
+	padding: 12pt;
+	/*background-color: rgb( 52, 152, 219);*/
+	/*background-color: #8E44AD;*/
+
+	margin-left:  0%;
+	margin-right: 0%;
+}
+
+
+footer#titlebar h1 {
+	padding: 0pt;
+	margin: 0pt;
+	font-size: 68pt;
+	text-align: right;
 }
 
 
@@ -42,14 +98,14 @@ html, body {
 
 
 .bottom-nav {
+
 	/*position: relative;*/
-	height: 10%;
-	width: 87%;
+	/*height: 10%;*/
+	/*width: 87%;*/
 	clear: both;
 
-	box-shadow: 5pt 0pt 7pt #CCC3CC;
-	padding: 12pt;
-	margin:  25pt;
+	/*padding: 12pt;*/
+	/*margin:  25pt;*/
 
 }
 
@@ -61,14 +117,19 @@ html, body {
 
 
 .side-nav {
-	width:  18%;
-	height: 70%;
+	/*width: 100%;  width:  18%;*/
+	width: 20%;
+	height: 100%;
+	display: table-cell;
 	
 	box-shadow: 5pt 0pt 7pt #CCC3CC;
 	padding: 12pt;
-	margin:  1.65%;
+	/*margin:  1.65%;*/
+	margin-left:  2.0%;
+	margin-right: 2.0%;
 
 	-webkit-transition: width 3.2s ease-in;
+	-webkit-transition: box-shadow 0.5s ease-in;
 
 	float: left;
 	/*margin-left: 25pt;*/
@@ -77,22 +138,23 @@ html, body {
 }
 
 
-#culture.side-nav { background-color: rgb(192, 57, 43); }
-
-
-#animals.side-nav { }
-
-
-#science.side-nav { background-color: rgb(41, 128, 185); }
-
-
-#projects.side-nav {
-	background-color: #FFC103;
+.darkshadow {
+	box-shadow: 5pt 0pt 7pt #887788;
+	-webkit-transition: box-shadow 0.8s linear;
 }
 
 
+#culture.side-nav { background-color: rgb(192, 57, 43); }
+
+#animals.side-nav { background-color: rgb(255, 255, 255); }
+
+#science.side-nav { background-color: rgb(41, 128, 185); }
+
+#projects.side-nav { background-color: #FFC103; }
+
+
 .side-nav h1 {
-	font-family: 'Raleway'; /* Raleway */
+	font-family: 'Franchise Regular' 'Raleway'; /* Raleway */
 	font-size:   52pt;
 }
 
@@ -108,8 +170,8 @@ html, body {
 	margin:  0pt;
 	padding: 3pt;
 
-	margin-top:    5pt;
-	margin-bottom: 5pt;
+	margin-top:    8pt;
+	margin-bottom: 8pt;
 
 	font-family: 'Opens Sans' 'Raleway'; /* Raleway */
 	-webkit-font-smoothing: antialiased;
@@ -137,14 +199,11 @@ html, body {
 
 
 .side-nav ul li:hover img {
-	-webkit-transform: rotate(46deg);
+	-webkit-transform: rotate(-46deg);
 	-webkit-transition: -webkit-transform 0.7s ease;
 }
 
 
 #titlebar.bottom-nav {
-	padding: 12pt;
-	background-color: rgb( 52, 152, 219);
-	font-family: 'Raleway';
-	font-size: 52pt;
+
 }

@@ -1,0 +1,24 @@
+/*
+ * fonts.css
+ * ?
+ *
+ * None
+ * August 25 2015
+ *
+
+ * TODO | - 
+ *        - 
+
+ * SPEC | -
+ *        -
+ */
+
+
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+
+@font-face {
+    font-family: LeagueGothicRegular;
+    src: url(data/fonts/League-Gothic/LeagueGothic-Regular.otf);
+}

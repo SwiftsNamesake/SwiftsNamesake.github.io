@@ -1,0 +1,48 @@
+/*
+ * effects.css
+ * ?
+ *
+ * Jonatan H Sundqvist
+ * August 25 2015
+ *
+
+ * TODO | - 
+ *        - 
+
+ * SPEC | -
+ *        -
+ */
+
+
+/*
+ * League Gothic Regular: Letterpress Effect
+ * Chunk Five Regular: Cloudy Effect & 3D Effect
+ * Museo 700: Embossed Effect
+ * Miso Regular: City Lights Effect
+ * Black Jack Regular: Burning Effect
+ * Bazar Regular: Retro Effect
+*/
+
+.three-d {
+	/* Credits: http://www.midwinter-dg.com/permalink-7-great-css-based-text-effects-using-the-text-shadow-property_2011-03-03.html */
+	color: #fff;
+	text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135;
+	font: 80px 'ChunkFiveRegular';
+}
+
+
+.retro {
+	/* Credits: http://www.midwinter-dg.com/permalink-7-great-css-based-text-effects-using-the-text-shadow-property_2011-03-03.html */
+	color: #d7ceb2;
+	text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+	font: 80px 'BazarMedium';
+	letter-spacing: 10px;
+}
+
+
+.letterpress {
+	/* Credits: http://www.midwinter-dg.com/permalink-7-great-css-based-text-effects-using-the-text-shadow-property_2011-03-03.html */
+	text-shadow: 0px 1px 1px #4d4d4d;
+	color: #222;
+	font-family: 'LeagueGothicRegular';
+}
