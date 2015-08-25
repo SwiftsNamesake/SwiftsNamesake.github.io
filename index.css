@@ -24,6 +24,9 @@ html, body {
 	height: 100%;
 
 	overflow: hidden;
+
+	/*background-color: #4D4D4D;*/
+
 }
 
 
@@ -43,12 +46,17 @@ html, body {
 }
 
 
+div#mainpage.page {
+
+}
+
+
 div#topics {
 	width:  100%;
 	height:  70%;
 	padding:  0%;
 	margin:   0%;
-	margin-bottom: 5.2%;
+	margin-bottom: 2.2%;
 
 	display: table;
 
@@ -86,8 +94,21 @@ footer#titlebar {
 footer#titlebar h1 {
 	padding: 0pt;
 	margin: 0pt;
+	box-shadow: 3pt 0pt 4pt #CCCCC0;
+
 	font-size: 68pt;
-	text-align: right;
+	text-align: center;
+	text-shadow: 3pt 0pt 8pt #888888;
+	-webkit-transition: text-shadow 0.65s;
+
+	cursor: pointer;
+
+}
+
+
+footer#titlebar h1:hover {
+	text-shadow: 3pt 0pt 8pt #555555;
+	-webkit-transition: text-shadow 0.65s;
 }
 
 
