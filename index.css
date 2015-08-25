@@ -56,7 +56,7 @@ div#topics {
 	height:  70%;
 	padding:  0%;
 	margin:   0%;
-	margin-bottom: 5.2%;
+	margin-bottom: 4.2%;
 
 	display: table;
 
@@ -100,6 +100,7 @@ footer#titlebar h1 {
 	text-align: center;
 	text-shadow: 3pt 0pt 8pt #888888;
 	-webkit-transition: text-shadow 0.65s;
+	/*include: .letterpress;*/
 
 	cursor: pointer;
 
@@ -157,10 +158,10 @@ footer#titlebar h1 img:hover {
 	display: table-cell;
 	
 	box-shadow: 5pt 0pt 7pt #CCC3CC;
-	padding: 12pt;
+	padding: 0.8%;
 	/*margin:  1.65%;*/
-	margin-left:  2.0%;
-	margin-right: 2.0%;
+	margin-left:  2.25%;
+	margin-right: 2.25%;
 
 	-webkit-transition: width 3.2s ease-in;
 	-webkit-transition: box-shadow 0.5s ease-in;
